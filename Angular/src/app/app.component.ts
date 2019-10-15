@@ -2,7 +2,6 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from './api.service';
 import { User } from './class/user';
-import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'app-root',
