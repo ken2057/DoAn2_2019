@@ -2,12 +2,12 @@ from pymongo import MongoClient
 
 mongodb = 'mongodb+srv://libary:ecyfAnTIz058VdrP@cluster0-uuoo5.gcp.mongodb.net/test?retryWrites=true&w=majority'
 client = MongoClient(mongodb)
+db = client.library
 
 if True:
-    client.drop_database('library')
+    # client.drop_database('library')
+    print(db.bookTitle.find_one({'_id': int('1')}))
 else:
-    db = client.library
-
     if db.list_collection_names() == []:
         # account
         try:
@@ -21,8 +21,13 @@ else:
 
         # Author
         try:
-            db.author.insert_many([
-                
+            db.bookTitle.insert_many([
+                {'_id': 1, 'name': 'Hello world', 'author': 'David', 'price': 200000},
+                {'_id': 2, 'name': 'Angular', 'author': 'Jacky', 'price': 250000},
+                {'_id': 3, 'name': 'Python', 'author': 'Mao', 'price': 500000},
+                {'_id': 4, 'name': 'Erlang', 'author': 'Env', 'price': 25000},
+                {'_id': 5, 'name': 'Internship', 'author': 'Jame', 'price': 150000},
+                {'_id': 6, 'name': 'Machine Learning', 'author': 'Rock', 'price': 300000},
             ])
         except Exception as e:
             print(e)

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Account } from './account';
 import { ApiService } from './api.service';
+import { User } from './class/user';
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'app-root',
@@ -10,27 +11,25 @@ import { ApiService } from './api.service';
 })
 export class AppComponent implements OnInit {
   title = 'Angular';
-  account = new Account('', '');
   
   bookName: string;
   bookPrice: number;
   bookAuthor: string;
 
   constructor(
-        private cookieService: CookieService,
-        private apiService: ApiService
-        ) {
-          
-        }
+    public cookieService: CookieService,
+    public apiService: ApiService,
+    public user: User
+    ) {}
 
   public ngOnInit(): void {
-    this.cookieService.set('token', '123', 500);
-    this.apiService.sendGetRequest()
-      .subscribe(data => {
-        this.bookName = data['name'];
-        this.bookPrice = data['price'];
-        this.bookAuthor = data['author'];
-      });
+    // this.cookieService.set('token', '123', 500);
+    // this.apiService.sendGetRequest()
+    //   .subscribe(data => {
+    //     this.bookName = data['name'];
+    //     this.bookPrice = data['price'];
+    //     this.bookAuthor = data['author'];
+    //   });
     
   }
 
@@ -38,7 +37,13 @@ export class AppComponent implements OnInit {
    * click_btn
    */
   public click_btn() {
-    this.cookieService.set('a', '234');
-    this.cookieService.set('token', '1');
+    
+  }
+
+  @Output() userInfo = new EventEmitter<User>();
+  public getLogin(ue: User){
+    // this.userInfo.emit(ue);
+    this.user = ue;
+    console.log('done '+ue.username +' - '+ue.password);
   }
 }

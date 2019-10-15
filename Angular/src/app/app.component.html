@@ -1,12 +1,3 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
 <head>
   <link rel="css" href="app.component.css">
   <!-- Latest compiled and minified CSS -->
@@ -53,8 +44,13 @@
 </div>
 
 <div class="content" role="main">
-    <p>{{ [bookName] }}</p>
-    <p>{{ [bookPrice] }}</p>
-    <p>{{ [bookAuthor] }}</p>
+    <app-login 
+      *ngIf="cookieService.get('token') == ''"
+      (userInfo)="getLogin($event)">
+    </app-login>
+    <app-account 
+      *ngIf="cookieService.get('token') != ''"
+      [user]="user">
+    </app-account>
 </div>
 

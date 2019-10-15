@@ -3,3 +3,4 @@ flask_restful
 Flask
 pymongo
 flask-cors
+dnspython
