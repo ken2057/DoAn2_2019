@@ -1,8 +1,4 @@
-from pymongo import MongoClient
-
-mongodb = 'mongodb+srv://libary:ecyfAnTIz058VdrP@cluster0-uuoo5.gcp.mongodb.net/test?retryWrites=true&w=majority'
-client = MongoClient(mongodb)
-db = client.library
+from src.configs import db
 
 if True:
     # client.drop_database('library')
