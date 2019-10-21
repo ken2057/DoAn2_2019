@@ -24,7 +24,7 @@ export class LoginComponent extends AppComponent {
         .subscribe(
           (val) => {
             this.cookieService.set(
-              'token', val['token'], 
+              'token', val['token'],
               this.convertSecondToDay(Number(val['expires']))
             );
             this.cookieService.set(
@@ -39,6 +39,6 @@ export class LoginComponent extends AppComponent {
           },
           () => {
               console.log("The POST observable is now completed.");
-          }); 
+          });
   }
 }
