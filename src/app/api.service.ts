@@ -79,19 +79,19 @@ export class ApiService {
                 })
   }
 
-  public sendGetBooks(page: string) {
+  public sendGetBooks(page?: string) {
     return this.http.get(this.REST_API_SERVER + '/GetBooks',
                 {
-                  params: { 'page': page },
+                  params: { 'page': page || '0' },
                   observe: 'response'
                 })
   }
   
-  public sendGetSearchBooks(page: string, subject?: string, author?: string, name?: string) {
+  public sendGetSearchBooks(subject?: string, author?: string, name?: string, page?: string) {
     return this.http.get(this.REST_API_SERVER + '/GetSearchBook',
                 {
                   params: { 
-                    'page': page,
+                    'page': page || '0',
                     'subject': subject || '',
                     'author': author || '',
                     'name': name || ''
