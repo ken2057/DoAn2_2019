@@ -12,7 +12,8 @@ export class ApiService {
   // private REST_API_SERVER = "http://localhost:5000";
   private REST_API_SERVER = "https://library-project-2-api.herokuapp.com";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+  }
 
   configUrl = 'assets/config.json';
 
@@ -85,35 +86,15 @@ export class ApiService {
                   observe: 'response'
                 })
   }
-
-  public sendGetBooksName(page: string, name: string) {
-    return this.http.get(this.REST_API_SERVER + '/GetBooksName',
-                {
-                  params: { 
-                    'page': page,
-                    'name': name
-                  },
-                  observe: 'response'
-                })
-  }
   
-  public sendGetBooksAuthor(page: string, author: string) {
-    return this.http.get(this.REST_API_SERVER + '/GetBooksAuthor',
+  public sendGetSearchBooks(page: string, subject?: string, author?: string, name?: string) {
+    return this.http.get(this.REST_API_SERVER + '/GetSearchBook',
                 {
                   params: { 
                     'page': page,
-                    'author': author
-                  },
-                  observe: 'response'
-                })
-  }
-  
-  public sendGetBooksSubject(page: string, subject: string) {
-    return this.http.get(this.REST_API_SERVER + '/GetBooksSubject',
-                {
-                  params: { 
-                    'page': page,
-                    'subject': subject
+                    'subject': subject || '',
+                    'author': author || '',
+                    'name': name || ''
                   },
                   observe: 'response'
                 })
