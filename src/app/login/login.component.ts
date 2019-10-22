@@ -19,30 +19,28 @@ export class LoginComponent extends AppComponent {
   @Output() userInfo = new EventEmitter<User>();
 
   convertSecondToDay(seconds){
-    let date = new Date();
+    let date = new Date()
     return new Date(date.getTime() + (1000 * seconds))
   }
 
   onSubmit(){
-    this.apiService.postLogin(this.userLogin)
-        .subscribe(
-          (val) => {
+    this.apiService
+        .sendGetLogin(this.userLogin)
+        .subscribe(response => {
+            // login succesfully
+            let json = response.body
             this.cookieService.set(
-              'token', val['token'],
-              this.convertSecondToDay(Number(val['expires']))
+              'token', response.body['token'],
+              this.convertSecondToDay(Number(json['expires']))
             );
             this.cookieService.set(
               'username', this.userLogin.username,
-              this.convertSecondToDay(Number(val['expires']))
+              this.convertSecondToDay(Number(json['expires']))
             );
-            
-            this.userInfo.emit(this.userLogin);
-          },
-          response => {
-              console.log("POST call in error", response);
-          },
-          () => {
-              console.log("The POST observable is now completed.");
-          });
+          }, invalid => {
+            //wrong usename/password
+            console.log('invalid', invalid)
+          }
+        )
   }
 }
