@@ -9,16 +9,17 @@ import { User } from './class/user';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Angular';
+  title = 'Home';
   
-  bookName: string;
-  bookPrice: number;
-  bookAuthor: string;
+  private bookName: string;
+  private bookPrice: number;
+  private bookAuthor: string;
+
+  public user: User;
 
   constructor(
     public cookieService: CookieService,
     public apiService: ApiService,
-    public user: User
     ) {}
 
   public ngOnInit(): void {
@@ -41,8 +42,6 @@ export class AppComponent implements OnInit {
 
   @Output() userInfo = new EventEmitter<User>();
   public getLogin(ue: User){
-    // this.userInfo.emit(ue);
     this.user = ue;
-    console.log('done '+ue.username +' - '+ue.password);
   }
 }

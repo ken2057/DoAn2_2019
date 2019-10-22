@@ -21,6 +21,6 @@ export class ApiService {
   }
 
   public postLogin(user: User) {
-    return this.http.post(this.REST_API_SERVER+'/Login/', user)
+    return this.http.post(this.REST_API_SERVER+'/Login', user)
   }
 }

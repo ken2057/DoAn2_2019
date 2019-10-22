@@ -1,6 +1,8 @@
-import { Component, Input, Output, Injectable, EventEmitter } from '@angular/core';
+import { Component, Input, Output, Injectable, EventEmitter, OnInit } from '@angular/core';
 import { User } from '../class/user';
 import { AppComponent } from '../app.component';
+import { ApiService } from '../api.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -8,9 +10,11 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./login.component.css'],
   providers: [AppComponent]
 })
-@Injectable()
+
 export class LoginComponent extends AppComponent {
   userLogin = new User();
+
+  ngOnInit() {}
 
   @Output() userInfo = new EventEmitter<User>();
 
@@ -31,7 +35,7 @@ export class LoginComponent extends AppComponent {
               'username', this.userLogin.username,
               this.convertSecondToDay(Number(val['expires']))
             );
-
+            
             this.userInfo.emit(this.userLogin);
           },
           response => {

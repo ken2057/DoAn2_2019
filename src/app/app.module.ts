@@ -6,7 +6,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
-import { User } from './class/user';
 import { AccountComponent } from './account/account.component';
 import { SignupComponent } from './login/signup/signup.component';
 import { ListBookComponent } from './list-book/list-book.component';
@@ -36,8 +35,7 @@ import { BookManagementComponent } from './admin/book-management/book-management
     ReactiveFormsModule
   ],
   providers: [
-    CookieService,
-    User
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

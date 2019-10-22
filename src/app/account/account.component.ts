@@ -7,13 +7,11 @@ import { User } from '../class/user';
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
-@Injectable()
+
 export class AccountComponent extends AppComponent {
-  @Input() user: User;
-  account: User;
+  public username: string;
 
   ngOnInit(){
-    this.account = this.user;
-    console.log(this.account.username + ' - '+this.account.password);
+    this.username = this.cookieService.get('username');
   }
 }
