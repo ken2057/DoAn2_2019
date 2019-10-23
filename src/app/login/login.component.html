@@ -21,7 +21,6 @@
     required minlength="3"
     [(ngModel)]="userLogin.password" name="password"
     #password="ngModel"/>
-        <div class="alert"></div>
       </label>
       <div [hidden]="password.valid || password.pristine"
       class="alert alert-danger">
