@@ -63,6 +63,16 @@ export class ApiService {
             })
   }
 
+  public getCheckToken(token: string) {
+    return this.http.get(this.REST_API_SERVER + '/CheckToken',
+            {
+              params: {
+                'token': token
+              },
+              observe: 'response'
+            })
+  }
+
   // ---------------------------------------------------------------------------
   //  API Book
   // ---------------------------------------------------------------------------

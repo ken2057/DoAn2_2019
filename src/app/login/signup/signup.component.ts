@@ -13,8 +13,8 @@ export class SignupComponent implements OnInit {
   userSignUp: User;
 
   constructor(
-    private apiService: ApiService,
-    private router: Router
+    public apiService: ApiService,
+    public router: Router
   ) {}
 
   ngOnInit() {
