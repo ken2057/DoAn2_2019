@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Headers, RequestOptions } from '@angular/http';
 import { User } from './class/user';
-import { Observable } from 'rxjs';
+import * as sha1 from 'sha1/sha1';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +39,7 @@ export class ApiService {
             {
               params: {
                 'username': user.username,
-                'password': user.password
+                'password': sha1(user.password)
               },
               observe: 'response'
             })
