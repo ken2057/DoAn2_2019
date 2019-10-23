@@ -1,6 +1,8 @@
 import { Component, Input, Output, Injectable, EventEmitter, OnInit } from '@angular/core';
 import { User } from '../class/user';
 import { AppComponent } from '../app.component';
+import { ApiService } from '../api.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +11,13 @@ import { AppComponent } from '../app.component';
   providers: [AppComponent]
 })
 
-export class LoginComponent extends AppComponent {
+export class LoginComponent implements OnInit {
   userLogin: User;
+
+  constructor(
+    public apiService: ApiService,
+    public cookieService: CookieService
+  ) {}
 
   ngOnInit() {
     this.userLogin = new User()

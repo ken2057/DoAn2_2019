@@ -1,14 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/class/user';
-import { AppComponent } from 'src/app/app.component';
+import { ApiService } from 'src/app/api.service';
+import { CookieService } from 'ngx-cookie-service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent extends AppComponent {
+export class SignupComponent implements OnInit {
   userSignUp: User;
+
+  constructor(
+    private apiService: ApiService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.userSignUp = new User()
@@ -18,7 +25,7 @@ export class SignupComponent extends AppComponent {
     this.apiService
         .postSignUp(this.userSignUp)
         .subscribe(response => {
-
+          this.router.navigateByUrl('../')
         }, error => {
           
         })
