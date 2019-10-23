@@ -8,7 +8,7 @@ import * as sha1 from 'sha1/sha1';
 })
 export class ApiService {
 
-  // private REST_API_SERVER = "http://localhost:5000";
+  // private REST_API_SERVER = "http://127.0.0.1:5000";
   private REST_API_SERVER = "https://library-project-2-api.herokuapp.com";
 
   constructor(private http: HttpClient) { 
@@ -20,7 +20,7 @@ export class ApiService {
   //  API Admin
   // ---------------------------------------------------------------------------
 
-  public sendGetUsersInfo(token: string) {
+  public getUsersInfo(token: string) {
     return this.http.get(this.REST_API_SERVER + '/Admin/GetUsers',
             {
               params: {
@@ -34,7 +34,7 @@ export class ApiService {
   //  API Auth
   // ---------------------------------------------------------------------------
 
-  public sendGetLogin(user: User) {
+  public getLogin(user: User) {
     return this.http.get(this.REST_API_SERVER + '/Login',
             {
               params: {
@@ -45,19 +45,15 @@ export class ApiService {
             })
   }
 
-  public sendGetSignUp(user: User) {
-    return this.http.get(this.REST_API_SERVER + '/SignUp',
+  public postSignUp(user: User) {
+    return this.http.post(this.REST_API_SERVER + '/SignUp',
             {
-              params: {
-                'username': user.username,
-                'password': user.password,
-                'email': user.email
-              },
+              user,
               observe: 'response'
             })
   }
 
-  public sendGetPermission(token: string) {
+  public getPermission(token: string) {
     return this.http.get(this.REST_API_SERVER + '/Permission',
             {
               params: {
@@ -70,7 +66,7 @@ export class ApiService {
   // ---------------------------------------------------------------------------
   //  API Book
   // ---------------------------------------------------------------------------
-  public sendGetBook(bookId: string) {
+  public getBook(bookId: string) {
     return this.http.get(this.REST_API_SERVER + '/GetBook',
                 {
                   params: { 'bookId': bookId },
@@ -78,7 +74,7 @@ export class ApiService {
                 })
   }
   
-  public sendGetSearchBooks(subject?: string, author?: string, name?: string, page?: string) {
+  public getSearchBooks(subject?: string, author?: string, name?: string, page?: string) {
     return this.http.get(this.REST_API_SERVER + '/GetSearchBook',
                 {
                   params: { 

@@ -1,8 +1,6 @@
 import { Component, Input, Output, Injectable, EventEmitter, OnInit } from '@angular/core';
 import { User } from '../class/user';
 import { AppComponent } from '../app.component';
-import { ApiService } from '../api.service';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +10,11 @@ import { CookieService } from 'ngx-cookie-service';
 })
 
 export class LoginComponent extends AppComponent {
-  userLogin = new User();
+  userLogin: User;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userLogin = new User()
+  }
 
   @Output() userInfo = new EventEmitter<User>();
 
@@ -25,7 +25,7 @@ export class LoginComponent extends AppComponent {
 
   onSubmit(){
     this.apiService
-        .sendGetLogin(this.userLogin)
+        .getLogin(this.userLogin)
         .subscribe(response => {
             // login succesfully
             let json = response.body

@@ -10,27 +10,15 @@ import { User } from './class/user';
 })
 export class AppComponent implements OnInit {
   title = 'Home';
-  
-  private bookName: string;
-  private bookPrice: number;
-  private bookAuthor: string;
 
   public user: User;
 
   constructor(
     public cookieService: CookieService,
-    public apiService: ApiService,
-    ) {}
+    public apiService: ApiService
+  ) {}
 
   public ngOnInit(): void {
-    // this.cookieService.set('token', '123', 500);
-    // this.apiService.sendGetRequest()
-    //   .subscribe(data => {
-    //     this.bookName = data['name'];
-    //     this.bookPrice = data['price'];
-    //     this.bookAuthor = data['author'];
-    //   });
-    
   }
 
   /**

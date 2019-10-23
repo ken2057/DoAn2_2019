@@ -1,7 +1,22 @@
 <p>login works!</p>
 <h1>Username:</h1>
-<input type="text" required [(ngModel)]="userLogin.username"/>
+<input type="text" class="form-control" id="username"
+    required minlength="3"
+    [(ngModel)]="userLogin.username" name="username"
+    #username="ngModel"/>
+<div [hidden]="username.valid || username.pristine"
+     class="alert alert-danger">
+     Username invalid
+</div>
+
 <h1>Password:</h1>
-<input type="password" required [(ngModel)]="userLogin.password"/>
+<input type="password" class="form-control" id="password"
+    required minlength="3"
+    [(ngModel)]="userLogin.password" name="password"
+    #password="ngModel"/>
+<div [hidden]="password.valid || password.pristine"
+     class="alert alert-danger">
+     Password invalid
+</div>
 
 <button type="submit" (click)="onSubmit()">Login</button>
