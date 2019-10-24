@@ -3,7 +3,7 @@ form{
   padding: 20px 50px 50px 50px;
   text-align: center;
   width: 450px;
-  height: 400px;
+  height: 450px;
   box-sizing: border-box;
   border-radius: 20px;
   background-color: rgb(245, 233, 233);
@@ -23,7 +23,8 @@ button[type="submit"]
 
 }
 .row-columns input[type="text"],
-.row-columns input[type="password"]
+.row-columns input[type="password"],
+.row-columns input[type ="email"]
 {
 
   height: 35px;
