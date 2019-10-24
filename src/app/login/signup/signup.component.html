@@ -1,1 +1,24 @@
-<p>signup works!</p>
+
+<form>
+  <div class="form-container">
+    <div class="row-columns">
+      <h1 style="color: yellow;">SignUp</h1>
+      <label id="userName">Username
+        <input type="text" class="form-control" id="username" required minlength="3" [(ngModel)]="userSignUp.username"
+          name="username" #username="ngModel" />
+      </label>
+      <div  class="alert"></div>
+      <label id="passWord">Password
+        <input type="password" class="form-control" id="password" required minlength="3"
+          [(ngModel)]="userSignUp.password" name="password" #password="ngModel" />
+      </label>
+      <div class="alert"></div>
+      <label id="email">Email
+        <input type="email" class="form-control" id="email" required minlength="10"
+          [(ngModel)]="userSignUp.email" name="email" #email="ngModel" />
+      </label>
+      <div class="alert"></div>
+      <button type="submit" (click)="onSubmit()">SignUp</button>
+    </div>
+  </div>
+</form>
