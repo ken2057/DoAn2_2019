@@ -9,7 +9,7 @@ import * as sha1 from 'sha1/sha1';
 export class ApiService {
 
   // private REST_API_SERVER = "http://127.0.0.1:5000";
- private REST_API_SERVER = "https://library-project-2-api.herokuapp.com";
+  private REST_API_SERVER = "https://library-project-2-api.herokuapp.com";
 
   constructor(private http: HttpClient) { 
   }
@@ -30,8 +30,20 @@ export class ApiService {
             })
   }
 
+  public postSetRole(token: string, accountId: string, role: string) {
+    return this.http.post(this.REST_API_SERVER + '/Admin/SetRole',
+            {
+              json: {
+                'token': token,
+                'accountId': accountId,
+                'role': role,
+              },
+              observable: 'response'
+            })
+  }
+
   // ---------------------------------------------------------------------------
-  //  API Auth
+  //  API Account
   // ---------------------------------------------------------------------------
 
   public getLogin(user: User) {
@@ -52,6 +64,19 @@ export class ApiService {
               observe: 'response'
             })
   }
+
+  public getUserBorrowed(token: string) {
+    return this.http.post(this.REST_API_SERVER + '/SignUp',
+            {
+              params: {
+                'token': token
+              }, observe: 'response'
+            })
+  }
+
+  // ---------------------------------------------------------------------------
+  //  API Auth
+  // ---------------------------------------------------------------------------
 
   public getPermission(token: string) {
     return this.http.get(this.REST_API_SERVER + '/Permission',
@@ -97,7 +122,37 @@ export class ApiService {
                 })
   }
 
+  public getBookAvaiable(bookId: string) {
+    return this.http.get(this.REST_API_SERVER + '/BorrowBook',
+                {
+                  params: { 'bookId': bookId },
+                  observe: 'response'
+                })
+  }
+
+  public postBookAvaiable(token: string, bookId: string) {
+    return this.http.post(this.REST_API_SERVER + '/BorrowBook',
+                {
+                  json: {
+                    'token': token,
+                    'bookId': bookId
+                  },
+                  observe: 'response'
+                })
+  }
+
   // ---------------------------------------------------------------------------
-  //  API 
+  //  API mananger
   // ---------------------------------------------------------------------------
+
+  public getBorrowed(token: string, page?: number) {
+    return this.http.post(this.REST_API_SERVER + '/BorrowBook',
+                {
+                  params: {
+                    'token': token,
+                    'page': page || 0
+                  },
+                  observe: 'response'
+                })
+  }
 }
