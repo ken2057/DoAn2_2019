@@ -14,6 +14,7 @@ import { ConfigComponent } from './account/config/config.component';
 import { AdminComponent } from './admin/admin.component';
 import { AccountManagementComponent } from './admin/account-management/account-management.component';
 import { BookManagementComponent } from './admin/book-management/book-management.component';
+import { BookDetailComponent } from './list-book/book-detail/book-detail.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BookManagementComponent } from './admin/book-management/book-management
     ConfigComponent,
     AdminComponent,
     AccountManagementComponent,
-    BookManagementComponent
+    BookManagementComponent,
+    BookDetailComponent
   ],
   imports: [
     BrowserModule,

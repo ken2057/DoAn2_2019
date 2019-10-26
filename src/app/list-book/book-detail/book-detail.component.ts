@@ -1,3 +1,4 @@
+import { Book } from './../../class/book';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./book-detail.component.css']
 })
 export class BookDetailComponent implements OnInit {
-
+  bookDetail: Book;
   constructor() { }
 
   ngOnInit() {

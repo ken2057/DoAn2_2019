@@ -1,1 +1,21 @@
-<p>book-detail works!</p>
+<div class="main-screen">
+  <div class="row">
+    <div class="hover14 column col-xs-6 col-sm-6 col-md-6 col-lg-6 image-box">
+      <br>
+      <figure>
+        <img src="https://data.chiasenhac.com/data/cover/77/76166.jpg" class="img-responsive" alt="Cinque Terre">
+      </figure>
+      <br />
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 left-box">
+      <div class="book-title">
+        <h1 [(ngModel)]="bookDetail.name">Name: {{bookDetail.name}} </h1>
+        <h3 [(ngModel)]="bookDetail.author">Author: {{bookDetail.author}} </h3>
+        <h3>Subject: </h3>
+      </div>
+      <div class="btn-them">
+        <button type="button" class="btn btn-success">Button</button>
+      </div>
+    </div>
+  </div>
+</div>
