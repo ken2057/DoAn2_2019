@@ -42,9 +42,9 @@ export class LoginComponent implements OnInit {
               'username', this.userLogin.username,
               this.utilsService.convertSecondToDay(Number(json['expires']))
             );
-          }, invalid => {
+          }, error => {
             //wrong usename/password
-            console.log('invalid', invalid)
+            console.log('invalid', error)
           }
         )
   }

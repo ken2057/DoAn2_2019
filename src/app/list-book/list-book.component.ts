@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-book.component.css']
 })
 export class ListBookComponent implements OnInit {
-
+  bookClicked = 1;
   constructor() { }
 
   ngOnInit() {

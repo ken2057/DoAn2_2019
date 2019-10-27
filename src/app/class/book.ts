@@ -22,6 +22,7 @@ export class Book {
     public name?: string,
     public author?: string,
     public subject?: Array<string>,
-    public books?: Array<string>
+    public books?: Array<string>,
+    public image?: string
   ) {}
 }

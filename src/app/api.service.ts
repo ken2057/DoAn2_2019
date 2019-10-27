@@ -8,8 +8,8 @@ import * as sha1 from 'sha1/sha1';
 })
 export class ApiService {
 
-  // private REST_API_SERVER = "http://127.0.0.1:5000";
-  private REST_API_SERVER = "https://library-project-2-api.herokuapp.com";
+  private REST_API_SERVER = "http://127.0.0.1:5000";
+  // private REST_API_SERVER = "https://library-project-2-api.herokuapp.com";
 
   constructor(private http: HttpClient) { 
   }
@@ -131,10 +131,21 @@ export class ApiService {
                 })
   }
 
-  public postBookAvaiable(token: string, bookId: string) {
+  public postBorrowBook(token: string, bookId: string) {
     return this.http.post(this.REST_API_SERVER + '/BorrowBook',
                 {
                   json: {
+                    'token': token,
+                    'bookId': bookId
+                  },
+                  observe: 'response'
+                })
+  }
+
+  public getIsBorrowedByUser(token: string, bookId: string) {
+    return this.http.get(this.REST_API_SERVER + '/IsBorrowedById',
+                {
+                  params: {
                     'token': token,
                     'bookId': bookId
                   },

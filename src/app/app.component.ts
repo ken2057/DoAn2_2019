@@ -27,16 +27,10 @@ export class AppComponent implements OnInit {
             .getCheckToken(this.cookieService.get('token'))
             .subscribe( response => {
               let json = response.body
-
-              if (response.status == 200) {
-                this.cookieService.set(
-                  'username', json['username'],
-                  this.utilsService.convertSecondToDay(Number(json['expires'])))
-              }
-              else if (response.status == 203) {
-                this.cookieService.deleteAll()
-              }
-            })
+              this.cookieService.set(
+                'username', json['username'],
+                this.utilsService.convertSecondToDay(Number(json['expires'])))
+            }, err => { this.cookieService.deleteAll() })
     }
 
   }

@@ -44,12 +44,14 @@
 </div>
 
 <div class="content" role="main">
+    
     <app-login 
       *ngIf="cookieService.get('token') == ''"
       (userInfo)="getLogin($event)">
     </app-login>
-    <app-account 
-      *ngIf="cookieService.get('token') != ''">
-    </app-account>
+    <div *ngIf="cookieService.get('token') != ''">
+    <app-account></app-account>
+    <app-list-book></app-list-book>
+    </div>
 </div>
 
