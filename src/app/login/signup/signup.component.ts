@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { User } from 'src/app/class/user';
 import { ApiService } from 'src/app/api.service';
-import { CookieService } from 'ngx-cookie-service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -13,21 +11,22 @@ export class SignupComponent implements OnInit {
   userSignUp: User;
 
   constructor(
-    public apiService: ApiService,
-    public router: Router
+    public apiService: ApiService
   ) {}
 
   ngOnInit() {
     this.userSignUp = new User()
   }
 
+  @Output() signUp = new EventEmitter<string>();
+
   onSubmit() {
     this.apiService
         .postSignUp(this.userSignUp)
         .subscribe(response => {
-          this.router.navigateByUrl('../')
+          this.signUp.emit(this.userSignUp.username)
         }, error => {
-          
+          console.log(error)
         })
   }
 }

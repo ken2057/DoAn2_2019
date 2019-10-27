@@ -58,6 +58,7 @@ export class ApiService {
   }
 
   public postSignUp(user: User) {
+    user.password = sha1(user.password)
     return this.http.post(this.REST_API_SERVER + '/SignUp',
             {
               user,

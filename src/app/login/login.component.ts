@@ -14,6 +14,7 @@ import { UtilsService } from '../utils.service';
 
 export class LoginComponent implements OnInit {
   userLogin: User;
+  isLogin = true;
 
   constructor(
     public apiService: ApiService,
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   @Output() userInfo = new EventEmitter<User>();
 
-  onSubmit(){
+  onSubmit() {
     this.apiService
         .getLogin(this.userLogin)
         .subscribe(response => {
@@ -46,5 +47,14 @@ export class LoginComponent implements OnInit {
             console.log('invalid', invalid)
           }
         )
+  }
+
+  clickSignUp() {
+    this.isLogin = !this.isLogin
+  }
+
+  finishSignUp(username: string) {
+    this.userLogin.username = username
+    this.clickSignUp()
   }
 }
