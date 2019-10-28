@@ -26,6 +26,7 @@ export class SignupComponent implements OnInit {
   @Output() signUp = new EventEmitter<string>();
 
   onSubmit() {
+    console.log(this.userSignUp.username)
     this.apiService
         .postSignUp(this.userSignUp)
         .subscribe(response => {

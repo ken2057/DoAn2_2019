@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from './api.service';
 import { User } from './class/user';
 import { UtilsService } from './utils.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ export class AppComponent implements OnInit {
   constructor(
     public cookieService: CookieService,
     public apiService: ApiService,
-    public utilsService: UtilsService
+    public utilsService: UtilsService,
+    public router: Router
   ) {}
 
   ngOnInit() {
@@ -45,5 +47,9 @@ export class AppComponent implements OnInit {
   @Output() userInfo = new EventEmitter<User>();
   public getLogin(ue: User){
     this.user = ue;
+  }
+
+  public goHome() {
+    this.router.navigate(['/Home'])
   }
 }

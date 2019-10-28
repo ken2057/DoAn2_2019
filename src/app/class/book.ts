@@ -21,7 +21,7 @@ export class Book {
     public isbn?: string,
     public name?: string,
     public author?: string,
-    public subject?: Array<string>,
+    public subjects?: Array<string>,
     public books?: Array<string>,
     public image?: string
   ) {}

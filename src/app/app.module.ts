@@ -15,6 +15,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AccountManagementComponent } from './admin/account-management/account-management.component';
 import { BookManagementComponent } from './admin/book-management/book-management.component';
 import { BookDetailComponent } from './list-book/book-detail/book-detail.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,16 @@ import { BookDetailComponent } from './list-book/book-detail/book-detail.compone
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot([
+      { path: 'Home', component: AppComponent },
+      {path:'Login', component: LoginComponent},
+      {path: 'SignUp', component: SignupComponent},
+      {path:'Search', component: ListBookComponent}, 
+      {path: 'Book/:bookId', component: BookDetailComponent},
+      { path: '', redirectTo: 'Home', pathMatch: 'full'},
+      { path: '**', redirectTo: 'Home', pathMatch: 'full'}
+    ]),
   ],
   providers: [
     CookieService
