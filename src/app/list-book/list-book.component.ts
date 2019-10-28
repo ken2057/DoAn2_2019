@@ -7,9 +7,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListBookComponent implements OnInit {
   bookClicked = 1;
-  constructor() { }
+
+  books = [{
+    isbn: '0884210642',
+    image: 'none',
+    name: 'Quick dinner menus',
+    author: 'Margaret Happel',
+    subject: 'Dinners and dining',
+    quantity: 2
+  },
+  {
+    isbn: '0884210642',
+    image: 'none',
+    name: 'Quick dinner menus',
+    author: 'Margaret Happel',
+    subject: 'Dinners and dining',
+    quantity: 2
+  }];
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
-
 }
