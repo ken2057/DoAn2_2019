@@ -54,19 +54,19 @@ export class BookDetailComponent implements OnInit {
   }
 
   checkUserBorrowed() {
-    this.apiService.getIsBorrowedByUser(this.cookieService.get('token'), this.bookId.toString())
-        .subscribe(response => {
-          let json = response.body
-          // is borrwed and not avaiable => borrowed
-          // is borrowed and avaiable => borrowed
-          // not borrow and not avaiable => Out of order
-          // not borrow and avaiable => Borrow
-          this.btnBorrowText = json['borrowed'] ? 'Borrowed' : this.isAvaiable ? 'Borrow' : 'Out of order'
-          this.isAvaiable = json['borrowed'] ? false : this.isAvaiable
-
-          // after get data from API then show it
-          this.dataAvaialbe = true
-        })
+    if (this.cookieService.get('token') != "")
+      this.apiService.getIsBorrowedByUser(this.cookieService.get('token'), this.bookId.toString())
+          .subscribe(response => {
+            let json = response.body
+            // is borrwed and not avaiable => borrowed
+            // is borrowed and avaiable => borrowed
+            // not borrow and not avaiable => Out of order
+            // not borrow and avaiable => Borrow
+            this.btnBorrowText = json['borrowed'] ? 'Borrowed' : this.isAvaiable ? 'Borrow' : 'Out of order'
+            this.isAvaiable = json['borrowed'] ? false : this.isAvaiable
+          })
+    // after get data from API then show it
+    this.dataAvaialbe = true
   }
 
   public btnBorrowClick() {
