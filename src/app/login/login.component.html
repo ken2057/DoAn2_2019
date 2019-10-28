@@ -1,22 +1,30 @@
 <div *ngIf="isLogin">
-  <form>
+  <form name="form" [formGroup]="form" (ngSubmit)="onSubmit() && form.valid">
     <div class="form-container">
       <div class="row-columns">
         <h1 style="color: brown;">Login</h1>
-        <label id="userName">Username
-          <input type="text" class="form-control" id="username" required minlength="3" [(ngModel)]="userLogin.username"
-            name="username" #username="ngModel" />
-          <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
-            Username invalid
-          </div>
+
+        <label for="username">Username
+          <input type="text" class="form-control" id="username" required formControlName="userName"
+            [(ngModel)]="userLogin.username"
+            [ngClass]="{'is-invalid':form.get('userName').touched && form.get('userName').invalid}" name="username" />
         </label>
-        <label id="passWord">Password
-          <input type="password" class="form-control" id="password" required minlength="3"
-            [(ngModel)]="userLogin.password" name="password" #password="ngModel" />
-        </label>
-        <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
-          Password invalid
+        <div *ngIf="form.get('userName').touched && form.get('userName').invalid" class="invalid-feedback">
+          <div *ngIf= "form.get('userName').errors.required">UserName is required</div>
+          <div *ngIf= "form.get('userName').errors.minlength">UserName must be at least 3 charector </div>
         </div>
+
+        <label for="passWord">Password
+          <input type="password" class="form-control" id="password" required formControlName="passWord"
+            [ngClass]="{'is-invalid':form.get('passWord').touched && form.get('passWord').invalid}"
+            [(ngModel)]="userLogin.password" name="password" />
+        </label>
+
+        <div *ngIf="form.get('passWord').touched && form.get('passWord').invalid" class="invalid-feedback">
+          <div *ngIf="form.get('passWord').errors.required">Password is required</div>
+          <div *ngIf="form.get('passWord').errors.minlength">Password must be at least 3 charector</div>
+        </div>
+
         <button type="submit" (click)="onSubmit()">Login</button>
         <div id="signUpLink">
           <br>
@@ -27,7 +35,6 @@
   </form>
 </div>
 <div *ngIf="!isLogin">
-  <app-signup
-  (signUp)="finishSignUp($event)">
+  <app-signup (signUp)="finishSignUp($event)">
   </app-signup>
 </div>
