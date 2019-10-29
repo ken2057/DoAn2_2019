@@ -5,6 +5,7 @@ import { ApiService } from '../api.service';
 import { CookieService } from 'ngx-cookie-service';
 import { UtilsService } from '../utils.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class LoginComponent implements OnInit {
   userLogin: User;
   isLogin = true;
+  form = new FormGroup({
+    userName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    passWord: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    Email: new FormControl('', [Validators.required, Validators.email])
+  });
 
   constructor(
     private apiService: ApiService,
