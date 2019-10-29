@@ -14,7 +14,9 @@ export class Book {
 //         "Lost by duy - Date: 2019-10-24 21:00:01.833411",
 //         "",
 //         ""
-//     ]
+//     ],
+//     image: "",
+//     deleted: false,
 // }
 
   constructor(
@@ -23,6 +25,7 @@ export class Book {
     public author?: string,
     public subjects?: Array<string>,
     public books?: Array<string>,
-    public image?: string
+    public image?: string,
+    public deleted?: boolean
   ) {}
 }
