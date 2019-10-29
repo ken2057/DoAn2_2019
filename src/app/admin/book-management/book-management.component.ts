@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from 'src/app/api.service';
 import { UtilsService } from 'src/app/utils.service';
+import { Book } from 'src/app/class/book';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,6 +11,9 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./book-management.component.css']
 })
 export class BookManagementComponent implements OnInit {
+  public bookClicked = -1;
+  public books = new Array<Book>();
+  dataLoaded = false;
 
   constructor(
     private cookieService: CookieService,
@@ -19,12 +23,47 @@ export class BookManagementComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
+
   ngOnInit() {
-    let role: Number
     this.apiService.getPermission(this.cookieService.get('token'))
-            .subscribe(res => role = Number(res.body), err => role = 9)
-            
-    if (role != 0 && role != 1)
-      this.router.navigate([''], {relativeTo: this.route})
+            .subscribe(res => { 
+              let role = Number(res.body['role'])
+              if(role != 0 && role != 1 ) {
+                this.router.navigate([''], {relativeTo: this.route})              
+              } else {
+                //have permission
+                this.searchBook();
+                this.dataLoaded = true
+              }
+            }, 
+            err => console.log(err))
+  }
+  searchBook(name?: string, subject?: string, author?: string, page?: number) {
+    if (page < 1) {
+      return
+    } // show error
+
+    this.apiService.getSearchBooks(subject, author, name, page + '')
+      .subscribe(response => {
+        let json = response.body
+        json['books'].forEach(book => {
+          this.books.push(new Book(
+                      book['_id'],
+                      book['name'],
+                      book['author'],
+                      book['subjects'],
+                      book['books'],
+                      book['image']
+                    ));
+        });
+        console.log(this.books);
+      }, error => {
+        console.log('error searchBook: ' + error);
+      });
+  }
+
+  public viewBook(bookId: number) {
+    this.bookClicked = bookId;
+    console.log(this.bookClicked);
   }
 }

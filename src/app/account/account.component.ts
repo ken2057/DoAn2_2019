@@ -12,6 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 export class AccountComponent implements OnInit {
   public username: string;
+  dataLoaded = false;
 
   constructor(
     private cookieService: CookieService,
@@ -22,15 +23,22 @@ export class AccountComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let role: Number
     this.apiService.getPermission(this.cookieService.get('token'))
-            .subscribe(res => role = Number(res.body), err => role = 9)
-            
-    if (role == 9){
-      this.router.navigate([''], {relativeTo: this.route})
-      return
-    }
-    
+            .subscribe(res => { 
+              let role = Number(res.body['role'])
+              console.log(role)
+              if(role == 3) {
+                this.router.navigate(['/Login'], {relativeTo: this.route})
+              } else {
+                //have permission
+                this.loadData()
+                this.dataLoaded = true
+              }
+            }, 
+            err => console.log(err))
+  }
+
+  loadData() {
     this.username = this.cookieService.get('username');
   }
 }

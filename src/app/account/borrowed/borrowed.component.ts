@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./borrowed.component.css']
 })
 export class BorrowedComponent implements OnInit {
+  dataLoaded = false
 
   constructor(
     private cookieService: CookieService,
@@ -20,14 +21,17 @@ export class BorrowedComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let role: Number
     this.apiService.getPermission(this.cookieService.get('token'))
-            .subscribe(res => role = Number(res.body), err => role = 9)
-            
-    if (role == 9){
-      this.router.navigate([''], {relativeTo: this.route})
-      return
-    }
-    
+        .subscribe(res => { 
+          let role = Number(res.body['role'])
+          if(role == 3) {
+            this.router.navigate(['/Login'], {relativeTo: this.route})
+          } else {
+            //have permission
+            // do sth
+            this.dataLoaded = true
+          }
+        }, 
+        err => console.log(err))
   }
 }

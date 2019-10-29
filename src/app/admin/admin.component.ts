@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+  dataLoaded = false
 
   constructor(
     private cookieService: CookieService,
@@ -20,12 +21,17 @@ export class AdminComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let role: Number
     this.apiService.getPermission(this.cookieService.get('token'))
-            .subscribe(res => role = Number(res.body), err => role = 9)
-            
-    if (role != 0 && role != 1)
-      this.router.navigate([''], {relativeTo: this.route})
+            .subscribe(res => { 
+              let role = Number(res.body['role'])
+              if(role != 0 && role != 1 ) {
+                this.router.navigate([''], {relativeTo: this.route})
+              } else {
+                // do sth 
+                this.dataLoaded = true
+              }
+            }, 
+            err => console.log(err))
   }
 
 }
