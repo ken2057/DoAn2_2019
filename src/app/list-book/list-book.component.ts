@@ -30,40 +30,40 @@ export class ListBookComponent implements OnInit {
   // }];
 
   constructor(
-    public apiService: ApiService,
-    public router: Router,
-    public route: ActivatedRoute
+    // public apiService: ApiService,
+    // public router: Router,
+    // public route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.searchBook()
+    // this.searchBook()
   }
 
-  searchBook(name?: string, subject?: string, author?: string, page?: number) {
-    if (page < 1)
-      return // show error
+  // searchBook(name?: string, subject?: string, author?: string, page?: number) {
+  //   if (page < 1)
+  //     return // show error
 
-    this.apiService.getSearchBooks(subject, author, name, page+'')
-        .subscribe(response => {
-          let json = response.body
-          json['books'].forEach(book => {
-            this.books.push(new Book(
-                        book['_id'],
-                        book['name'],
-                        book['author'],
-                        book['subjects'],
-                        book['books'],
-                        book['image']
-                      ))
-          })
-          console.log(this.books)
-        }, error => {
-          console.log('error searchBook: ' + error)
-        })
-  }
+  //   this.apiService.getSearchBooks(subject, author, name, page+'')
+  //       .subscribe(response => {
+  //         let json = response.body
+  //         json['books'].forEach(book => {
+  //           this.books.push(new Book(
+  //                       book['_id'],
+  //                       book['name'],
+  //                       book['author'],
+  //                       book['subjects'],
+  //                       book['books'],
+  //                       book['image']
+  //                     ))
+  //         })
+  //         console.log(this.books)
+  //       }, error => {
+  //         console.log('error searchBook: ' + error)
+  //       })
+  // }
 
-  public viewBook(bookId: number) {
-    this.bookClicked = bookId
-    console.log(this.bookClicked)
-  }
+  // public viewBook(bookId: number) {
+  //   this.bookClicked = bookId
+  //   console.log(this.bookClicked)
+  // }
 }
