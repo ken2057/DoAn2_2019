@@ -4,6 +4,7 @@ import { AppComponent } from '../app.component';
 import { ApiService } from '../api.service';
 import { CookieService } from 'ngx-cookie-service';
 import { UtilsService } from '../utils.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,9 @@ export class LoginComponent implements OnInit {
   constructor(
     public apiService: ApiService,
     public cookieService: CookieService,
-    public utilsService: UtilsService
+    public utilsService: UtilsService,
+    public router: Router,
+    public route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -37,11 +40,12 @@ export class LoginComponent implements OnInit {
             this.cookieService.set(
               'token', json['token'],
               this.utilsService.convertSecondToDay(Number(json['expires']))
-            );
+            )
             this.cookieService.set(
               'username', this.userLogin.username,
               this.utilsService.convertSecondToDay(Number(json['expires']))
-            );
+            )
+            this.router.navigate([''], {relativeTo: this.route})
           }, error => {
             //wrong usename/password
             console.log('invalid', error)

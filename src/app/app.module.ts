@@ -40,10 +40,20 @@ import { RouterModule } from '@angular/router';
       { path: 'Home', component: AppComponent },
       {path:'Login', component: LoginComponent},
       {path: 'SignUp', component: SignupComponent},
+      
       {path:'Search', component: ListBookComponent}, 
       {path: 'Book/:bookId', component: BookDetailComponent},
-      { path: '', redirectTo: 'Home', pathMatch: 'full'},
-      { path: '**', redirectTo: 'Home', pathMatch: 'full'}
+
+      {path: 'Account', component: AccountComponent},
+      {path: 'Account/Setting', component: ConfigComponent},
+      {path: 'Account/Borrowed', component: BorrowedComponent},
+
+      {path: 'Admin', component: AdminComponent},
+      {path: 'Admin/AccountManagement', component: AccountManagementComponent},
+      {path: 'Admin/BookManagement', component: BookManagementComponent},
+      
+      { path: '', redirectTo: '/', pathMatch: 'full'},
+      { path: '**', redirectTo: '/', pathMatch: 'full'}
     ]),
   ],
   providers: [
