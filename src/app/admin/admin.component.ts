@@ -33,7 +33,7 @@ export class AdminComponent implements OnInit {
                 this.dataLoaded = true
               }
             }, 
-            err => console.log(err))
+            err => console.error(err))
   }
 
 }

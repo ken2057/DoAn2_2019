@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from './class/user';
 import * as sha1 from 'sha1/sha1';
+import { Book } from './class/book';
 
 @Injectable({
   providedIn: 'root'
@@ -186,6 +187,17 @@ export class ApiService {
                   jsons: {
                     'token': token,
                     'bookId': bookId
+                  },
+                  observe: 'response'
+                })
+  }
+
+  public postEditBook(token: string, book: Book) {
+    return this.http.post(this.REST_API_SERVER + '/Manager/EditBook',
+                {
+                  jsons: {
+                    'token': token,
+                    'book': book
                   },
                   observe: 'response'
                 })

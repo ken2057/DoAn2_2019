@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate([''], {relativeTo: this.route})
           }, error => {
             //wrong usename/password
-            console.log('invalid', error)
+            console.error('login: ', error)
           }
         )
   }

@@ -51,6 +51,7 @@ export class AppComponent implements OnInit {
                       .subscribe(res => this.role = Number(res.body['role']), err => this.role = 9)
 
             }, error => { 
+              console.error('checkToken: '+error)
               this.resetAllValue()
             })
     }

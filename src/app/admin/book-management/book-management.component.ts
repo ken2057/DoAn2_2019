@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from 'src/app/api.service';
-import { UtilsService } from 'src/app/utils.service';
 import { Book } from 'src/app/class/book';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -18,7 +17,6 @@ export class BookManagementComponent implements OnInit {
   constructor(
     private cookieService: CookieService,
     private apiService: ApiService,
-    private utilService: UtilsService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -36,13 +34,15 @@ export class BookManagementComponent implements OnInit {
                 this.dataLoaded = true
               }
             }, 
-            err => console.log(err))
+            err => console.error(err))
   }
+
   searchBook(name?: string, subject?: string, author?: string, page?: number) {
     if (page < 1) {
+      // show error
       return
-    } // show error
-
+    } 
+    this.books = new Array<Book>()
     this.apiService.getSearchBooks(subject, author, name, page + '')
       .subscribe(response => {
         let json = response.body
@@ -53,17 +53,32 @@ export class BookManagementComponent implements OnInit {
                       book['author'],
                       book['subjects'],
                       book['books'],
-                      book['image']
+                      book['image'],
+                      book['deleted']
                     ));
         });
         console.log(this.books);
       }, error => {
-        console.log('error searchBook: ' + error);
+        console.error('error searchBook: ' + error);
       });
   }
 
   public viewBook(bookId: number) {
     this.bookClicked = bookId;
     console.log(this.bookClicked);
+  }
+
+  public deleteBook(bookId: string) {
+    this.apiService.postDelteBook(this.cookieService.get('token'), bookId)
+        .subscribe(response => {
+          let bookRemove = new Book()
+          this.books.forEach(t => {
+            bookRemove = t.isbn == bookId ? t : bookRemove
+          })
+          this.books = this.books.filter(t => t != bookRemove)
+          
+        }, error => {
+          console.error('error deleteBook: '+error)
+        })
   }
 }

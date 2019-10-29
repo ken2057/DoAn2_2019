@@ -38,7 +38,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let book of books;">
+      <tr *ngFor="let book of books;" [hidden]="book.deleted">
         <td><a [routerLink]="['/Book', book.isbn]">{{book.isbn}}</a></td>
         <td>{{book.image}}</td>
         <td>{{book.name}}</td>
@@ -46,12 +46,9 @@
         <td>{{book.subjects}}</td>
         <td>{{book.books}}</td>
         <td><button type="button" class="btn btn-info">V</button></td>
-        <td><button type="button" class="btn btn-danger">X</button>
+        <td><button type="button" class="btn btn-danger" (click)="deleteBook(book.isbn)">X</button>
         </td>
       </tr>
     <tbody>
   </table>
 </div>
-<app-book-detail
-*ngIf="bookClicked != -1"
-[bookId]="bookClicked"></app-book-detail>

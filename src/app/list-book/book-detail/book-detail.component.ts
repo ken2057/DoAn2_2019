@@ -120,7 +120,7 @@ export class BookDetailComponent implements OnInit {
           ).subscribe(response => {
             this.getBookInfo()
           }, error => {
-            console.log('error returnBook: ' + error.toString())
+            console.error('error returnBook: ' + error.toString())
           })
   }
 

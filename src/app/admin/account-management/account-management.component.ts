@@ -32,6 +32,6 @@ export class AccountManagementComponent implements OnInit {
                 this.dataLoaded = true
               }
             }, 
-            err => console.log(err))
+            err => console.error(err))
   }
 }
