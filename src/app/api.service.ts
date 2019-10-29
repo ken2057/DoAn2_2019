@@ -170,11 +170,22 @@ export class ApiService {
   // ---------------------------------------------------------------------------
 
   public getBorrowed(token: string, page?: number) {
-    return this.http.post(this.REST_API_SERVER + '/BorrowBook',
+    return this.http.get(this.REST_API_SERVER + '/Manager/GetBorrowed',
                 {
                   params: {
                     'token': token,
-                    'page': page || 0
+                    'page': ''+page || '0'
+                  },
+                  observe: 'response'
+                })
+  }
+
+  public postDelteBook(token: string, bookId: string) {
+    return this.http.post(this.REST_API_SERVER + '/Manager/DeleteBook',
+                {
+                  jsons: {
+                    'token': token,
+                    'bookId': bookId
                   },
                   observe: 'response'
                 })

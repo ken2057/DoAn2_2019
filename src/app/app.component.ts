@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
               )
               this.isLogin = true
               this.apiService.getPermission(this.cookieService.get('token'))
-                      .subscribe(res => this.role = Number(res.body), err => this.role = 9)
+                      .subscribe(res => this.role = Number(res.body['role']), err => this.role = 9)
 
             }, error => { 
               this.resetAllValue()
