@@ -37,7 +37,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: 'Home', component: AppComponent },
+      {path: 'Home', component: AppComponent },
       {path:'Login', component: LoginComponent},
       {path: 'SignUp', component: SignupComponent},
       

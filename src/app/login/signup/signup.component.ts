@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { User } from 'src/app/class/user';
 import { ApiService } from 'src/app/api.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -15,24 +16,24 @@ export class SignupComponent implements OnInit {
     passWord: new FormControl('',[Validators.required,Validators.minLength(3)]),
     Email: new FormControl('', [Validators.required,Validators.email])
   });
+  
   constructor(
-    public apiService: ApiService
+    public apiService: ApiService,
+    public router: Router,
+    public route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.userSignUp = new User()
   }
 
-  @Output() signUp = new EventEmitter<string>();
-
   onSubmit() {
-    console.log(this.userSignUp.username)
     this.apiService
         .postSignUp(this.userSignUp)
         .subscribe(response => {
-          this.signUp.emit(this.userSignUp.username)
+          this.router.navigate(['/Login'], { queryParams: { username: this.userSignUp.username }} )
         }, error => {
-          console.log(error)
+          console.log('error signUp:' + error)
         })
   }
 }

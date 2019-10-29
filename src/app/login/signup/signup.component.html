@@ -34,7 +34,7 @@
         <div *ngIf="form.get('Email').errors.email">Email must be a valid email Address</div>
       </div>
 
-      <button class="btn btn-primary" type="submit" [disabled]="!form.valid" (click)="onSubmit()">SignUp</button>
+      <button class="btn btn-primary" type="submit" [disabled]="!form.valid">SignUp</button>
     </div>
   </div>
 </form>

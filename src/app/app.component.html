@@ -53,8 +53,9 @@
 
 <body>
   <div>
-    <button type="button" class="btn btn-success" *ngIf="!isLogin" [routerLink]="['/Login']">Login</button>
-    <button type="button" class="btn btn-success" *ngIf="!isLogin" [routerLink]="['/SignUp']">SignUp</button>
+    <button type="button" class="btn btn-success" *ngIf="!isLogin" [routerLink]="['/Login']"
+    routerLinkActive="router-link-active">Login</button>
+    <!-- <button type="button" class="btn btn-success" *ngIf="!isLogin" [routerLink]="['/SignUp']">SignUp</button> -->
     <button type="button" class="btn btn-success" [routerLink]="['/Search']">Search</button>
 
     <button type="button" class="btn btn-success" *ngIf="isLogin" [routerLink]="['/Account']">Account</button>

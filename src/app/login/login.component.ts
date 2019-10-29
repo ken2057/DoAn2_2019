@@ -18,15 +18,16 @@ export class LoginComponent implements OnInit {
   isLogin = true;
 
   constructor(
-    public apiService: ApiService,
-    public cookieService: CookieService,
-    public utilsService: UtilsService,
-    public router: Router,
-    public route: ActivatedRoute
+    private apiService: ApiService,
+    private cookieService: CookieService,
+    private utilsService: UtilsService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.userLogin = new User()
+    this.userLogin.username = this.route.snapshot.queryParams['username'] || ''
   }
 
   @Output() userInfo = new EventEmitter<User>();

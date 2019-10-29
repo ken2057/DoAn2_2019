@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
 import { CookieService } from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
+import { relative } from 'path';
 
 @Component({
   selector: 'app-book-detail',
@@ -58,13 +59,16 @@ export class BookDetailComponent implements OnInit {
       this.apiService.getIsBorrowedByUser(this.cookieService.get('token'), this.bookId.toString())
           .subscribe(response => {
             let json = response.body
+            this.isAvaiable = json['borrowed'] ? false : this.isAvaiable
             // is borrwed and not avaiable => borrowed
             // is borrowed and avaiable => borrowed
             // not borrow and not avaiable => Out of order
             // not borrow and avaiable => Borrow
             this.btnBorrowText = json['borrowed'] ? 'Borrowed' : this.isAvaiable ? 'Borrow' : 'Out of order'
-            this.isAvaiable = json['borrowed'] ? false : this.isAvaiable
           })
+    else
+      this.btnBorrowText = this.isAvaiable ? 'Borrow' : 'Out of order'
+      
     // after get data from API then show it
     this.dataAvaialbe = true
   }
@@ -72,6 +76,11 @@ export class BookDetailComponent implements OnInit {
   public btnBorrowClick() {
     let token = this.cookieService.get('token')
     let isExpire = false;
+    
+    if(token == "") {
+      this.router.navigate(['/Login'], {relativeTo: this.route})
+      return
+    }
 
     this.apiService.getCheckToken(token)
           .subscribe(response => console.log('token fine')
