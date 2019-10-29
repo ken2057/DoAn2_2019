@@ -26,7 +26,6 @@ export class AccountComponent implements OnInit {
     this.apiService.getPermission(this.cookieService.get('token'))
             .subscribe(res => { 
               let role = Number(res.body['role'])
-              console.log(role)
               if(role == 3) {
                 this.router.navigate(['/Login'], {relativeTo: this.route})
               } else {

@@ -16,6 +16,8 @@ import { AccountManagementComponent } from './admin/account-management/account-m
 import { BookManagementComponent } from './admin/book-management/book-management.component';
 import { BookDetailComponent } from './list-book/book-detail/book-detail.component';
 import { RouterModule } from '@angular/router';
+import { EditBookComponent } from './admin/book-management/edit-book/edit-book.component';
+import { EditAccountComponent } from './admin/account-management/edit-account/edit-account.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { RouterModule } from '@angular/router';
     AdminComponent,
     AccountManagementComponent,
     BookManagementComponent,
-    BookDetailComponent
+    BookDetailComponent,
+    EditBookComponent,
+    EditAccountComponent
   ],
   imports: [
     BrowserModule,

@@ -23,7 +23,9 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.apiService.getPermission(this.cookieService.get('token'))
             .subscribe(res => { 
+
               let role = Number(res.body['role'])
+              console.log(res.body)
               if(role != 0 && role != 1 ) {
                 this.router.navigate([''], {relativeTo: this.route})
               } else {
