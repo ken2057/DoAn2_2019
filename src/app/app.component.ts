@@ -3,7 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from './api.service';
 import { User } from './class/user';
 import { UtilsService } from './utils.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -18,15 +18,16 @@ export class AppComponent implements OnInit {
   public role = 9;
 
   constructor(
-    public cookieService: CookieService,
-    public apiService: ApiService,
-    public utilsService: UtilsService,
-    public router: Router,
-    public route: ActivatedRoute
+    private cookieService: CookieService,
+    private apiService: ApiService,
+    private utilsService: UtilsService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.router.events.subscribe(val => {
-      if(val['urlAfterRedirects'] == '/')
-        this.checkToken()
+      if(val instanceof NavigationEnd)
+        if(val['urlAfterRedirects'] == '/')
+          this.checkToken()
     })
   }
 
@@ -43,9 +44,12 @@ export class AppComponent implements OnInit {
               let json = response.body
               this.cookieService.set(
                 'username', json['username'],
-                this.utilsService.convertSecondToDay(Number(json['expires'])))
+                this.utilsService.convertSecondToDay(Number(json['expires']))
+              )
               this.isLogin = true
-              this.getTokenPermission()
+              this.apiService.getPermission(this.cookieService.get('token'))
+                      .subscribe(res => this.role = Number(res.body), err => this.role = 9)
+
             }, error => { 
               this.resetAllValue()
             })
@@ -53,23 +57,7 @@ export class AppComponent implements OnInit {
   }
 
   public btnLogoutClick() {
-    this.cookieService.deleteAll()
     this.resetAllValue()
-  }
-
-  @Output() userInfo = new EventEmitter<User>();
-  public getLogin(ue: User){
-    this.user = ue;
-  }
-
-  getTokenPermission() {
-    this.apiService.getPermission(this.cookieService.get('token'))
-        .subscribe(response => {
-          let json = response.body
-          console.log(json)
-          this.role = Number(json)
-          
-        }, error => { this.role = 9 })
   }
 
   resetAllValue() {

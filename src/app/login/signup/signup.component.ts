@@ -18,9 +18,9 @@ export class SignupComponent implements OnInit {
   });
   
   constructor(
-    public apiService: ApiService,
-    public router: Router,
-    public route: ActivatedRoute
+    private apiService: ApiService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {

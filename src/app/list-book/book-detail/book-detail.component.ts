@@ -17,10 +17,10 @@ export class BookDetailComponent implements OnInit {
   btnBorrowText = 'Borrow'
 
   constructor(
-    public cookieService: CookieService,
-    public apiService: ApiService,
-    public router: Router,
-    public route: ActivatedRoute
+    private cookieService: CookieService,
+    private apiService: ApiService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   @Input() bookId: number;
