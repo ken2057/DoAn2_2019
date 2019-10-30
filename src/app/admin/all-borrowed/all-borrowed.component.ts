@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Borrowed } from 'src/app/class/borrowed';
 import { ManangerService } from 'src/app/api/mananger.service';
+import { AuthService } from 'src/app/api/auth.service';
 
 @Component({
   selector: 'app-all-borrowed',
@@ -16,13 +17,14 @@ export class AllBorrowedComponent implements OnInit {
 
   constructor(
     private manService: ManangerService,
+    private authSerivce: AuthService,
     private cookieService: CookieService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.manService.getPermission(this.cookieService.get('token'))
+    this.authSerivce.getPermission(this.cookieService.get('token'))
             .subscribe(res => { 
               let role = Number(res.body['role'])
               if(role != 0 && role != 1 ) {

@@ -5,6 +5,7 @@ import { Book } from 'src/app/class/book';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/api/auth.service';
 import { ManangerService } from 'src/app/api/mananger.service';
+import { BookService } from 'src/app/api/book.service';
 
 @Component({
   selector: 'app-book-management',
@@ -20,6 +21,7 @@ export class BookManagementComponent implements OnInit {
     private cookieService: CookieService,
     private authService: AuthService,
     private manService: ManangerService,
+    private bookService: BookService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -46,7 +48,7 @@ export class BookManagementComponent implements OnInit {
       return
     } 
     this.books = new Array<Book>()
-    this.manService.getSearchBooks(subject, author, name, page + '')
+    this.bookService.getSearchBooks(subject, author, name, page + '')
       .subscribe(response => {
         let json = response.body
         json['books'].forEach(book => {

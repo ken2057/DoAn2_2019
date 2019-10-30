@@ -62,7 +62,7 @@ export class AccountComponent implements OnInit {
   }
 
   updateAccountInfo() {
-    this.authService.postAccountInfo(this.cookieService.get('token'), this.user)
+    this.accService.postAccountInfo(this.cookieService.get('token'), this.user)
         .subscribe(res => {console.log(res)},
                   err => {console.log(err)})
   }

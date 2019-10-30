@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/class/user';
 import { AuthService } from 'src/app/api/auth.service';
+import { AdminService } from 'src/app/api/admin.service';
 
 @Component({
   selector: 'app-account-management',
@@ -18,6 +19,7 @@ export class AccountManagementComponent implements OnInit {
   constructor(
     private cookieService: CookieService,
     private authService: AuthService,
+    private adminService: AdminService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -44,7 +46,7 @@ export class AccountManagementComponent implements OnInit {
   }
 
   getAllAccount() {
-    this.authService.getUsersInfo(this.cookieService.get('token'))
+    this.adminService.getUsersInfo(this.cookieService.get('token'))
         .subscribe(res => {
           let accounts = res.body['users']
           accounts.forEach(account => {
