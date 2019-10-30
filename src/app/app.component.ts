@@ -58,6 +58,9 @@ export class AppComponent implements OnInit {
   }
 
   public btnLogoutClick() {
+    this.apiService.postLogout(this.cookieService.get('token'))
+        .subscribe(response => { console.log(response) },
+                  error => {console.error('logout: '+error)})
     this.resetAllValue()
   }
 

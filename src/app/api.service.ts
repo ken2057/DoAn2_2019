@@ -9,8 +9,8 @@ import { Book } from './class/book';
 })
 export class ApiService {
 
-  // private REST_API_SERVER = "http://127.0.0.1:5000";
-  private REST_API_SERVER = "https://library-project-2-api.herokuapp.com";
+  private REST_API_SERVER = "http://127.0.0.1:5000";
+  // private REST_API_SERVER = "https://library-project-2-api.herokuapp.com";
 
   constructor(private http: HttpClient) { 
   }
@@ -76,6 +76,25 @@ export class ApiService {
             })
   }
 
+  public getAccountInfo(token: string) {
+    return this.http.get(this.REST_API_SERVER + '/User/Info',
+            {
+              params: {
+                'token': token
+              }, observe: 'response'
+            })
+  }
+
+  public postAccountInfo(token: string, user: User) {
+    return this.http.post(this.REST_API_SERVER + '/User/Info',
+            {
+              json: {
+                'token': token,
+                'user': user
+              }, observe: 'response'
+            })
+  }
+
   // ---------------------------------------------------------------------------
   //  API Auth
   // ---------------------------------------------------------------------------
@@ -94,6 +113,16 @@ export class ApiService {
     return this.http.get(this.REST_API_SERVER + '/CheckToken',
             {
               params: {
+                'token': token
+              },
+              observe: 'response'
+            })
+  }
+
+  public postLogout(token: string) {
+    return this.http.post(this.REST_API_SERVER + '/Logout',
+            {
+              json: {
                 'token': token
               },
               observe: 'response'
@@ -184,7 +213,7 @@ export class ApiService {
   public postDelteBook(token: string, bookId: string) {
     return this.http.post(this.REST_API_SERVER + '/Manager/DeleteBook',
                 {
-                  jsons: {
+                  json: {
                     'token': token,
                     'bookId': bookId
                   },
@@ -195,7 +224,7 @@ export class ApiService {
   public postEditBook(token: string, book: Book) {
     return this.http.post(this.REST_API_SERVER + '/Manager/EditBook',
                 {
-                  jsons: {
+                  json: {
                     'token': token,
                     'book': book
                   },

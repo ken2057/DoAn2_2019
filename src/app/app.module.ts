@@ -10,7 +10,6 @@ import { AccountComponent } from './account/account.component';
 import { SignupComponent } from './login/signup/signup.component';
 import { ListBookComponent } from './list-book/list-book.component';
 import { BorrowedComponent } from './account/borrowed/borrowed.component';
-import { ConfigComponent } from './account/config/config.component';
 import { AdminComponent } from './admin/admin.component';
 import { AccountManagementComponent } from './admin/account-management/account-management.component';
 import { BookManagementComponent } from './admin/book-management/book-management.component';
@@ -27,7 +26,6 @@ import { EditAccountComponent } from './admin/account-management/edit-account/ed
     SignupComponent,
     BorrowedComponent,
     ListBookComponent,
-    ConfigComponent,
     AdminComponent,
     AccountManagementComponent,
     BookManagementComponent,
@@ -49,10 +47,10 @@ import { EditAccountComponent } from './admin/account-management/edit-account/ed
       {path: 'Book/:bookId', component: BookDetailComponent},
 
       {path: 'Account', component: AccountComponent},
-      {path: 'Account/Setting', component: ConfigComponent},
       {path: 'Account/Borrowed', component: BorrowedComponent},
 
       {path: 'Admin', component: AdminComponent},
+      {path: 'Admin/AllBorrowed', component: BorrowedComponent},
       {path: 'Admin/AccountManagement', component: AccountManagementComponent},
       {path: 'Admin/BookManagement', component: BookManagementComponent},
       {path: 'Admin/EditBook', component: EditBookComponent},

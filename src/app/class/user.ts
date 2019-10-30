@@ -5,6 +5,7 @@ export class User {
         public username?: string,
         public password?: string,
         public email?: string,
-        public history_borrowed?: Array<Borrowed>
+        public history_borrowed?: Array<Borrowed>,
+        public role?: string
     ) {}
 }

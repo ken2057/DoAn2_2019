@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from '../api.service';
 import { UtilsService } from '../utils.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { User } from '../class/user';
 
 @Component({
   selector: 'app-account',
@@ -11,8 +12,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 
 export class AccountComponent implements OnInit {
-  public username: string;
+  user = new User()
   dataLoaded = false;
+  
 
   constructor(
     private cookieService: CookieService,
@@ -38,6 +40,28 @@ export class AccountComponent implements OnInit {
   }
 
   loadData() {
-    this.username = this.cookieService.get('username');
+    this.getAccountInfo()
+  }
+
+  getAccountInfo() {
+    this.apiService.getAccountInfo(this.cookieService.get('token'))
+        .subscribe(response => {
+          let json = response.body
+          let account = json['account']
+          this.user = new User(
+            account['_id'],
+            '',
+            account['email'],
+            account['borrowed']
+          )
+        }, error => {
+          console.error('getAccountInfo: '+error)
+          })
+  }
+
+  updateAccountInfo() {
+    this.apiService.postAccountInfo(this.cookieService.get('token'), this.user)
+        .subscribe(res => {console.log(res)},
+                  err => {console.log(err)})
   }
 }
