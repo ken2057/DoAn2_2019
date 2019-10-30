@@ -53,8 +53,8 @@ import { EditAccountComponent } from './admin/account-management/edit-account/ed
       {path: 'Admin/AllBorrowed', component: BorrowedComponent},
       {path: 'Admin/AccountManagement', component: AccountManagementComponent},
       {path: 'Admin/BookManagement', component: BookManagementComponent},
-      {path: 'Admin/EditBook', component: EditBookComponent},
-      {path: 'Admin/EditAccount', component: EditAccountComponent},
+      {path: 'EditBook', component: EditBookComponent},
+      {path: 'EditAccount', component: EditAccountComponent},
       
       { path: '', redirectTo: '/', pathMatch: 'full'},
       { path: '**', redirectTo: '/', pathMatch: 'full'}

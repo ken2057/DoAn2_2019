@@ -9,8 +9,8 @@ import { Book } from './class/book';
 })
 export class ApiService {
 
-  private REST_API_SERVER = "http://127.0.0.1:5000";
-  // private REST_API_SERVER = "https://library-project-2-api.herokuapp.com";
+  // private REST_API_SERVER = "http://127.0.0.1:5000";
+  private REST_API_SERVER = "https://library-project-2-api.herokuapp.com";
 
   constructor(private http: HttpClient) { 
   }

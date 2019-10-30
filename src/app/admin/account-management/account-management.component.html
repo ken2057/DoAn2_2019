@@ -24,8 +24,8 @@
     <thead>
       <tr>
           <th>Username</th>
-          <th>Password</th>
           <th>Email</th>
+          <th>Role</th>
           <th>History Borrowed</th>
           <th>Edit</th>
           <th>Delete</th>
@@ -34,8 +34,8 @@
     <tbody>
       <tr *ngFor="let account of accounts;" >
         <td><a [routerLink]="['/Account', account.username]">{{account.username}}</a></td>
-        <td>{{account.password}}</td>
         <td>{{account.email}}</td>
+        <td [hidden]="role != 0">{{account.role}}</td>
         <td>{{account.history_borrowed}}</td>
         <td><button type="button" class="btn btn-info">V</button></td>
         <td><button type="button" class="btn btn-danger">X</button></td>

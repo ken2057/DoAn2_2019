@@ -57,15 +57,9 @@ export class BookManagementComponent implements OnInit {
                       book['deleted']
                     ));
         });
-        console.log(this.books);
       }, error => {
         console.error('error searchBook: ' + error);
       });
-  }
-
-  public viewBook(bookId: number) {
-    this.bookClicked = bookId;
-    console.log(this.bookClicked);
   }
 
   public deleteBook(bookId: string) {
