@@ -21,11 +21,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                            <tr *ngFor="let borrowed of user.history_borrowed">
+                                <td><a [routerLink]="['/Book', borrowed.bookId]">{{ borrowed.bookId }}</a></td>
+                                <td>{{ borrowed.date_borrow }}</td>
+                                <td>{{ borrowed.date_expire }}</td>
+                                <td>{{ borrowed.status }}</td>
                             </tr>  
                         </tbody>
                     </table>

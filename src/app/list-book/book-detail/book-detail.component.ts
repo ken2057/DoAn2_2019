@@ -27,7 +27,6 @@ export class BookDetailComponent implements OnInit {
 
   ngOnInit() {
     this.bookId = Number(this.route.snapshot.paramMap.get('bookId'))
-    console.log(this.bookId)
     this.getBookInfo()
   }
 

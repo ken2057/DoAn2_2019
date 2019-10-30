@@ -199,7 +199,7 @@ export class ApiService {
   //  API mananger
   // ---------------------------------------------------------------------------
 
-  public getBorrowed(token: string, page?: number) {
+  public getAllBorrowed(token: string, page?: number) {
     return this.http.get(this.REST_API_SERVER + '/Manager/GetBorrowed',
                 {
                   params: {

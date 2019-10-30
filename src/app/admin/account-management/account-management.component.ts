@@ -48,7 +48,7 @@ export class AccountManagementComponent implements OnInit {
           let accounts = res.body['users']
           accounts.forEach(account => {
             this.accounts.push(new User(
-              account['username'],
+              account['_id'],
               '',
               account['email'],
               account['borrowed'],

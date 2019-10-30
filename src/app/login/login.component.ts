@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
         .getLogin(this.userLogin)
         .subscribe(response => {
             // login succesfully
+            this.cookieService.deleteAll()
             let json = response.body
             this.cookieService.set(
               'token', json['token'],

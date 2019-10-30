@@ -53,7 +53,7 @@ export class AccountComponent implements OnInit {
             '',
             account['email'],
             account['borrowed']
-          )
+          )          
         }, error => {
           console.error('getAccountInfo: '+error)
           })

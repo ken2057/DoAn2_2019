@@ -69,7 +69,8 @@ export class BookManagementComponent implements OnInit {
           this.books.forEach(t => {
             bookRemove = t.isbn == bookId ? t : bookRemove
           })
-          this.books = this.books.filter(t => t != bookRemove)
+          // this.books = this.books.filter(t => t != bookRemove)
+          this.books.splice(this.books.indexOf(bookRemove), 1)
           
         }, error => {
           console.error('error deleteBook: '+error)

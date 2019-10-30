@@ -9,7 +9,6 @@ import { LoginComponent } from './login/login.component';
 import { AccountComponent } from './account/account.component';
 import { SignupComponent } from './login/signup/signup.component';
 import { ListBookComponent } from './list-book/list-book.component';
-import { BorrowedComponent } from './account/borrowed/borrowed.component';
 import { AdminComponent } from './admin/admin.component';
 import { AccountManagementComponent } from './admin/account-management/account-management.component';
 import { BookManagementComponent } from './admin/book-management/book-management.component';
@@ -17,6 +16,7 @@ import { BookDetailComponent } from './list-book/book-detail/book-detail.compone
 import { RouterModule } from '@angular/router';
 import { EditBookComponent } from './admin/book-management/edit-book/edit-book.component';
 import { EditAccountComponent } from './admin/account-management/edit-account/edit-account.component';
+import { AllBorrowedComponent } from './admin/all-borrowed/all-borrowed.component';
 
 @NgModule({
   declarations: [
@@ -24,14 +24,14 @@ import { EditAccountComponent } from './admin/account-management/edit-account/ed
     LoginComponent,
     AccountComponent,
     SignupComponent,
-    BorrowedComponent,
     ListBookComponent,
     AdminComponent,
     AccountManagementComponent,
     BookManagementComponent,
     BookDetailComponent,
     EditBookComponent,
-    EditAccountComponent
+    EditAccountComponent,
+    AllBorrowedComponent
   ],
   imports: [
     BrowserModule,
@@ -47,10 +47,9 @@ import { EditAccountComponent } from './admin/account-management/edit-account/ed
       {path: 'Book/:bookId', component: BookDetailComponent},
 
       {path: 'Account', component: AccountComponent},
-      {path: 'Account/Borrowed', component: BorrowedComponent},
 
       {path: 'Admin', component: AdminComponent},
-      {path: 'Admin/AllBorrowed', component: BorrowedComponent},
+      {path: 'Admin/AllBorrowed', component: AllBorrowedComponent},
       {path: 'Admin/AccountManagement', component: AccountManagementComponent},
       {path: 'Admin/BookManagement', component: BookManagementComponent},
       {path: 'EditBook', component: EditBookComponent},
