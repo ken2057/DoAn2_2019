@@ -1,3 +1,5 @@
 {
-    "bookUrl": "GetBooks"
-  }
+    "bookUrl": "GetBooks",
+    "API_SERVER": "https://library-project-2-api.herokuapp.com",
+    "LOCAL_API_SERVER": "http://127.0.0.1:5000"
+}

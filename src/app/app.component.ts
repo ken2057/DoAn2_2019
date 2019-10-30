@@ -1,9 +1,9 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { ApiService } from './api.service';
 import { User } from './class/user';
 import { UtilsService } from './utils.service';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { AuthService } from './api/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private cookieService: CookieService,
-    private apiService: ApiService,
+    private authService: AuthService,
     private utilsService: UtilsService,
     private router: Router,
     private route: ActivatedRoute
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
   checkToken() {
     // check token expire or not
     if(this.cookieService.get('token') != '') {
-      this.apiService
+      this.authService
             .getCheckToken(this.cookieService.get('token'))
             .subscribe( response => {
               let json = response.body
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
                 this.utilsService.convertSecondToDay(Number(json['expires']))
               )
               this.isLogin = true
-              this.apiService.getPermission(this.cookieService.get('token'))
+              this.authService.getPermission(this.cookieService.get('token'))
                       .subscribe(res => this.role = Number(res.body['role']), err => this.role = 9)
 
             }, error => { 
@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
   }
 
   public btnLogoutClick() {
-    this.apiService.postLogout(this.cookieService.get('token'))
+    this.authService.postLogout(this.cookieService.get('token'))
         .subscribe(response => { console.log(response) },
                   error => {console.error('logout: '+error)})
     this.resetAllValue()

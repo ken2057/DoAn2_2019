@@ -4,6 +4,8 @@ import { ApiService } from '../api.service';
 import { UtilsService } from '../utils.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../class/user';
+import { AuthService } from '../api/auth.service';
+import { AccountService } from '../api/account.service';
 
 @Component({
   selector: 'app-account',
@@ -18,14 +20,14 @@ export class AccountComponent implements OnInit {
 
   constructor(
     private cookieService: CookieService,
-    private apiService: ApiService,
-    private utilService: UtilsService,
+    private authService: AuthService,
+    private accService: AccountService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.apiService.getPermission(this.cookieService.get('token'))
+    this.authService.getPermission(this.cookieService.get('token'))
             .subscribe(res => { 
               let role = Number(res.body['role'])
               if(role == 3) {
@@ -44,7 +46,7 @@ export class AccountComponent implements OnInit {
   }
 
   getAccountInfo() {
-    this.apiService.getAccountInfo(this.cookieService.get('token'))
+    this.accService.getAccountInfo(this.cookieService.get('token'))
         .subscribe(response => {
           let json = response.body
           let account = json['account']
@@ -60,7 +62,7 @@ export class AccountComponent implements OnInit {
   }
 
   updateAccountInfo() {
-    this.apiService.postAccountInfo(this.cookieService.get('token'), this.user)
+    this.authService.postAccountInfo(this.cookieService.get('token'), this.user)
         .subscribe(res => {console.log(res)},
                   err => {console.log(err)})
   }

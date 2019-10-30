@@ -3,6 +3,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from 'src/app/api.service';
 import { Book } from 'src/app/class/book';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/api/auth.service';
+import { ManangerService } from 'src/app/api/mananger.service';
 
 @Component({
   selector: 'app-book-management',
@@ -16,14 +18,15 @@ export class BookManagementComponent implements OnInit {
 
   constructor(
     private cookieService: CookieService,
-    private apiService: ApiService,
+    private authService: AuthService,
+    private manService: ManangerService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
 
   ngOnInit() {
-    this.apiService.getPermission(this.cookieService.get('token'))
+    this.authService.getPermission(this.cookieService.get('token'))
             .subscribe(res => { 
               let role = Number(res.body['role'])
               if(role != 0 && role != 1 ) {
@@ -43,7 +46,7 @@ export class BookManagementComponent implements OnInit {
       return
     } 
     this.books = new Array<Book>()
-    this.apiService.getSearchBooks(subject, author, name, page + '')
+    this.manService.getSearchBooks(subject, author, name, page + '')
       .subscribe(response => {
         let json = response.body
         json['books'].forEach(book => {
@@ -63,7 +66,7 @@ export class BookManagementComponent implements OnInit {
   }
 
   public deleteBook(bookId: string) {
-    this.apiService.postDelteBook(this.cookieService.get('token'), bookId)
+    this.manService.postDelteBook(this.cookieService.get('token'), bookId)
         .subscribe(response => {
           let bookRemove = new Book()
           this.books.forEach(t => {

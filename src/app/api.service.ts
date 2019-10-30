@@ -8,14 +8,15 @@ import { Book } from './class/book';
   providedIn: 'root'
 })
 export class ApiService {
-
-  // private REST_API_SERVER = "http://127.0.0.1:5000";
-  private REST_API_SERVER = "https://library-project-2-api.herokuapp.com";
+  configUrl = 'assets/config.json';
+  private REST_API_SERVER: string
 
   constructor(private http: HttpClient) { 
+    this.http.get(this.configUrl)
+            .subscribe(res => {
+              this.REST_API_SERVER = res['API_SERVER']
+            })
   }
-
-  configUrl = 'assets/config.json';
 
   // ---------------------------------------------------------------------------
   //  API Admin

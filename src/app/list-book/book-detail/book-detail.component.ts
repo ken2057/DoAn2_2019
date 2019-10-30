@@ -1,9 +1,10 @@
 import { Book } from './../../class/book';
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiService } from 'src/app/api.service';
 import { CookieService } from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { relative } from 'path';
+import { BookService } from 'src/app/api/book.service';
+import { AuthService } from 'src/app/api/auth.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -18,7 +19,8 @@ export class BookDetailComponent implements OnInit {
 
   constructor(
     private cookieService: CookieService,
-    private apiService: ApiService,
+    private bookSerivce: BookService,
+    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -33,7 +35,7 @@ export class BookDetailComponent implements OnInit {
   getBookInfo() {
     this.bookDetail = new Book()
     if (this.bookId != null) {
-      this.apiService.getBook(this.bookId.toString())
+      this.bookSerivce.getBook(this.bookId.toString())
           .subscribe(response => {
             let json = response.body
             this.bookDetail = new Book(
@@ -55,7 +57,7 @@ export class BookDetailComponent implements OnInit {
 
   checkUserBorrowed() {
     if (this.cookieService.get('token') != "")
-      this.apiService.getIsBorrowedByUser(this.cookieService.get('token'), this.bookId.toString())
+      this.bookSerivce.getIsBorrowedByUser(this.cookieService.get('token'), this.bookId.toString())
           .subscribe(response => {
             let json = response.body
             this.isAvaiable = json['borrowed'] ? false : this.isAvaiable
@@ -81,7 +83,7 @@ export class BookDetailComponent implements OnInit {
       return
     }
 
-    this.apiService.getCheckToken(token)
+    this.authService.getCheckToken(token)
           .subscribe(response => console.log('token fine')
             ,response => {
               if(response.status == 400) 
@@ -92,7 +94,7 @@ export class BookDetailComponent implements OnInit {
     if (isExpire) {
       // event here
     } else {
-      this.apiService.postBorrowBook(token, this.bookId.toString())
+      this.bookSerivce.postBorrowBook(token, this.bookId.toString())
           .subscribe(response => {
             console.log('done borrow')
             this.btnBorrowText = 'Borrowed'
@@ -112,7 +114,7 @@ export class BookDetailComponent implements OnInit {
   }
 
   callPostReturn(status: string) {
-    this.apiService.postReturnBook(
+    this.bookSerivce.postReturnBook(
             this.cookieService.get('token'), 
             this.bookId+'', 
             status

@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from '../api.service';
 import { UtilsService } from '../utils.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../api/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -14,14 +15,13 @@ export class AdminComponent implements OnInit {
 
   constructor(
     private cookieService: CookieService,
-    private apiService: ApiService,
-    private utilService: UtilsService,
+    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.apiService.getPermission(this.cookieService.get('token'))
+    this.authService.getPermission(this.cookieService.get('token'))
             .subscribe(res => { 
               let role = Number(res.body['role'])
               if(role != 0 && role != 1 ) {

@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { User } from 'src/app/class/user';
-import { ApiService } from 'src/app/api.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AccountService } from 'src/app/api/account.service';
 
 @Component({
   selector: 'app-signup',
@@ -18,7 +18,7 @@ export class SignupComponent implements OnInit {
   });
   
   constructor(
-    private apiService: ApiService,
+    private accountService: AccountService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    this.apiService
+    this.accountService
         .postSignUp(this.userSignUp)
         .subscribe(response => {
           this.router.navigate(['/Login'], { queryParams: { username: this.userSignUp.username }} )

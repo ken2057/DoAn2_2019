@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from 'src/app/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/class/user';
+import { AuthService } from 'src/app/api/auth.service';
 
 @Component({
   selector: 'app-account-management',
@@ -16,13 +17,13 @@ export class AccountManagementComponent implements OnInit {
 
   constructor(
     private cookieService: CookieService,
-    private apiService: ApiService,
+    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.apiService.getPermission(this.cookieService.get('token'))
+    this.authService.getPermission(this.cookieService.get('token'))
             .subscribe(res => {
               let role = Number(res.body['role'])
               if(role != 0 && role != 1 ) {
@@ -43,7 +44,7 @@ export class AccountManagementComponent implements OnInit {
   }
 
   getAllAccount() {
-    this.apiService.getUsersInfo(this.cookieService.get('token'))
+    this.authService.getUsersInfo(this.cookieService.get('token'))
         .subscribe(res => {
           let accounts = res.body['users']
           accounts.forEach(account => {

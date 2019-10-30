@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/api.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Borrowed } from 'src/app/class/borrowed';
+import { ManangerService } from 'src/app/api/mananger.service';
 
 @Component({
   selector: 'app-all-borrowed',
@@ -14,14 +15,14 @@ export class AllBorrowedComponent implements OnInit {
   allBorrowed = new Array<Borrowed>()
 
   constructor(
-    private apiService: ApiService,
+    private manService: ManangerService,
     private cookieService: CookieService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.apiService.getPermission(this.cookieService.get('token'))
+    this.manService.getPermission(this.cookieService.get('token'))
             .subscribe(res => { 
               let role = Number(res.body['role'])
               if(role != 0 && role != 1 ) {
@@ -36,7 +37,7 @@ export class AllBorrowedComponent implements OnInit {
   }
 
   getAllBorrowed(page?: number) {
-    this.apiService.getAllBorrowed(this.cookieService.get('token'), page)
+    this.manService.getAllBorrowed(this.cookieService.get('token'), page)
         .subscribe(res => {
           let allBorrowed = res.body['borrowed']
           allBorrowed.forEach(t => {
