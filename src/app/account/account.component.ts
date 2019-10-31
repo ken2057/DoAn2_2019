@@ -1,7 +1,5 @@
 import { Component, OnInit, Injectable, Input } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { ApiService } from '../api.service';
-import { UtilsService } from '../utils.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../class/user';
 import { AuthService } from '../api/auth.service';

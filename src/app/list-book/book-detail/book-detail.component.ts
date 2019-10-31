@@ -2,7 +2,6 @@ import { Book } from './../../class/book';
 import { Component, OnInit, Input } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
-import { relative } from 'path';
 import { BookService } from 'src/app/api/book.service';
 import { AuthService } from 'src/app/api/auth.service';
 

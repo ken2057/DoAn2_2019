@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { ApiService } from 'src/app/api.service';
 import { Book } from 'src/app/class/book';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/api/auth.service';

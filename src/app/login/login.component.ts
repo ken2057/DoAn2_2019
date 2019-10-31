@@ -1,11 +1,11 @@
 import { Component, Input, Output, Injectable, EventEmitter, OnInit } from '@angular/core';
 import { User } from '../class/user';
 import { AppComponent } from '../app.component';
-import { ApiService } from '../api.service';
 import { CookieService } from 'ngx-cookie-service';
 import { UtilsService } from '../utils.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AccountService } from '../api/account.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(
-    private apiService: ApiService,
+    private accService: AccountService,
     private cookieService: CookieService,
     private utilsService: UtilsService,
     private router: Router,
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   @Output() userInfo = new EventEmitter<User>();
 
   onSubmit() {
-    this.apiService
+    this.accService
         .getLogin(this.userLogin)
         .subscribe(response => {
             // login succesfully
