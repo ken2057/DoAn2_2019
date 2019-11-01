@@ -59,4 +59,14 @@ export class AccountService extends ApiService {
               }, observe: 'response'
             })
   }
+
+  public postLogout(token: string) {
+    return this.http.post(this.REST_API_SERVER + '/Logout',
+            {
+              json: {
+                'token': token
+              },
+              observe: 'response'
+            })
+  }
 }

@@ -5,7 +5,6 @@ import { ApiService } from './api.service';
   providedIn: 'root'
 })
 export class AuthService extends ApiService {
-  
   // ---------------------------------------------------------------------------
   //  API Auth
   // ---------------------------------------------------------------------------
@@ -30,13 +29,4 @@ export class AuthService extends ApiService {
             })
   }
 
-  public postLogout(token: string) {
-    return this.http.post(this.REST_API_SERVER + '/Logout',
-            {
-              json: {
-                'token': token
-              },
-              observe: 'response'
-            })
-  }
 }

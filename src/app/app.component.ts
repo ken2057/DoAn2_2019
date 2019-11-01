@@ -4,6 +4,7 @@ import { User } from './class/user';
 import { UtilsService } from './utils.service';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { AuthService } from './api/auth.service';
+import { AccountService } from './api/account.service';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
   constructor(
     private cookieService: CookieService,
     private authService: AuthService,
+    private accountService: AccountService,
     private utilsService: UtilsService,
     private router: Router,
     private route: ActivatedRoute
@@ -38,8 +40,7 @@ export class AppComponent implements OnInit {
   checkToken() {
     // check token expire or not
     if(this.cookieService.get('token') != '') {
-      this.authService
-            .getCheckToken(this.cookieService.get('token'))
+      this.authService.getCheckToken(this.cookieService.get('token'))
             .subscribe( response => {
               let json = response.body
               this.cookieService.set(
@@ -58,7 +59,7 @@ export class AppComponent implements OnInit {
   }
 
   public btnLogoutClick() {
-    this.authService.postLogout(this.cookieService.get('token'))
+    this.accountService.postLogout(this.cookieService.get('token'))
         .subscribe(response => { console.log(response) },
                   error => {console.error('logout: '+error)})
     this.resetAllValue()

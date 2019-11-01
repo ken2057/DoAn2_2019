@@ -39,8 +39,7 @@ export class LoginComponent implements OnInit {
   @Output() userInfo = new EventEmitter<User>();
 
   onSubmit() {
-    this.accService
-        .getLogin(this.userLogin)
+    this.accService.getLogin(this.userLogin)
         .subscribe(response => {
             // login succesfully
             this.cookieService.deleteAll()
