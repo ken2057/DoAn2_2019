@@ -47,6 +47,7 @@ import { AllBorrowedComponent } from './admin/all-borrowed/all-borrowed.componen
       {path: 'Book/:bookId', component: BookDetailComponent},
 
       {path: 'Account', component: AccountComponent},
+      {path: 'Account/:username', component: AccountComponent},
 
       {path: 'Admin', component: AdminComponent},
       {path: 'Admin/AllBorrowed', component: AllBorrowedComponent},

@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../class/user';
 import { AuthService } from '../api/auth.service';
 import { AccountService } from '../api/account.service';
+import { ManangerService } from '../api/mananger.service';
 
 @Component({
   selector: 'app-account',
@@ -14,12 +15,12 @@ import { AccountService } from '../api/account.service';
 export class AccountComponent implements OnInit {
   user = new User()
   dataLoaded = false;
-  
 
   constructor(
     private cookieService: CookieService,
     private authService: AuthService,
     private accService: AccountService,
+    private manService: ManangerService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -32,15 +33,16 @@ export class AccountComponent implements OnInit {
                 this.router.navigate(['/Login'], {relativeTo: this.route})
               } else {
                 //have permission
-                this.loadData()
+                let username = this.route.snapshot.paramMap.get('username')
+                if(username == null)
+                  this.getAccountInfo()
+                else 
+                  this.getAccountInfoWithId(username)
+
                 this.dataLoaded = true
               }
             }, 
             err => console.log(err))
-  }
-
-  loadData() {
-    this.getAccountInfo()
   }
 
   getAccountInfo() {
@@ -63,5 +65,20 @@ export class AccountComponent implements OnInit {
     this.accService.postAccountInfo(this.cookieService.get('token'), this.user)
         .subscribe(res => {console.log(res)},
                   err => {console.log(err)})
+  }
+
+  getAccountInfoWithId(username: string) {
+    this.manService.getUserWithId(this.cookieService.get('token'), username)
+          .subscribe( res => {
+            let user = res.body['user']
+            this.user = new User(
+              user['_id'],
+              '',
+              user['email'],
+              user['borrowed']
+            )
+          }, error => {
+            console.error(error)
+          })
   }
 }

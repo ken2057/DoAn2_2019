@@ -43,4 +43,15 @@ export class ManangerService extends ApiService {
                   observe: 'response'
                 })
   }
+
+  public getUserWithId(token: string, username) {
+    return this.http.get(this.REST_API_SERVER + '/Manager/GetUser', 
+              {
+                params: {
+                  'token': token,
+                  'username': username
+                },
+                observe: 'response'
+              })
+  }
 }
