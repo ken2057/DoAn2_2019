@@ -11,6 +11,8 @@ import { BookService } from '../api/book.service';
 export class ListBookComponent implements OnInit {
   public bookClicked = -1;
   public books = new Array<Book>();
+  dataLoaded = false;
+
 
   constructor(
     private router: Router,
@@ -20,6 +22,8 @@ export class ListBookComponent implements OnInit {
 
   ngOnInit() {
     this.searchBook();
+    this.dataLoaded = true;
+
   }
 
   searchBook(name?: string, subject?: string, author?: string, page?: number) {
