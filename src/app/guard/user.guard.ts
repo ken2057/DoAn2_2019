@@ -7,7 +7,7 @@ import { AuthService } from '../api/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginGuard implements CanActivate {
+export class UserGuard implements CanActivate {
   res: boolean
 
   constructor(
@@ -20,19 +20,25 @@ export class LoginGuard implements CanActivate {
   async canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<boolean> {
+    let flag = (state.url == '/Login' || state.url == '/SignUp')
+    if(this.cookieService.get('token') == '' && flag)
+      return true
 
     await this.getPermission()
     
-    return this.res
+    return this.res && !flag
   }
 
   async getPermission() {
-    await this.authService
-      .getPermission(this.cookieService.get('token'))
-      .toPromise().then(t => {
-        this.res = !(Number(t.body['role']) == 3)
-        if (!this.res)
-          this.router.navigate(['/Login'], {relativeTo: this.route})
-    })
+      await this.authService
+        .getPermission(this.cookieService.get('token'))
+        .toPromise().then(t => {
+          // equal 3 => not login
+          this.res = !(Number(t.body['role']) == 3)
+          if (!this.res) {
+            this.cookieService.deleteAll()
+            this.router.navigate(['/Login'], {relativeTo: this.route})
+          }
+      })
   }
 }
