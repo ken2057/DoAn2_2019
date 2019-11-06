@@ -1,17 +1,17 @@
-<p>account works!</p>
-<div *ngIf="dataLoaded">
+
+<div *ngIf="dataLoaded" class="container">
     <form>
-       
+
         <div class="info-box">
             <div style="border-bottom: 1px solid black; border-radius: 4px;">
                 <h2 style="text-align: center;">Account Information</h2>
-            </div>             
+            </div>
             <div class="info-detail">
                 <h4>User name: {{ user.username }}</h4>
                 <h4>Email: {{ user.email }}</h4>
                 <h4>Borrowed History</h4>
                 <div class="list-borrowed">
-                    <table class="table table-striped table-class" style="width: 100%;">
+                    <table class="table table-striped table-class">
                         <thead>
                             <tr>
                                 <th>Book</th>
@@ -26,7 +26,7 @@
                                 <td>{{ borrowed.date_borrow }}</td>
                                 <td>{{ borrowed.date_expire }}</td>
                                 <td>{{ borrowed.status }}</td>
-                            </tr>  
+                            </tr>
                         </tbody>
                     </table>
                 </div>
