@@ -20,6 +20,7 @@ import { AllBorrowedComponent } from './admin/all-borrowed/all-borrowed.componen
 import { UserGuard } from './guard/user.guard';
 import { AdminGuard } from './guard/admin.guard';
 import { ManagerGuard } from './guard/manager.guard';
+import { LoginGuard } from './guard/login.guard';
 
 @NgModule({
   declarations: [
@@ -43,22 +44,22 @@ import { ManagerGuard } from './guard/manager.guard';
     ReactiveFormsModule,
     RouterModule.forRoot([
       {path: 'Home', component: AppComponent},
-      {path:'Login', component: LoginComponent, canActivate: [UserGuard]},
-      {path: 'SignUp', component: SignupComponent, canActivate: [UserGuard]},
+      {path:'Login', component: LoginComponent, canActivate: [LoginGuard]},
+      {path: 'SignUp', component: SignupComponent, canActivate: [LoginGuard]},
       
       {path:'Search', component: ListBookComponent}, 
       {path: 'Book/:bookId', component: BookDetailComponent},
 
       {path: 'Account', component: AccountComponent, canActivate: [UserGuard]},
-      {path: 'Account/:username', component: AccountComponent, canActivate: [AdminGuard, ManagerGuard]},
+      {path: 'Account/:username', component: AccountComponent, canActivate: [AdminGuard]},
 
-      {path: 'Admin', component: AdminComponent, canActivate: [AdminGuard, ManagerGuard]},
-      {path: 'Admin/AllBorrowed', component: AllBorrowedComponent, canActivate: [AdminGuard, ManagerGuard]},
-      {path: 'Admin/AccountManagement', component: AccountManagementComponent, canActivate: [AdminGuard, ManagerGuard]},
-      {path: 'Admin/BookManagement', component: BookManagementComponent, canActivate: [AdminGuard, ManagerGuard]},
-      {path: 'EditBook', component: EditBookComponent, canActivate: [AdminGuard, ManagerGuard]},
+      {path: 'Admin', component: AdminComponent, canActivate: [AdminGuard]},
+      {path: 'Admin/AllBorrowed', component: AllBorrowedComponent, canActivate: [AdminGuard]},
+      {path: 'Admin/AccountManagement', component: AccountManagementComponent, canActivate: [AdminGuard]},
+      {path: 'Admin/BookManagement', component: BookManagementComponent, canActivate: [AdminGuard]},
+      {path: 'EditBook', component: EditBookComponent, canActivate: [AdminGuard]},
       {path: 'EditAccount', component: EditAccountComponent, canActivate: [UserGuard]},
-      {path: 'EditAccount/:username', component: EditAccountComponent, canActivate: [AdminGuard, ManagerGuard]},
+      {path: 'EditAccount/:username', component: EditAccountComponent, canActivate: [AdminGuard]},
       
       { path: '', redirectTo: '/', pathMatch: 'full'},
       { path: '**', redirectTo: '/', pathMatch: 'full'}

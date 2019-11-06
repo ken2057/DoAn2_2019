@@ -7,7 +7,7 @@ import { AuthService } from '../api/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate {
+export class LoginGuard implements CanActivate {
   res: boolean
 
   constructor(
@@ -22,17 +22,16 @@ export class AdminGuard implements CanActivate {
     state: RouterStateSnapshot): Promise<boolean> {
 
     await this.getPermission()
-    console.log(this.res)
+    
     return this.res
   }
 
   async getPermission() {
-    await this.authService
-      .getPermission(this.cookieService.get('token'))
-      .toPromise().then(t => {
-        this.res = (Number(t.body['role']) == 0)
-        if (!this.res)
-          this.router.navigate(['/'], {relativeTo: this.route})
-    })
+      await this.authService
+        .getPermission(this.cookieService.get('token'))
+        .toPromise().then(t => {
+          // equal 3 => not login
+          this.res = (Number(t.body['role']) == 3)
+      })
   }
 }

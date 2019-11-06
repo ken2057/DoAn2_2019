@@ -20,13 +20,10 @@ export class UserGuard implements CanActivate {
   async canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<boolean> {
-    let flag = (state.url == '/Login' || state.url == '/SignUp')
-    if(this.cookieService.get('token') == '' && flag)
-      return true
 
     await this.getPermission()
     
-    return this.res && !flag
+    return this.res
   }
 
   async getPermission() {

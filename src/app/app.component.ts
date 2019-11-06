@@ -28,8 +28,9 @@ export class AppComponent implements OnInit {
   ) {
     this.router.events.subscribe(val => {
       if(val instanceof NavigationEnd)
-        if(val['urlAfterRedirects'] == '/')
+        if(val['url'] == '/' || val['url'] == '/Login'){
           this.checkToken()
+        }
     })
   }
 
@@ -55,6 +56,8 @@ export class AppComponent implements OnInit {
               console.error('checkToken: '+error)
               this.resetAllValue()
             })
+    } else {
+      this.resetAllValue()
     }
   }
 
