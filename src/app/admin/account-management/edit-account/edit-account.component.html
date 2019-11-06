@@ -1,56 +1,51 @@
 <p>edit-account works!</p>
 <div class="container">
-    <form name="form" [formGroup]="form">
-        <div class="info-box">
-            <div style="border-bottom: 2px solid black; border-radius: 3px;">
-                <h2 style="text-align: center;">Edit Account</h2>
-            </div>
-            <div class="info-edt">
-                <h4 for="userName">User name</h4>
-                <input type="text" class="form-control" id="txt-username" required value="{{user.username}} "
-                    placeholder="Enter new User name" formControlName="userName"
-                    [ngClass]="{'is-invalid':form.get('userName').touched && form.get('userName').invalid}"
-                    [(ngModel)]="edtUser.username">
+  <form name="form" [formGroup]="form">
+    <div class="info-box">
+      <div style="border-bottom: 2px solid black; border-radius: 3px;">
+        <h2 style="text-align: center;">Edit Account</h2>
+      </div>
+      <div class="info-edt">
+        <h4 for="userName">User name</h4>
+        <input disabled type="text" class="form-control" id="txt-username" value="{{user.username}} "
+          formControlName="userName" [(ngModel)]="edtUser.username">
 
-                <div style="color: red;" *ngIf="form.get('userName').touched && form.get('userName').invalid"
-                    class="invalid-feedback">
-                    <div *ngIf="form.get('userName').errors.required">User Name is required</div>
-                    <div *ngIf="form.get('userName').errors.minlength">User Name must be at least 3 charector </div>
-                </div>
-
-                <h4 for="passWord">Password</h4>
-
-                <input type="password" class="form-control" id="txtPass" required value="{{user.password}}"
-                    placeholder="Enter new Password" formControlName="passWord"
-                    [ngClass]="{'is-invalid':form.get('passWord').touched && form.get('passWord').invalid}"
-                    [(ngModel)]="edtUser.password">
-
-                <div style="color: red;" *ngIf="form.get('passWord').touched && form.get('passWord').invalid"
-                    class="invalid-feedback">
-                    <div *ngIf="form.get('passWord').errors.required">Password is required</div>
-                    <div *ngIf="form.get('passWord').errors.minlength">Password must be at least 3 charector</div>
-                </div>
-
-                <h4 for="email">Email</h4>
-                <input type="email" class="form-control" formControlName="Email" id="txtEmail" value="{{user.email}}"
-                    [ngClass]="{'is-invalid':form.get('Email').touched && form.get('Email').invalid}"
-                    placeholder="Enter new Email" [(ngModel)]="edtUser.email">
-                <div style="color: red;" *ngIf="form.get('Email').touched && form.get('Email').invalid"
-                    class="invalid-feedback">
-                    <div *ngIf="form.get('Email').errors.required">Email is required</div>
-                    <div *ngIf="form.get('Email').errors.email">Email must be a valid email Address</div>
-                </div>
-                <h4>Role</h4>
-                <select class="form-control" id="selectRole" [(ngModel)]="edtUser.Role">
-                    <option selected>Guess</option>
-                    <option>Admin</option>
-                    <option>Manager</option>
-
-                </select>
-            </div>
-            <div class="btn-submit">
-                <button type="submit" class="btn btn-success">Save</button>
-            </div>
+        <div style="color: red;" *ngIf="form.get('userName').touched && form.get('userName').invalid"
+          class="invalid-feedback">
+          <div *ngIf="form.get('userName').errors.required">User Name is required</div>
+          <div *ngIf="form.get('userName').errors.minlength">User Name must be at least 3 charector </div>
         </div>
-    </form>
+
+        <h4 for="passWord">Password</h4>
+
+        <input type="password" class="form-control" id="txtPass" value="{{user.password}}"
+          placeholder="Enter new Password" formControlName="passWord"
+          [ngClass]="{'is-invalid':form.get('passWord').touched && form.get('passWord').invalid}"
+          [(ngModel)]="edtUser.password">
+
+        <div style="color: red;" *ngIf="form.get('passWord').touched && form.get('passWord').invalid"
+          class="invalid-feedback">
+          <div *ngIf="form.get('passWord').errors.minlength">Password must be at least 3 charector</div>
+        </div>
+        <h4 for="email">Email</h4>
+        <input type="email" class="form-control" formControlName="Email" id="txtEmail" value="{{user.email}}"
+          [ngClass]="{'is-invalid':form.get('Email').touched && form.get('Email').invalid}"
+          placeholder="Enter new Email" [(ngModel)]="edtUser.email">
+        <div style="color: red;" *ngIf="form.get('Email').touched && form.get('Email').invalid"
+          class="invalid-feedback">
+          <div *ngIf="form.get('Email').errors.required">Email is required</div>
+          <div *ngIf="form.get('Email').errors.email">Email must be a valid email Address</div>
+        </div>
+        <h4>Role</h4>
+        <select class="form-control" id="selectRole" [(ngModel)]="edtUser.Role">
+          <option selected>Guess</option>
+          <option>Admin</option>
+          <option>Manager</option>
+        </select>
+      </div>
+      <div class="btn-submit">
+        <button type="submit" class="btn btn-success">Save</button>
+      </div>
+    </div>
+  </form>
 </div>

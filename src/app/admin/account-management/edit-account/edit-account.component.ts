@@ -29,10 +29,10 @@ export class EditAccountComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) { }
-  
+
   ngOnInit() {
     this.authService.getPermission(this.cookieService.get('token'))
-            .subscribe(res => { 
+            .subscribe(res => {
               let role = Number(res.body['role'])
               if(role == 3) {
                 this.router.navigate(['/Login'], {relativeTo: this.route})
@@ -41,12 +41,12 @@ export class EditAccountComponent implements OnInit {
                 let username = this.route.snapshot.paramMap.get('username')
                 if(username == null)
                   this.getAccountInfo() //user
-                else 
+                else
                   this.getAccountInfoWithId(username) //admin - manager
 
                 this.dataLoaded = true
               }
-            }, 
+            },
             err => console.log(err))
   }
 
@@ -60,7 +60,7 @@ export class EditAccountComponent implements OnInit {
             '',
             account['email'],
             account['borrowed']
-          )          
+          )
         }, error => {
           console.error('getAccountInfo: '+error)
           })
