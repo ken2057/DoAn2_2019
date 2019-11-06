@@ -8,6 +8,7 @@ form{
   border-radius: 20px;
   background-color: rgb(245, 233, 233);
   opacity: 10;
+  margin-top: 30px;
 }
 button[type="submit"]
 {

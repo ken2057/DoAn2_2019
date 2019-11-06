@@ -1,5 +1,5 @@
-<div *ngIf="isLogin">
-  <form name="form" [formGroup]="form" (ngSubmit)="onSubmit() && form.valid">
+<div *ngIf="isLogin" class="container">
+  <form name="form" [formGroup]="form" (ngSubmit)="onSubmit() && form.valid" class="container">
     <div class="form-container">
       <div class="row-columns">
         <h1 style="color: brown;">Login</h1>
