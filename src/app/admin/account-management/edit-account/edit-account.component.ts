@@ -17,7 +17,7 @@ export class EditAccountComponent implements OnInit {
   dataLoaded = false;
   edtUser = new User()
   form = new FormGroup({
-    userName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    userName: new FormControl({value:'',disabled: true}, [Validators.required , Validators.minLength(3)]),
     passWord: new FormControl('', [Validators.required, Validators.minLength(3)]),
     Email: new FormControl('', [Validators.required, Validators.email])
   });
