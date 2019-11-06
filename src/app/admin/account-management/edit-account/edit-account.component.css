@@ -1,0 +1,37 @@
+.info-box{
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 800px;
+    height: auto;
+    background-color: rgb(245, 233, 233);
+    opacity: 10;
+  
+  }
+  .info-edt{
+    margin: 20px;
+    margin-top: 5px;;
+    padding: 20px 50px 40px 230px;
+  }
+  #txt-username, #txtPass, #txtEmail ,#selectRole{
+    margin-top: 10px;
+    width: 300px;
+  
+  }
+  h4{
+    margin-top: 10px;
+    font-size: 22px;
+  }
+  .btn-success{
+    width: 100px;
+  
+  }
+  .btn-submit{
+    padding: 0px 50px 40px 340px;
+  
+  }
+  button{
+    height: 50px;
+    background-color: brown;
+    font-size: 20px;
+  }
+  

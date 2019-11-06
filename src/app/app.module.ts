@@ -54,7 +54,7 @@ import { AllBorrowedComponent } from './admin/all-borrowed/all-borrowed.componen
       {path: 'Admin/AccountManagement', component: AccountManagementComponent},
       {path: 'Admin/BookManagement', component: BookManagementComponent},
       {path: 'EditBook', component: EditBookComponent},
-      {path: 'EditAccount', component: EditAccountComponent},
+      {path: 'Admin/EditAccount', component: EditAccountComponent},
       
       { path: '', redirectTo: '/', pathMatch: 'full'},
       { path: '**', redirectTo: '/', pathMatch: 'full'}

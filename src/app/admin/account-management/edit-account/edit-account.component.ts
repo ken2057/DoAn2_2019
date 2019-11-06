@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { User } from 'src/app/class/user';
+
 
 @Component({
   selector: 'app-edit-account',
@@ -6,10 +10,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-account.component.css']
 })
 export class EditAccountComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  dataLoaded = false;
+  edtUser = new User()
+  form = new FormGroup({
+    userName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    passWord: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    Email: new FormControl('', [Validators.required, Validators.email])
+  });
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
+  ngOnInit() {   
   }
-
 }

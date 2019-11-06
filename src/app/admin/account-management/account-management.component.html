@@ -37,7 +37,7 @@
         <td>{{account.email}}</td>
         <td [hidden]="role != 0">{{account.role}}</td>
         <td>{{account.history_borrowed}}</td>
-        <td><button type="button" class="btn btn-info">V</button></td>
+        <td><button type="button" class="btn btn-info" [routerLink]="['/Admin/EditAccount']">V</button></td>
         <td><button type="button" class="btn btn-danger">X</button></td>
       </tr>
     <tbody>
