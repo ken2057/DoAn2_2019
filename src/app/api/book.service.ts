@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -52,8 +53,10 @@ export class BookService extends ApiService {
   public getIsBorrowedByUser(token: string, bookId: string) {
     return this.http.get(this.REST_API_SERVER + '/IsBorrowedById',
                 {
+                  headers: new HttpHeaders({
+                    'Authorization': token
+                  }),
                   params: {
-                    'token': token,
                     'bookId': bookId
                   },
                   observe: 'response'

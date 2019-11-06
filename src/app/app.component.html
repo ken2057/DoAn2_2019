@@ -1,44 +1,57 @@
 <head>
-  <base href="/Home">
-  <link rel="css" href="app.component.css">
+  <base href="/Home" />
+  <link rel="css" href="app.component.css" />
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous"
+  />
   <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous"
+  />
   <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"
+  ></script>
 </head>
-
 
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
-  <img
-    width="40"
-    alt="Library Logo"
-    src="assets/img/icons8-library-100.png"
-  />
+  <a [routerLink]="['/']" routerLinkActive="router-link-active">
+    <img
+      width="40"
+      alt="Library Logo"
+      src="assets/img/icons8-library-100.png"
+    />
+  </a>
   <span>LIBRARY</span>
+
   <div class="spacer"></div>
   <div>
-      <nav>
-          <button
-                  type="button"
-                  class=""
-                  *ngIf="!isLogin"
-                  [routerLink]="['/Login']"
-                  routerLinkActive="router-link-active">
-            Login
-            <span></span><span></span><span></span><span></span>
-          </button>
-          <button
-                  type="button"
-                  class=""
-                  *ngIf="isLogin"
-                  (click)="btnLogoutClick()">
-            Log out
-            <span></span><span></span><span></span><span></span>
-          </button>
-        </nav>
+    <nav>
+      <button
+        type="button"
+        class=""
+        *ngIf="!isLogin"
+        [routerLink]="['/Login']"
+        routerLinkActive="router-link-active"
+      >
+        Login
+        <span></span><span></span><span></span><span></span>
+      </button>
+      <button type="button" class="" *ngIf="isLogin" (click)="btnLogoutClick()">
+        Log out
+        <span></span><span></span><span></span><span></span>
+      </button>
+    </nav>
   </div>
 </div>
 <!-- <div class="content" role="main">
@@ -52,17 +65,52 @@
 </div> -->
 <div class="toolbar toolbar-second-line" role="banner">
   <!-- <button type="button" class="btn btn-success" *ngIf="!isLogin" [routerLink]="['/SignUp']">SignUp</button> -->
-  <button type="button" class="btn btn-component" [routerLink]="['/Search']">Search</button>
+  <button type="button" class="btn btn-component" [routerLink]="['/Search']">
+    Search
+  </button>
 
-  <button type="button" class="btn btn-component" *ngIf="isLogin" [routerLink]="['/Account']">Account</button>
+  <button
+    type="button"
+    class="btn btn-component"
+    *ngIf="isLogin"
+    [routerLink]="['/Account']"
+  >
+    Account
+  </button>
 
-  <button type="button" class="btn btn-component" *ngIf="role == 0 || role == 1" [routerLink]="['/Admin']">Admin</button>
-  <button type="button" class="btn btn-component" *ngIf="role == 0 || role == 1" [routerLink]="['/Admin/AccountManagement']">Account Management</button>
-  <button type="button" class="btn btn-component" *ngIf="role == 0 || role == 1" [routerLink]="['/Admin/BookManagement']">Book management</button>
-  <button type="button" class="btn btn-component" *ngIf="role == 0 || role == 1" [routerLink]="['/Admin/AllBorrowed']">All Borrowed</button>
-
+  <button
+    type="button"
+    class="btn btn-component"
+    *ngIf="role == 0 || role == 1"
+    [routerLink]="['/Admin']"
+  >
+    Admin
+  </button>
+  <button
+    type="button"
+    class="btn btn-component"
+    *ngIf="role == 0 || role == 1"
+    [routerLink]="['/Admin/AccountManagement']"
+  >
+    Account Management
+  </button>
+  <button
+    type="button"
+    class="btn btn-component"
+    *ngIf="role == 0 || role == 1"
+    [routerLink]="['/Admin/BookManagement']"
+  >
+    Book management
+  </button>
+  <button
+    type="button"
+    class="btn btn-component"
+    *ngIf="role == 0 || role == 1"
+    [routerLink]="['/Admin/AllBorrowed']"
+  >
+    All Borrowed
+  </button>
 </div>
 <body>
-
   <router-outlet></router-outlet>
 </body>

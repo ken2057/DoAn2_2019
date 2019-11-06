@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Book } from '../class/book';
 import { ApiService } from './api.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,10 @@ export class ManangerService extends ApiService {
   public getAllBorrowed(token: string, page?: number) {
     return this.http.get(this.REST_API_SERVER + '/Manager/GetBorrowed',
                 {
+                  headers: new HttpHeaders({
+                    'Authorization': token
+                  }),
                   params: {
-                    'token': token,
                     'page': ''+page || '0'
                   },
                   observe: 'response'
@@ -47,8 +50,10 @@ export class ManangerService extends ApiService {
   public getUserWithId(token: string, username) {
     return this.http.get(this.REST_API_SERVER + '/Manager/GetUser', 
               {
+                headers: new HttpHeaders({
+                  'Authorization': token
+                }),
                 params: {
-                  'token': token,
                   'username': username
                 },
                 observe: 'response'

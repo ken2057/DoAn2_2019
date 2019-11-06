@@ -23,18 +23,8 @@ export class AllBorrowedComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.authSerivce.getPermission(this.cookieService.get('token'))
-            .subscribe(res => { 
-              let role = Number(res.body['role'])
-              if(role != 0 && role != 1 ) {
-                this.router.navigate([''], {relativeTo: this.route})
-              } else {
-                // do sth 
-                this.getAllBorrowed()
-                this.dataLoaded = true
-              }
-            }, 
-            err => console.error(err))
+    this.getAllBorrowed()
+    this.dataLoaded = true
   }
 
   getAllBorrowed(page?: number) {

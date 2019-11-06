@@ -31,23 +31,13 @@ export class EditAccountComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.authService.getPermission(this.cookieService.get('token'))
-            .subscribe(res => {
-              let role = Number(res.body['role'])
-              if(role == 3) {
-                this.router.navigate(['/Login'], {relativeTo: this.route})
-              } else {
-                //have permission
-                let username = this.route.snapshot.paramMap.get('username')
-                if(username == null)
-                  this.getAccountInfo() //user
-                else
-                  this.getAccountInfoWithId(username) //admin - manager
+    let username = this.route.snapshot.paramMap.get('username')
+    if(username == null)
+      this.getAccountInfo() //user
+    else
+      this.getAccountInfoWithId(username) //admin - manager
 
-                this.dataLoaded = true
-              }
-            },
-            err => console.log(err))
+    this.dataLoaded = true
   }
 
   getAccountInfo() {

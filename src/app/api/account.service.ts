@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../class/user';
 import * as sha1 from 'sha1/sha1';
 import { ApiService } from './api.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -35,18 +36,20 @@ export class AccountService extends ApiService {
   public getUserBorrowed(token: string) {
     return this.http.post(this.REST_API_SERVER + '/SignUp',
             {
-              params: {
+              json: {
                 'token': token
-              }, observe: 'response'
+              },
+              observe: 'response'
             })
   }
 
   public getAccountInfo(token: string) {
     return this.http.get(this.REST_API_SERVER + '/User/Info',
             {
-              params: {
-                'token': token
-              }, observe: 'response'
+              headers: new HttpHeaders({
+                'Authorization': token
+              }),
+              observe: 'response'
             })
   }
 
@@ -54,8 +57,8 @@ export class AccountService extends ApiService {
     return this.http.post(this.REST_API_SERVER + '/User/Info',
             {
               json: {
-                'token': token,
-                'user': user
+                'user': user,
+                'token': token
               }, observe: 'response'
             })
   }

@@ -63,6 +63,7 @@ export class AppComponent implements OnInit {
         .subscribe(response => { console.log(response) },
                   error => {console.error('logout: '+error)})
     this.resetAllValue()
+    this.router.navigate(['/'], {relativeTo: this.route})
   }
 
   resetAllValue() {

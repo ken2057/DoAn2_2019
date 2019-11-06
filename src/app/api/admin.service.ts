@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,9 @@ export class AdminService extends ApiService {
   public getUsersInfo(token: string) {
     return this.http.get(this.REST_API_SERVER + '/Admin/GetUsers',
             {
-              params: {
-                'token': token
-              },
+              headers: new HttpHeaders({
+                'Authorization': token
+              }),
               observe: 'response'
             })
   }

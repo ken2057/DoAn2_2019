@@ -27,18 +27,8 @@ export class BookManagementComponent implements OnInit {
 
 
   ngOnInit() {
-    this.authService.getPermission(this.cookieService.get('token'))
-            .subscribe(res => { 
-              let role = Number(res.body['role'])
-              if(role != 0 && role != 1 ) {
-                this.router.navigate([''], {relativeTo: this.route})              
-              } else {
-                //have permission
-                this.searchBook();
-                this.dataLoaded = true
-              }
-            }, 
-            err => console.error(err))
+    this.searchBook();
+    this.dataLoaded = true
   }
 
   searchBook(name?: string, subject?: string, author?: string, page?: number) {
