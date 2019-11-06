@@ -43,7 +43,7 @@ export class BookDetailComponent implements OnInit {
               json['author'],
               json['subjects'],
               json['books'],
-              '' // image
+              json['image']
             )
             // set if still have book for borrow
             this.isAvaiable = this.bookDetail.books.filter(t => t == '').length == 0 ? false : true
