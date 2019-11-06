@@ -26,25 +26,96 @@ p {
 
 .toolbar {
   height: 60px;
-  margin: -8px;
   display: flex;
   align-items: center;
-  background-color: #1976d2;
-  color: white;
+  background-color: #1D3C26;
+  color: #EADFCE;
   font-weight: 600;
+  padding: 0 8px;
 }
 
 .toolbar img {
-  margin: 0 16px;
+  margin: 0 8px;
+  color: #EADFCE;
 }
 
-.toolbar #twitter-logo {
-  height: 40px;
-  margin: 0 16px;
+.toolbar span {
+  font-size: 200%;
 }
 
-.toolbar #twitter-logo:hover {
-  opacity: 0.8;
+.toolbar button {
+  color: #EADFCE;
+  font-weight: 300;
+}
+
+nav button {
+  --c: #578F53;
+  font-size: 16px;
+  border: 0;
+  border-radius: 0.5em;
+  width: 6em;
+  height: 3em;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  letter-spacing: 0.1em;
+  text-align: center;
+  line-height: 3em;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: 0.5s;
+  background: transparent;
+  margin: 0.5em;
+}
+
+nav button span {
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  background-color: var(--c);
+  transform: translateY(150%);
+  border-radius: 50%;
+  left: calc((var(--n) - 1) * 25%);
+  transition: 0.5s;
+  transition-delay: calc((var(--n) - 1) * 0.1s);
+  z-index: -1;
+}
+
+nav button:hover {
+  color: black;
+}
+
+nav button:hover span {
+  transform: translateY(0) scale(2);
+}
+
+nav button span:nth-child(1) {
+  --n: 1;
+}
+
+nav button span:nth-child(2) {
+  --n: 2;
+}
+
+nav button span:nth-child(3) {
+  --n: 3;
+}
+
+nav button span:nth-child(4) {
+  --n: 4;
+}
+
+.btn-component{
+  background: transparent;
+  color: #EADFCE;
+  width: 100%;
+}
+.toolbar .btn-component{
+  font-weight: 600;
+}
+
+.toolbar-second-line{
+  margin-bottom: 8px;
 }
 
 .content {

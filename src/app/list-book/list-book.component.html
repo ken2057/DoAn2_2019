@@ -1,7 +1,25 @@
-<p>List-book-work!</p>
 <head>
   <base href="/Search">
 </head>
+<div class="container">
+  <div class="row">
+    <input type="searchBook"id="input-search-book" class="col-sm-6 form-control" placeholder="Search here...">
+    <button id="book-name" class="btn col-sm-2">Book Name</button>
+    <button id="author-name" class="btn col-sm-2">Author Name</button>
+    <button id="subject" class="btn col-sm-2">Subject</button>
+  </div>
+  <div>
+    <h1>Books:</h1>
+    <div class="row">
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" *ngFor="let book of books;">
+        <a href="#">
+          <img src="{{book.image}}" class="img-responsive book-image" alt="BookImage">
+          <label>{{book.name}}</label>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <app-book-detail
 *ngIf="bookClicked != -1"

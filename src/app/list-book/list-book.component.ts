@@ -9,8 +9,8 @@ import { BookService } from '../api/book.service';
   styleUrls: ['./list-book.component.css']
 })
 export class ListBookComponent implements OnInit {
-  public bookClicked = -1
-  public books = new Array<Book>()
+  public bookClicked = -1;
+  public books = new Array<Book>();
 
   constructor(
     private router: Router,
@@ -19,25 +19,32 @@ export class ListBookComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getSearchBook()
+    this.searchBook();
   }
 
-  getSearchBook(subject?: string, author?: string, name?: string, page?: string) {
-    this.books = new Array<Book>();
-    this.bookService.getSearchBooks(subject, author, name, page)
-          .subscribe(res => {
-            let result = res.body['books']
-            result.forEach(book => {
-              this.books.push(new Book(
-                book['_id'],
-                book['name'],
-                book['subjects'],
-                book['books'],
-                book['image']
-              ))
-            });
-          }, error => {
-            console.error(error)
-          })
+  searchBook(name?: string, subject?: string, author?: string, page?: number) {
+    if (page < 1) {
+      // show error
+      return
+    }
+    this.books = new Array<Book>()
+    this.bookService.getSearchBooks(subject, author, name, page + '')
+      .subscribe(response => {
+        let json = response.body
+        json['books'].forEach(book => {
+          this.books.push(new Book(
+                      book['_id'],
+                      book['name'],
+                      book['author'],
+                      book['subjects'],
+                      book['books'],
+                      book['image'],
+                      book['deleted']
+                    ));
+        });
+      }, error => {
+        console.error('error searchBook: ' + error);
+      });
   }
+
 }
