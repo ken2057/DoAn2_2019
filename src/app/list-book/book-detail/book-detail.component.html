@@ -1,9 +1,9 @@
 <head>
   <base href="/Book">
 </head>
-
-<div class="row" *ngIf="dataAvaialbe">
-    <div class="hover14 column col-xs-6 col-sm-6 col-md-6 col-lg-6 image-box">
+<div class="container">
+  <div class="row" *ngIf="dataAvaialbe">
+    <div class="hover14 column col-xs-6 col-sm-6 col-md-6 col-lg-6 image-box" >
       <br>
       <figure>
         <img src="{{bookDetail.image}}" class="img-responsive" alt="{{bookDetail.name}}">
@@ -17,17 +17,19 @@
         <h3>Subject: </h3>
       </div>
       <div class="btn-them">
-        <button type="button" class="btn btn-success" [disabled]="!isAvaiable" (click)="btnBorrowClick()">{{ btnBorrowText }}</button>
+        <button type="button" class="btn btn-success" [disabled]="!isAvaiable"
+          (click)="btnBorrowClick()">{{ btnBorrowText }}</button>
         <div class="btn-option" [hidden]="btnBorrowText != 'Borrowed'">
           <button type="button" class="btn btn-success" (click)="btnReturnClick()">Return</button>
           <button type="button" class="btn btn-success" (click)="btnLostClick()">Lost</button>
         </div>
       </div>
-      
+
     </div>
     <div class='card-footer'>
-        <button class='btn btn-outline-secondary' (click)='onBack()'>
-            <i class='fa fa-chevron-left'></i> Back
-        </button>
+      <button class='btn btn-outline-secondary' (click)='onBack()'>
+        <i class='fa fa-chevron-left'></i> Back
+      </button>
     </div>
+  </div>
 </div>
