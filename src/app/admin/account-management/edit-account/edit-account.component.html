@@ -16,19 +16,9 @@
         />
         <h4 for="passWord">Password</h4>
 
-        <input
-          type="password"
-          class="form-control"
-          id="txtPass"
-          value="{{ edtUser.password }}"
-          placeholder="Enter new Password"
-          formControlName="passWord"
-          [(ngModel)]="edtUser.password"
-          [ngClass]="{
-            'is-invalid':
-              form.get('passWord').touched && form.get('passWord').invalid
-          }"
-        />
+        <input type="password" class="form-control" id="txtPass" value="{{edtUser.password}}"
+          placeholder="Enter new Password" formControlName="passWord" [(ngModel)]="edtUser.password"
+          [ngClass]="{'is-invalid':form.get('passWord').touched && form.get('passWord').invalid}">
 
         <div
           style="color: red;"
