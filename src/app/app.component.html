@@ -64,52 +64,65 @@
     </div>
 </div> -->
 <div class="toolbar toolbar-second-line" role="banner">
-  <!-- <button type="button" class="btn btn-success" *ngIf="!isLogin" [routerLink]="['/SignUp']">SignUp</button> -->
-  <button type="button" class="btn btn-component" [routerLink]="['/Search']">
-    Search
-  </button>
+  <div>
+    <nav>
+      <!-- <button type="button" class="btn btn-success" *ngIf="!isLogin" [routerLink]="['/SignUp']">SignUp</button> -->
+      <button
+      type="button"
+      class="btn btn-component"
+      [routerLink]="['/Search']"
+      >
+      Search
+      <span></span><span></span><span></span><span></span>
+      </button>
 
-  <button
-    type="button"
-    class="btn btn-component"
-    *ngIf="isLogin"
-    [routerLink]="['/Account']"
-  >
-    Account
-  </button>
+      <button
+      type="button"
+      class="btn btn-component"
+      *ngIf="isLogin"
+      [routerLink]="['/Account']"
+      >
+      Account
+      <span></span><span></span><span></span><span></span>
+      </button>
 
-  <button
-    type="button"
-    class="btn btn-component"
-    *ngIf="role == 0 || role == 1"
-    [routerLink]="['/Admin']"
-  >
-    Admin
-  </button>
-  <button
-    type="button"
-    class="btn btn-component"
-    *ngIf="role == 0 || role == 1"
-    [routerLink]="['/Admin/AccountManagement']"
-  >
-    Account Management
-  </button>
-  <button
-    type="button"
-    class="btn btn-component"
-    *ngIf="role == 0 || role == 1"
-    [routerLink]="['/Admin/BookManagement']"
-  >
-    Book management
-  </button>
-  <button
-    type="button"
-    class="btn btn-component"
-    *ngIf="role == 0 || role == 1"
-    [routerLink]="['/Admin/AllBorrowed']"
-  >
-    All Borrowed
-  </button>
+      <div class="dropdown">
+        <button
+          type="button"
+          class="btn btn-component dropbtn"
+          *ngIf="role == 0 || role == 1"
+          [routerLink]="['/Admin']"
+          >
+        Admin
+        <span></span><span></span><span></span><span></span>
+        </button>
+        <div class="dropdown-content">
+          <a
+            class="btn btn-component"
+            *ngIf="role == 0 || role == 1"
+            [routerLink]="['/Admin/AccountManagement']"
+            >
+            Account Management
+          </a>
+          <a
+            class="btn btn-component"
+            *ngIf="role == 0 || role == 1"
+            [routerLink]="['/Admin/BookManagement']"
+            >
+            Book management
+          </a>
+          <a
+            class="btn btn-component"
+            *ngIf="role == 0 || role == 1"
+            [routerLink]="['/Admin/AllBorrowed']"
+            >
+            All Borrowed
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
 </div>
 <body>
   <router-outlet></router-outlet>
