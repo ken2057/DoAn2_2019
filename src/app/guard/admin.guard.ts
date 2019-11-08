@@ -22,7 +22,7 @@ export class AdminGuard implements CanActivate {
     state: RouterStateSnapshot): Promise<boolean> {
 
     await this.getPermission()
-    console.log(this.res)
+    
     return this.res
   }
 

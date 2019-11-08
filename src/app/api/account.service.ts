@@ -57,8 +57,14 @@ export class AccountService extends ApiService {
     return this.http.post(this.REST_API_SERVER + '/User/Info',
             {
               json: {
-                'user': user,
-                'token': token
+                'token': token,
+                'user': new User(
+                  user.username,
+                  user.password == '' ? '' : sha1(user.password),
+                  user.email, 
+                  null,
+                  user.role
+                )
               }, observe: 'response'
             })
   }

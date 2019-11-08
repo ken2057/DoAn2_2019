@@ -15,10 +15,20 @@ import { ManangerService } from 'src/app/api/mananger.service';
 })
 export class EditAccountComponent implements OnInit {
   dataLoaded = false;
+  isAdmin = false;
   edtUser = new User()
+
+  roles = [
+    {'id': 1, 'name': 'User'},
+    {'id': 2, 'name': 'Manager'},
+    {'id': 3, 'name': 'Admin'},
+  ]
+  currentRole = 1
+  newRole = -1
+
   form = new FormGroup({
-    userName: new FormControl({value:'',disabled: true}, [Validators.required , Validators.minLength(3)]),
-    passWord: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    userName: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.minLength(3)]),
+    passWord: new FormControl('', [Validators.minLength(3)]),
     Email: new FormControl('', [Validators.required, Validators.email])
   });
   constructor(
@@ -32,7 +42,7 @@ export class EditAccountComponent implements OnInit {
 
   ngOnInit() {
     let username = this.route.snapshot.paramMap.get('username')
-    if(username == null)
+    if (username == null)
       this.getAccountInfo() //user
     else
       this.getAccountInfoWithId(username) //admin - manager
@@ -42,39 +52,61 @@ export class EditAccountComponent implements OnInit {
 
   getAccountInfo() {
     this.accService.getAccountInfo(this.cookieService.get('token'))
-        .subscribe(response => {
-          let json = response.body
-          let account = json['account']
-          this.edtUser = new User(
-            account['_id'],
-            '',
-            account['email'],
-            account['borrowed']
-          )
-        }, error => {
-          console.error('getAccountInfo: '+error)
-          })
+      .subscribe(response => {
+        let json = response.body
+        let account = json['account']
+        this.edtUser = new User(
+          account['_id'],
+          '',
+          account['email'],
+          account['borrowed']
+        )
+      }, error => {
+        console.error('getAccountInfo: ' + error)
+      })
   }
 
   updateAccountInfo() {
     this.accService.postAccountInfo(this.cookieService.get('token'), this.edtUser)
-        .subscribe(res => {console.log(res)},
-                  err => {console.log(err)})
+      .subscribe(res => { console.log(res) },
+        err => { console.log(err) })
   }
 
   getAccountInfoWithId(username: string) {
     this.manService.getUserWithId(this.cookieService.get('token'), username)
-          .subscribe( res => {
-            let user = res.body['user']
-            this.edtUser = new User(
-              user['_id'],
-              '',
-              user['email'],
-              user['borrowed'],
-              user['role']
-            )
-          }, error => {
-            console.error(error)
-          })
+      .subscribe(res => {
+        let user = res.body['user']
+        this.edtUser = new User(
+          user['_id'],
+          '',
+          user['email'],
+          user['borrowed']
+          )
+          this.roles.forEach(role => {
+            if (role.name.toLowerCase() == user['role']){
+              this.currentRole = role.id
+              this.newRole = role.id
+            }
+          });
+          this.isAdmin = true
+      }, error => {
+        console.error(error)
+      })
+  }
+
+  onSubmit() {
+    if(this.isAdmin)
+      this.roles.forEach(role => {
+        if (this.newRole == role.id)
+          this.edtUser.role = role.name.toLowerCase()
+      })
+
+    this.accService.postAccountInfo(this.cookieService.get('token'), this.edtUser)
+        .subscribe(res => {
+          let username = this.route.snapshot.paramMap.get('username')
+          this.router.navigate(['/Admin/AccountManagement'], {relativeTo: this.route})
+        }, error => {
+          console.error(error)
+        })
   }
 }
