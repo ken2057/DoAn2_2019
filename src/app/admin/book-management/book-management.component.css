@@ -7,8 +7,8 @@ table tr:nth-child(even){
 }
 
 th {
-background: brown;
-color: #fff;
+background: #1D3C26;
+color: #EADFCE;
 }
 
 .pagination {
@@ -42,3 +42,18 @@ text-align:right;
 color: #999;
 }
 
+img{
+  width: 100px;
+  height:150px;
+}
+
+.btn-component{
+  background: #1D3C26;
+  color: #EADFCE;
+  width: 100px;
+}
+.btn-component:hover{
+  background: #578F53;
+  color: #EADFCE;
+  font-weight: 600;
+}
