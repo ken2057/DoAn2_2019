@@ -44,14 +44,8 @@ export class LoginComponent implements OnInit {
             // login succesfully
             this.cookieService.deleteAll()
             let json = response.body
-            this.cookieService.set(
-              'token', json['token'],
-              this.utilsService.convertSecondToDay(Number(json['expires']))
-            )
-            this.cookieService.set(
-              'username', this.userLogin.username,
-              this.utilsService.convertSecondToDay(Number(json['expires']))
-            )
+            this.cookieService.set('token', json['token'])
+            this.cookieService.set('username', this.userLogin.username)
             this.router.navigate([''], {relativeTo: this.route})
           }, error => {
             //wrong usename/password
