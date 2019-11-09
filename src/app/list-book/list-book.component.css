@@ -35,9 +35,14 @@ label{
 }
 
 .book-image{
+  min-width: 160px;
+  max-width: 165px;
+  min-height: 240px;
+  max-height: 248px;
   width: auto;
   height: auto;
   align-items: center;
+  background: #fff;
 }
 
 .end-form{

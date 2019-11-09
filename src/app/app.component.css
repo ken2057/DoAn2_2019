@@ -112,10 +112,6 @@ nav button span:nth-child(4) {
   color: #EADFCE;
 }
 
-.toolbar .btn-component{
-  font-weight: 600;
-}
-
 .toolbar-second-line{
   margin-bottom: 8px;
   align-items: center;
