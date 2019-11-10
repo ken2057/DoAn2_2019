@@ -3,12 +3,12 @@ table th , table td{
   border: 0.5px solid black;
 }
 th {
-  background: brown;
-  color: #fff;
-  }
-  table tr:nth-child(even){
-    background-color: #d9c99c
-  }
+  background: #1D3C26;
+  color: #EADFCE;
+}
+table tr:nth-child(even){
+  background-color: #EADFCE;
+}
 .lst-search{
   width: 20%;
   float: right;

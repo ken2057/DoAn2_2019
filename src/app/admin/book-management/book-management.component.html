@@ -44,7 +44,7 @@
         <td>{{book.author}}</td>
         <td>{{book.subjects}}</td>
         <td>{{book.books}}</td>
-        <td><button type="button" class="btn btn-info">V</button></td>
+        <td><button type="button" class="btn btn-info" [routerLink]="['/EditBook']" routerLinkActive="router-link-active" >V</button></td>
         <td><button type="button" class="btn btn-danger" (click)="deleteBook(book.isbn)">X</button>
         </td>
       </tr>
