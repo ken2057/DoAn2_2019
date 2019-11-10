@@ -1,1 +1,83 @@
-<p>edit-book works!</p>
+<div class="container">
+  <h1>EDIT BOOK</h1>
+  <div class="row">
+    <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <label for="inputBookName" class="col-sm-2 control-label">BookName:</label>
+      <div class="col-sm-12">
+        <input
+              type="text"
+              name="BookName"
+              id="inputBookName"
+              class="form-control"
+              value=""
+              required="required"
+              pattern=""
+              title=""
+        >
+      </div>
+    </div>
+
+    <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <label for="inputAuthor" class="col-sm-2 control-label">Author:</label>
+      <div class="col-sm-12">
+        <input
+              type="text"
+              name="Author"
+              id="input"
+              class="form-control"
+              value=""
+              required="required"
+              pattern=""
+              title=""
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <label for="inputSubject" class="col-sm-12 control-label">Subject:</label>
+    <div class="row">
+      <div class="col-sm-4">
+        <select name="Subject1" id="inputSubject" class="form-control">
+          <option value="">-- Select One --</option>
+        </select>
+      </div>
+      <div class="col-sm-4">
+        <select name="Subject2" id="inputSubject" class="form-control">
+          <option value="">-- Select One --</option>
+        </select>
+      </div>
+      <div class="col-sm-4">
+        <select name="Subject3" id="inputSubject" class="form-control">
+          <option value="">-- Select One --</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <label for="browse" class="col-sm-12 control-label">Book image:</label>
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <img src="#" class="img-responsive" alt="BookImage">
+      </div>
+
+      <div class="input-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <input type="text" class="form-control" id="inputImgLink" placeholder="Image link...">
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-browse">Go!</button>
+        </span>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <button type="button" class="btn btn-cancel">Cancel</button>
+      </div>
+      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"></div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <button type="button" class="btn btn-confirm">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
