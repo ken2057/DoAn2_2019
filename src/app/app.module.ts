@@ -1,11 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { CookieService } from 'ngx-cookie-service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent , LoginDialog} from './login/login.component';
 import { AccountComponent } from './account/account.component';
 import { SignupComponent } from './login/signup/signup.component';
 import { ListBookComponent } from './list-book/list-book.component';
@@ -21,11 +20,14 @@ import { UserGuard } from './guard/user.guard';
 import { AdminGuard } from './guard/admin.guard';
 import { ManagerGuard } from './guard/manager.guard';
 import { LoginGuard } from './guard/login.guard';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    [LoginComponent, LoginDialog],
     AccountComponent,
     SignupComponent,
     ListBookComponent,
@@ -35,10 +37,14 @@ import { LoginGuard } from './guard/login.guard';
     BookDetailComponent,
     EditBookComponent,
     EditAccountComponent,
-    AllBorrowedComponent
+    AllBorrowedComponent,
   ],
+  entryComponents: [LoginComponent, LoginDialog],
   imports: [
     BrowserModule,
+    MatDialogModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -46,8 +52,8 @@ import { LoginGuard } from './guard/login.guard';
       {path: 'Home', component: AppComponent},
       {path:'Login', component: LoginComponent, canActivate: [LoginGuard]},
       {path: 'SignUp', component: SignupComponent, canActivate: [LoginGuard]},
-      
-      {path:'Search', component: ListBookComponent}, 
+
+      {path:'Search', component: ListBookComponent},
       {path: 'Book/:bookId', component: BookDetailComponent},
 
       {path: 'Account', component: AccountComponent, canActivate: [UserGuard]},
@@ -60,13 +66,13 @@ import { LoginGuard } from './guard/login.guard';
       {path: 'EditBook', component: EditBookComponent, canActivate: [AdminGuard]},
       {path: 'EditAccount', component: EditAccountComponent, canActivate: [UserGuard]},
       {path: 'EditAccount/:username', component: EditAccountComponent, canActivate: [AdminGuard]},
-      
+
       { path: '', redirectTo: '/', pathMatch: 'full'},
       { path: '**', redirectTo: '/', pathMatch: 'full'}
     ]),
   ],
   providers: [
-    CookieService
+    CookieService,
   ],
   bootstrap: [AppComponent]
 })

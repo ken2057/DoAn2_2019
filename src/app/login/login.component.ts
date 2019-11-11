@@ -6,6 +6,8 @@ import { UtilsService } from '../utils.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AccountService } from '../api/account.service';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +30,8 @@ export class LoginComponent implements OnInit {
     private cookieService: CookieService,
     private utilsService: UtilsService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -50,6 +53,7 @@ export class LoginComponent implements OnInit {
           }, error => {
             //wrong usename/password
             console.error('login: ', error)
+            this.openDialog()
           }
         )
   }
@@ -61,5 +65,26 @@ export class LoginComponent implements OnInit {
   finishSignUp(username: string) {
     this.userLogin.username = username
     this.clickSignUp()
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(LoginDialog, {
+      width: '300px',
+      position: {top: '2%',left: '43%'},
+
+    });
+  }
+}
+
+
+@Component({
+  selector: 'login-dialog',
+  templateUrl: './login-dialog.component.html',
+  styleUrls: ['./login-dialog.component.css']
+})
+export class LoginDialog {
+  constructor(public dialogRef: MatDialogRef<LoginDialog>){
+  }
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
