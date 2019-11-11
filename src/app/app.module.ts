@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { CookieService } from 'ngx-cookie-service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent , LoginDialog} from './login/login.component';
 import { AccountComponent } from './account/account.component';
 import { SignupComponent } from './login/signup/signup.component';
 import { ListBookComponent } from './list-book/list-book.component';
@@ -30,7 +30,7 @@ import { DialogService } from './services/dialog.service';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    [LoginComponent, LoginDialog],
     AccountComponent,
     SignupComponent,
     ListBookComponent,
