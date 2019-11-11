@@ -57,7 +57,7 @@ import { LoginGuard } from './guard/login.guard';
       {path: 'Admin/AllBorrowed', component: AllBorrowedComponent, canActivate: [AdminGuard]},
       {path: 'Admin/AccountManagement', component: AccountManagementComponent, canActivate: [AdminGuard]},
       {path: 'Admin/BookManagement', component: BookManagementComponent, canActivate: [AdminGuard]},
-      {path: 'EditBook', component: EditBookComponent, canActivate: [AdminGuard]},
+      {path: 'EditBook/:bookId', component: EditBookComponent, canActivate: [AdminGuard]},
       {path: 'EditAccount', component: EditAccountComponent, canActivate: [UserGuard]},
       {path: 'EditAccount/:username', component: EditAccountComponent, canActivate: [AdminGuard]},
       

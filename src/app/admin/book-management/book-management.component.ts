@@ -28,7 +28,6 @@ export class BookManagementComponent implements OnInit {
 
   ngOnInit() {
     this.searchBook();
-    this.dataLoaded = true
   }
 
   searchBook(name?: string, subject?: string, author?: string, page?: number) {
@@ -50,6 +49,8 @@ export class BookManagementComponent implements OnInit {
                       book['image'],
                       book['deleted']
                     ));
+          this.books.sort(t => Number(t.isbn))
+          this.dataLoaded = true
         });
       }, error => {
         console.error('error searchBook: ' + error);

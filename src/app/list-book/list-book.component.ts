@@ -9,10 +9,10 @@ import { BookService } from '../api/book.service';
   styleUrls: ['./list-book.component.css']
 })
 export class ListBookComponent implements OnInit {
-  public bookClicked = -1;
-  public books = new Array<Book>();
-  dataLoaded = false;
-
+  public bookClicked = -1
+  public books = new Array<Book>()
+  dataLoaded = false
+  txtSearch: string
 
   constructor(
     private router: Router,
@@ -22,8 +22,8 @@ export class ListBookComponent implements OnInit {
 
   ngOnInit() {
     this.searchBook();
+    this.txtSearch = ''
     this.dataLoaded = true;
-
   }
 
   searchBook(name?: string, subject?: string, author?: string, page?: number) {
@@ -34,7 +34,9 @@ export class ListBookComponent implements OnInit {
     this.books = new Array<Book>()
     this.bookService.getSearchBooks(subject, author, name, page + '')
       .subscribe(response => {
+        this.books = new Array<Book>()
         let json = response.body
+        console.log(json['books'])
         json['books'].forEach(book => {
           this.books.push(new Book(
                       book['_id'],
@@ -51,4 +53,15 @@ export class ListBookComponent implements OnInit {
       });
   }
 
+  public btnFindBookName() {
+    this.searchBook(this.txtSearch)
+  }
+
+  public btnFindAuthorName() {
+    this.searchBook(null, null, this.txtSearch)
+  }
+  
+  public btnFindSubject() {
+    this.searchBook(null, this.txtSearch)
+  }
 }

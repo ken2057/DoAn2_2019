@@ -3,10 +3,10 @@
 </head>
 <div class="container">
   <div class="row">
-    <input type="searchBook"id="input-search-book" class="col-sm-6 form-control" placeholder="Search here...">
-    <button id="book-name" class="btn col-sm-2">Book Name</button>
-    <button id="author-name" class="btn col-sm-2">Author Name</button>
-    <button id="subject" class="btn col-sm-2">Subject</button>
+    <input type="searchBook"id="input-search-book" class="col-sm-6 form-control" placeholder="Search here..." [(ngModel)]="txtSearch">
+    <button id="book-name" class="btn col-sm-2" (click)="btnFindBookName()">Book Name</button>
+    <button id="author-name" class="btn col-sm-2" (click)="btnFindAuthorName()">Author Name</button>
+    <button id="subject" class="btn col-sm-2" (click)="btnFindSubject()">Subject</button>
   </div>
   <div>
     <h1>Books:</h1>
