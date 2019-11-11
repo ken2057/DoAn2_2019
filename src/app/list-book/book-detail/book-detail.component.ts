@@ -18,7 +18,7 @@ export class BookDetailComponent implements OnInit {
 
   constructor(
     private cookieService: CookieService,
-    private bookSerivce: BookService,
+    private bookService: BookService,
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
@@ -34,7 +34,7 @@ export class BookDetailComponent implements OnInit {
   getBookInfo() {
     this.bookDetail = new Book()
     if (this.bookId != null) {
-      this.bookSerivce.getBook(this.bookId.toString())
+      this.bookService.getBook(this.bookId.toString())
         .subscribe(response => {
           let json = response.body
           this.bookDetail = new Book(
@@ -56,7 +56,7 @@ export class BookDetailComponent implements OnInit {
 
   checkUserBorrowed() {
     if (this.cookieService.get('token') != "")
-      this.bookSerivce.getIsBorrowedByUser(this.cookieService.get('token'), this.bookId.toString())
+      this.bookService.getIsBorrowedByUser(this.cookieService.get('token'), this.bookId.toString())
         .subscribe(response => {
           let json = response.body
           this.isAvaiable = json['borrowed'] ? false : this.isAvaiable
@@ -83,7 +83,7 @@ export class BookDetailComponent implements OnInit {
 
     this.authService.getCheckToken(token)
       .subscribe(response => {
-        this.bookSerivce.postBorrowBook(token, this.bookId.toString())
+        this.bookService.postBorrowBook(token, this.bookId.toString())
           .subscribe(response => {
             console.log('done borrow')
             this.btnBorrowText = 'Borrowed'
@@ -108,7 +108,7 @@ export class BookDetailComponent implements OnInit {
   }
 
   callPostReturn(status: string) {
-    this.bookSerivce.postReturnBook(
+    this.bookService.postReturnBook(
       this.cookieService.get('token'),
       this.bookId + '',
       status
