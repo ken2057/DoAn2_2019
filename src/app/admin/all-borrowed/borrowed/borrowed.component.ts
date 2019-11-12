@@ -28,8 +28,10 @@ export class BorrowedComponent implements OnInit {
   }
 
   getBorrowedInfo() {
+    // get detail of the borrowed
     this.borrowedService.getBorrowed(this.cookieService.get('token'), this.borrowedId)
         .subscribe(Response => {
+          // set the value from respone
           let result = Response.body['borrowed']
           this.borrowedInfo = new Borrowed(
             result['_id'],

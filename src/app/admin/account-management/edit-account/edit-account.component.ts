@@ -51,6 +51,7 @@ export class EditAccountComponent implements OnInit {
   }
 
   getAccountInfo() {
+    // this function execute when user go to change his/her infomation
     this.accService.getAccountInfo(this.cookieService.get('token'))
       .subscribe(response => {
         let json = response.body
@@ -72,12 +73,14 @@ export class EditAccountComponent implements OnInit {
   }
 
   updateAccountInfo() {
+    // update the information
     this.accService.postAccountInfo(this.cookieService.get('token'), this.edtUser)
       .subscribe(res => { console.log(res) },
         err => { console.log(err) })
   }
 
   getAccountInfoWithId(username: string) {
+    // this function excecute when admin/manager access to change user infomation
     this.manService.getUserWithId(this.cookieService.get('token'), username)
       .subscribe(res => {
         let user = res.body['user']
@@ -92,8 +95,10 @@ export class EditAccountComponent implements OnInit {
           user['date_created'] || null,
           user['date_expire'] || null
           )
+          // get the role of current user to change
           this.roles.forEach(role => {
             if (role.name.toLowerCase() == user['role']){
+              // 2 varibles to set block role change to admin or change role of admin
               this.currentRole = role.id
               this.newRole = role.id
             }
@@ -105,15 +110,17 @@ export class EditAccountComponent implements OnInit {
   }
 
   onSubmit() {
+    // only admin can change the role of user
     if(this.isAdmin)
       this.roles.forEach(role => {
         if (this.newRole == role.id)
           this.edtUser.role = role.name.toLowerCase()
       })
-
+    
+    // start post method to update user information
     this.accService.postAccountInfo(this.cookieService.get('token'), this.edtUser)
         .subscribe(res => {
-          let username = this.route.snapshot.paramMap.get('username')
+          // after finish update, move back to account-management
           this.router.navigate(['/Admin/AccountManagement'], {relativeTo: this.route})
         }, error => {
           console.error(error)

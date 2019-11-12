@@ -25,6 +25,7 @@ export class AllBorrowedComponent implements OnInit {
   }
 
   getAllBorrowed(page?: number) {
+    // get all the borrowed history
     this.manService.getAllBorrowed(this.cookieService.get('token'), page)
         .subscribe(res => {
           let allBorrowed = res.body['borrowed']

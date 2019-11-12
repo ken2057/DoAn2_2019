@@ -63,14 +63,11 @@ export class BookDetailComponent implements OnInit {
       this.bookService.getIsBorrowedByUser(this.cookieService.get('token'), this.bookId.toString())
         .subscribe(response => {
           let json = response.body
-          // this.isAvaiable = json['borrowed'] ? false : this.isAvaiable
-          // // is borrwed and not avaiable => borrowed
-          // // is borrowed and avaiable => borrowed
-          // // not borrow and not avaiable => Out of order
-          // // not borrow and avaiable => Borrow
-          // this.btnBorrowText = json['borrowed'] ? 'Borrowed' : this.isAvaiable ? 'Borrow' : 'Out of order'
+          // get that status from server
           this.btnBorrowText = json['status']
+          // if teh status is 'Borrow' set avaiable
           this.isAvaiable = json['status'] == 'Borrow'
+          // change the text with the isAvaible
           this.btnBorrowText = this.isAvaiable ? 'Borrow' : this.btnBorrowText
         }, error => {
           this.btnBorrowText = 'Borrow'
@@ -83,25 +80,31 @@ export class BookDetailComponent implements OnInit {
   }
 
   public btnBorrowClick() {
+    // get token 
     let token = this.cookieService.get('token')
-
+    // if token empty direct to login
     if (token == "") {
       this.router.navigate(['/Login'], { relativeTo: this.route })
       return
     }
-
+    // check valid token
     this.authService.getCheckToken(token)
       .subscribe(response => {
+        // if token valid => call the post method to start borrow the book
         this.bookService.postBorrowBook(token, this.bookId.toString())
           .subscribe(response => {
-            console.log('done borrow')
+            // borrow successful 
+            // change the btnTxt to 'Wait to Get'
+            // for user come to the librarian to get the book
             this.btnBorrowText = 'Wait To Get'
+            // make borrow button disable
             this.isAvaiable = false
           }, error => {
             console.error(error)
           })
       }
         , response => {
+          // if token invalid, delete all the cookie and redirect to login
           if (response.status == 400 || response.status == 401)
             this.cookieService.deleteAll()
           this.router.navigate(['/Login'], { relativeTo: this.route })
@@ -121,14 +124,16 @@ export class BookDetailComponent implements OnInit {
   }
 
   callPostReturn(status: string) {
+    // start post method set return/lost book
     this.bookService.postReturnBook(
       this.cookieService.get('token'),
       this.bookId + '',
       status
     ).subscribe(response => {
+      // success => start reload the book info
       this.getBookInfo()
     }, error => {
-      console.error('error returnBook: ' + error.toString())
+      console.error(error)
     })
   }
 

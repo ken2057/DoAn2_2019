@@ -35,9 +35,11 @@ export class EditBookComponent implements OnInit {
   }
 
   getBookInfo() {
+    // get book info with bookId
     this.bookDetail = new Book()
     this.bookService.getBook(this.bookId)
       .subscribe(response => {
+        // set value from respone
         let json = response.body
         this.bookDetail = new Book(
           json['_id'],
@@ -47,7 +49,7 @@ export class EditBookComponent implements OnInit {
           json['books'],
           json['image']
         )
-
+        // change subjects of books into html drop-box can use
         this.convertToSelectSubjects()
         // all data loaded
         this.dataLoaded = true
@@ -57,6 +59,7 @@ export class EditBookComponent implements OnInit {
   }
 
   allSubject() {
+    // get all subjects exists
     this.subjectService.getSubjects()
       .subscribe(response => {
         let allSubject = response.body['subjects']
@@ -74,14 +77,14 @@ export class EditBookComponent implements OnInit {
       })
   }
 
+  // change subjects of books into html drop-box can use
   convertToSelectSubjects() {
     // function to add 'None' to list Subjects
     // if subjects.length < 3 => need add 'None' to the list
     const addEmptySubject = (t: number): Array<string> => { if (t == 0) return []; return addEmptySubject(t - 1).concat(['None']) }
     let currentLength = this.bookDetail.subjects.length
     this.bookDetail.subjects = currentLength < 3 ?
-      this.bookDetail.subjects.concat(addEmptySubject(3 - currentLength)) :
-      this.bookDetail.subjects
+      this.bookDetail.subjects.concat(addEmptySubject(3 - currentLength)) : this.bookDetail.subjects
     // map the string from the subjects to the index  got from the allSubject()
     this.selected = this.bookDetail.subjects
       .map(t => {

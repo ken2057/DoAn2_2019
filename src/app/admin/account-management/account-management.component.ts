@@ -34,10 +34,13 @@ export class AccountManagementComponent implements OnInit {
   }
 
   getAllAccount() {
+    // get all the user info
     this.adminService.getUsersInfo(this.cookieService.get('token'))
         .subscribe(res => {
+          // get list user from respone
           let accounts = res.body['users']
           this.accounts = new Array<User>()
+          // add to accounts
           accounts.forEach(account => {
             this.accounts.push(new User(
               account['_id'],
@@ -56,8 +59,10 @@ export class AccountManagementComponent implements OnInit {
   }
 
   getRole() {
+    // get role of the current user access to this component
     this.authService.getPermission(this.cookieService.get('token'))
           .subscribe(Response => {
+            // get the role position to disable some function in html
             this.role = Number(Response.body['role'])
           }, error => {
             console.error(error)
@@ -65,8 +70,10 @@ export class AccountManagementComponent implements OnInit {
   }
 
   public btnActiveAccount(username: string) {
+    // active/deactive account so they can't borrow the book
     this.manService.postActiveAccount(this.cookieService.get('token'), username)
         .subscribe(response => {
+          // successful => reload the data
           this.getAllAccount()
         }, error => {
           console.error(error)

@@ -34,8 +34,10 @@ export class ListBookComponent implements OnInit {
     this.books = new Array<Book>()
     this.bookService.getSearchBooks(subject, author, name, page + '')
       .subscribe(response => {
+        // get lists book from return
         this.books = new Array<Book>()
         let json = response.body
+        // add all the book into books varible
         json['books'].forEach(book => {
           this.books.push(new Book(
                       book['_id'],

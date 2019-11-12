@@ -38,6 +38,7 @@ export class BookManagementComponent implements OnInit {
     this.books = new Array<Book>()
     this.bookService.getSearchBooks(subject, author, name, page + '')
       .subscribe(response => {
+        // set all book add to books
         let json = response.body
         json['books'].forEach(book => {
           this.books.push(new Book(
@@ -58,8 +59,10 @@ export class BookManagementComponent implements OnInit {
   }
 
   public deleteBook(bookId: string) {
+    // delete book
     this.manService.postDelteBook(this.cookieService.get('token'), bookId)
         .subscribe(response => {
+          // remove deleted book from books
           let bookRemove = new Book()
           this.books.forEach(t => {
             bookRemove = t.isbn == bookId ? t : bookRemove
