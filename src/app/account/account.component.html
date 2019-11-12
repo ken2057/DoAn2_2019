@@ -7,7 +7,12 @@
       <div class="info-detail">
         <h4>User name: {{ user.username }}</h4>
         <h4>Email: {{ user.email }}</h4>
-        <h4>Borrowed History</h4>
+        <h4>Date of birth: {{user.birth}}</h4>
+        <h4>Address: {{user.address}}</h4>
+        <h4>Created Date: {{user.date_created}}</h4>
+        <h4>Expired Date: {{user.date_expire}}</h4>
+        <h4>Role: {{user.role}}</h4>
+        <h4 style="color: red;">Borrowed History</h4>
         <div class="list-borrowed">
           <table class="table table-striped table-class">
             <thead>
@@ -17,6 +22,7 @@
                 <th>Borrowed Date</th>
                 <th>Expired Date</th>
                 <th>Status</th>
+                <th>Returned Date</th>
               </tr>
             </thead>
             <tbody>
@@ -39,6 +45,7 @@
                 <td>{{ borrowed.date_borrow }}</td>
                 <td>{{ borrowed.date_expire }}</td>
                 <td>{{ borrowed.status }}</td>
+                <td></td>
               </tr>
             </tbody>
           </table>
