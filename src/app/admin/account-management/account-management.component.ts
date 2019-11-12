@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/class/user';
 import { AuthService } from 'src/app/api/auth.service';
 import { AdminService } from 'src/app/api/admin.service';
+import { ManangerService } from 'src/app/api/mananger.service';
 
 @Component({
   selector: 'app-account-management',
@@ -18,6 +19,7 @@ export class AccountManagementComponent implements OnInit {
     private cookieService: CookieService,
     private authService: AuthService,
     private adminService: AdminService,
+    private manService: ManangerService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -35,6 +37,7 @@ export class AccountManagementComponent implements OnInit {
     this.adminService.getUsersInfo(this.cookieService.get('token'))
         .subscribe(res => {
           let accounts = res.body['users']
+          this.accounts = new Array<User>()
           accounts.forEach(account => {
             this.accounts.push(new User(
               account['_id'],
@@ -45,7 +48,8 @@ export class AccountManagementComponent implements OnInit {
               account['birth'],
               account['address'],
               account['date_created'],
-              account['date_expire']
+              account['date_expire'],
+              account['active'] == undefined ? true : account['active']
             ))
           })
         })
@@ -58,6 +62,15 @@ export class AccountManagementComponent implements OnInit {
           }, error => {
             console.error(error)
           })
+  }
+
+  public btnActiveAccount(username: string) {
+    this.manService.postActiveAccount(this.cookieService.get('token'), username)
+        .subscribe(response => {
+          this.getAllAccount()
+        }, error => {
+          console.error(error)
+        })
   }
 }
 

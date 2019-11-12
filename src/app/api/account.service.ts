@@ -24,8 +24,8 @@ export class AccountService extends ApiService {
             })
   }
 
-  public postSignUp(user: User) {
-    user.password = sha1(user.password)
+  public postSignUp(u: User) {
+    let user = new User(u.username, sha1(u.password), u.email)
     return this.http.post(this.REST_API_SERVER + '/SignUp',
             {
               user,

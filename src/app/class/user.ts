@@ -10,6 +10,7 @@ export class User {
         public birth?: Date,
         public address?: string,
         public date_created?: Date,
-        public date_expire?: Date
+        public date_expire?: Date,
+        public active?: boolean
     ) {}
 }

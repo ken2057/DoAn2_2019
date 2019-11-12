@@ -15,6 +15,7 @@ import { ManangerService } from '../api/mananger.service';
 export class AccountComponent implements OnInit {
   user = new User()
   dataLoaded = false;
+  isAdmin = false;
 
   constructor(
     private cookieService: CookieService,
@@ -30,7 +31,7 @@ export class AccountComponent implements OnInit {
     if(username == null)
       this.getAccountInfo()
     else 
-      this.getAccountInfoWithId(username)
+      this.getAccountInfoWithId(username) // admin or manager
 
     this.dataLoaded = true
   }
@@ -72,6 +73,7 @@ export class AccountComponent implements OnInit {
               user['email'],
               user['borrowed']
             )
+            this.isAdmin = true
           }, error => {
             console.error(error)
           })

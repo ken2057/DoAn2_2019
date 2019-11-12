@@ -47,13 +47,24 @@ export class ManangerService extends ApiService {
                 })
   }
 
-  public getUserWithId(token: string, username) {
+  public getUserWithId(token: string, username: string) {
     return this.http.get(this.REST_API_SERVER + '/Manager/GetUser', 
               {
                 headers: new HttpHeaders({
                   'Authorization': token
                 }),
                 params: {
+                  'username': username
+                },
+                observe: 'response'
+              })
+  }
+
+  public postActiveAccount(token: string, username: string) {
+    return this.http.post(this.REST_API_SERVER + '/Manager/ActiveAccount',
+              {
+                json: {
+                  'token': token,
                   'username': username
                 },
                 observe: 'response'
