@@ -1,24 +1,5 @@
 export class Book {
 
-//   exemple
-//   {
-//     "_id": 1,
-//     "name": "Hello world",
-//     "author": "David",
-//     "subject": [
-//         "ab",
-//         "cd"
-//     ],
-//     "books": [
-//         "Lost by duy",
-//         "Lost by duy - Date: 2019-10-24 21:00:01.833411",
-//         "",
-//         ""
-//     ],
-//     image: "",
-//     deleted: false,
-// }
-
   constructor(
     public isbn?: string,
     public name?: string,
@@ -26,6 +7,9 @@ export class Book {
     public subjects?: Array<string>,
     public books?: Array<string>,
     public image?: string,
-    public deleted?: boolean
+    public deleted?: boolean,
+    public year_released?: string,
+    public publisher?: string,
+    public price?: number
   ) {}
 }
