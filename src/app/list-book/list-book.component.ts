@@ -36,7 +36,6 @@ export class ListBookComponent implements OnInit {
       .subscribe(response => {
         this.books = new Array<Book>()
         let json = response.body
-        console.log(json['books'])
         json['books'].forEach(book => {
           this.books.push(new Book(
                       book['_id'],
