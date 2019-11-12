@@ -18,6 +18,16 @@ h6 {
 button:focus {
   outline: none;
 }
+
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+  outline: none;
+}
+
 p {
   margin: 0;
 }
@@ -43,6 +53,7 @@ p {
 
 .toolbar span {
   font-size: 200%;
+  outline: none;
 }
 
 .toolbar button {
