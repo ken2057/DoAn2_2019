@@ -16,21 +16,26 @@
   }
   .list-borrowed{
     height:200px;
-    border:1px solid #ccc;
     font:16px/26px Georgia, Garamond, Serif;
     overflow:auto;
     margin-bottom: 20px;
-
+    padding: 1px;
     width: auto;
-    border-top: 1px solid #ddd
+    border: 1px solid #1D3C26;
   }
   th {
-    background: brown;
-    color: #fff;
+    background: #1D3C26;
+    color: #EADFCE;
     }
+table{
+  margin-bottom: 0;
+}
 table th , table td{
     text-align: center;
 
+    }
+    table tr:nth-child(even){
+      background-color: #ddd
     }
 .edtButton{
   margin:10px;
