@@ -65,7 +65,7 @@ import { BorrowedComponent } from './admin/all-borrowed/borrowed/borrowed.compon
       {path: 'EditAccount', component: EditAccountComponent, canActivate: [UserGuard]},
       {path: 'EditAccount/:username', component: EditAccountComponent, canActivate: [AdminGuard]},
       
-      { path: '', redirectTo: '/', pathMatch: 'full'},
+      { path: '', redirectTo: '/Search', pathMatch: 'full'},
       { path: '**', redirectTo: '/', pathMatch: 'full'}
     ]),
   ],
