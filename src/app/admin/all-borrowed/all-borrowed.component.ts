@@ -11,12 +11,10 @@ import { AuthService } from 'src/app/api/auth.service';
   styleUrls: ['./all-borrowed.component.css']
 })
 export class AllBorrowedComponent implements OnInit {
-  dataLoaded = false
   allBorrowed = new Array<Borrowed>()
 
   constructor(
     private manService: ManangerService,
-    private authSerivce: AuthService,
     private cookieService: CookieService,
     private router: Router,
     private route: ActivatedRoute
@@ -24,7 +22,6 @@ export class AllBorrowedComponent implements OnInit {
 
   ngOnInit() {
     this.getAllBorrowed()
-    this.dataLoaded = true
   }
 
   getAllBorrowed(page?: number) {
@@ -33,13 +30,18 @@ export class AllBorrowedComponent implements OnInit {
           let allBorrowed = res.body['borrowed']
           allBorrowed.forEach(t => {
             this.allBorrowed.push(new Borrowed(
+              t['_id'],
               t['username'],
               t['bookId'],
               t['status'],
               t['date_borrow'],
-              t['date_expire']
+              t['date_expire'],
+              t['date_return'],
+              t['history_status'],
+              t['fee'],
+              t['paid'],
             ))
-          });
+          })
         }, error => {
           console.error('GetAllBorrwed: '+error)
         })

@@ -6,6 +6,10 @@ export class User {
         public password?: string,
         public email?: string,
         public history_borrowed?: Array<Borrowed>,
-        public role?: string
+        public role?: string,
+        public birth?: Date,
+        public address?: string,
+        public date_created?: Date,
+        public date_expire?: Date
     ) {}
 }

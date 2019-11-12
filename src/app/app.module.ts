@@ -21,6 +21,7 @@ import { UserGuard } from './guard/user.guard';
 import { AdminGuard } from './guard/admin.guard';
 import { ManagerGuard } from './guard/manager.guard';
 import { LoginGuard } from './guard/login.guard';
+import { BorrowedComponent } from './admin/all-borrowed/borrowed/borrowed.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { LoginGuard } from './guard/login.guard';
     BookDetailComponent,
     EditBookComponent,
     EditAccountComponent,
-    AllBorrowedComponent
+    AllBorrowedComponent,
+    BorrowedComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,8 @@ import { LoginGuard } from './guard/login.guard';
 
       {path: 'Account', component: AccountComponent, canActivate: [UserGuard]},
       {path: 'Account/:username', component: AccountComponent, canActivate: [AdminGuard]},
+
+      {path: 'Borrowed/:borrowedId', component: BorrowedComponent, canActivate: [UserGuard]},
 
       {path: 'Admin', component: AdminComponent, canActivate: [AdminGuard]},
       {path: 'Admin/AllBorrowed', component: AllBorrowedComponent, canActivate: [AdminGuard]},

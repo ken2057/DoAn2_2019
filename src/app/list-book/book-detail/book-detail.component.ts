@@ -14,7 +14,7 @@ export class BookDetailComponent implements OnInit {
   bookDetail: Book;
   isAvaiable = false;
   dataAvaialbe = false;
-  btnBorrowText = 'Borrow'
+  btnBorrowText = ''
 
   constructor(
     private cookieService: CookieService,
@@ -43,7 +43,11 @@ export class BookDetailComponent implements OnInit {
             json['author'],
             json['subjects'],
             json['books'],
-            json['image']
+            json['image'],
+            false,
+            json['year_released'],
+            json['publisher'],
+            json['price']
           )
           // set if still have book for borrow
           this.isAvaiable = this.bookDetail.books.filter(t => t == '').length == 0 ? false : true
@@ -59,16 +63,21 @@ export class BookDetailComponent implements OnInit {
       this.bookService.getIsBorrowedByUser(this.cookieService.get('token'), this.bookId.toString())
         .subscribe(response => {
           let json = response.body
-          this.isAvaiable = json['borrowed'] ? false : this.isAvaiable
-          // is borrwed and not avaiable => borrowed
-          // is borrowed and avaiable => borrowed
-          // not borrow and not avaiable => Out of order
-          // not borrow and avaiable => Borrow
-          this.btnBorrowText = json['borrowed'] ? 'Borrowed' : this.isAvaiable ? 'Borrow' : 'Out of order'
+          // this.isAvaiable = json['borrowed'] ? false : this.isAvaiable
+          // // is borrwed and not avaiable => borrowed
+          // // is borrowed and avaiable => borrowed
+          // // not borrow and not avaiable => Out of order
+          // // not borrow and avaiable => Borrow
+          // this.btnBorrowText = json['borrowed'] ? 'Borrowed' : this.isAvaiable ? 'Borrow' : 'Out of order'
+          this.btnBorrowText = json['status']
+          this.isAvaiable = json['status'] == 'Borrow'
+          this.btnBorrowText = this.isAvaiable ? 'Borrow' : this.btnBorrowText
+        }, error => {
+          this.btnBorrowText = 'Borrow'
         })
     else
       this.btnBorrowText = this.isAvaiable ? 'Borrow' : 'Out of order'
-
+    
     // after get data from API then show it
     this.dataAvaialbe = true
   }
@@ -86,10 +95,10 @@ export class BookDetailComponent implements OnInit {
         this.bookService.postBorrowBook(token, this.bookId.toString())
           .subscribe(response => {
             console.log('done borrow')
-            this.btnBorrowText = 'Borrowed'
+            this.btnBorrowText = 'Wait To Get'
             this.isAvaiable = false
           }, error => {
-            console.log('error borrow: ' + error.toString())
+            console.error(error)
           })
       }
         , response => {
@@ -107,6 +116,10 @@ export class BookDetailComponent implements OnInit {
     this.callPostReturn('lost')
   }
 
+  public btnCancelOrder() {
+    this.callPostReturn('cancel')
+  }
+
   callPostReturn(status: string) {
     this.bookService.postReturnBook(
       this.cookieService.get('token'),
@@ -122,4 +135,5 @@ export class BookDetailComponent implements OnInit {
   public onBack() {
     this.router.navigate(['/Search']);
   }
+
 }

@@ -13,6 +13,7 @@
                     <table class="table table-striped table-class">
                         <thead>
                             <tr>
+                                <th>Detail</th>
                                 <th>Book</th>
                                 <th>Borrowed Date</th>
                                 <th>Expired Date</th>
@@ -21,6 +22,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let borrowed of user.history_borrowed">
+                                <td><button type="button" class="btn btn-info" [routerLink]="['/Borrowed', borrowed._id]" routerLinkActive="router-link-active" >V</button></td>
                                 <td><a [routerLink]="['/Book', borrowed.bookId]">{{ borrowed.bookId }}</a></td>
                                 <td>{{ borrowed.date_borrow }}</td>
                                 <td>{{ borrowed.date_expire }}</td>

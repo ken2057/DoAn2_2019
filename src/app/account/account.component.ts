@@ -44,7 +44,12 @@ export class AccountComponent implements OnInit {
             account['_id'],
             '',
             account['email'],
-            account['borrowed']
+            account['borrowed'],
+            '',
+            account['birth'],
+            account['address'],
+            account['date_creted'],
+            account['date_expire']
           )          
         }, error => {
           console.error('getAccountInfo: '+error)

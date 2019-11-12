@@ -1,4 +1,4 @@
-<div *ngIf="dataLoaded" class="container" style="margin-top: 10px;">
+<div class="container" style="margin-top: 10px;">
   <div class="lst-search">
     <input type="text" placeholder="Search.." class="form-control">
   </div>
@@ -10,6 +10,7 @@
         <th>Status</th>
         <th>Borrowed Date</th>
         <th>Expired Date</th>
+        <th>Edit</th>
       </tr>
     </thead>
     <tbody>
@@ -19,6 +20,7 @@
         <td>{{borrows.status}}</td>
         <td>{{borrows.date_borrow}}</td>
         <td>{{borrows.date_expire}}</td>
+        <td><button type="button" class="btn btn-info" [routerLink]="['/Borrowed', borrows._id]" routerLinkActive="router-link-active" >V</button></td>
       </tr>
     </tbody>
   </table>

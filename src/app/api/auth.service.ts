@@ -16,9 +16,6 @@ export class AuthService extends ApiService {
               headers: new HttpHeaders({
                 'Authorization': token
               }),
-              params: {
-                'token': token
-              },
               observe: 'response'
             })
   }

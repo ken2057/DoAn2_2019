@@ -59,7 +59,12 @@ export class EditAccountComponent implements OnInit {
           account['_id'],
           '',
           account['email'],
-          account['borrowed']
+          account['borrowed'],
+          '',
+          account['birth'],
+          account['address'],
+          account['date_created'],
+          account['date_expire']
         )
       }, error => {
         console.error('getAccountInfo: ' + error)
@@ -79,15 +84,20 @@ export class EditAccountComponent implements OnInit {
         this.edtUser = new User(
           user['_id'],
           '',
-          user['email'],
-          user['borrowed']
+          user['email'] || '',
+          user['borrowed'] || null,
+          user['role'] || null,
+          user['birth'] || null,
+          user['address'] || '',
+          user['date_created'] || null,
+          user['date_expire'] || null
           )
           this.roles.forEach(role => {
             if (role.name.toLowerCase() == user['role']){
               this.currentRole = role.id
               this.newRole = role.id
             }
-          });
+          })
           this.isAdmin = true
       }, error => {
         console.error(error)
