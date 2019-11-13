@@ -1,9 +1,10 @@
+<div class="container">
 <form name="form" [formGroup]="form" (ngSubmit)="onSubmit() && form.valid" class="container">
   <div class="form-container">
     <div class="row-columns">
       <h1 style="color: brown;">SignUp</h1>
-
-      <label for="userName">Username
+      <!-- USERNAME -->
+      <label for="userName">Username*
         <input type="text" class="form-control" formControlName="userName"
           [ngClass]="{'is-invalid':form.get('userName').touched && form.get('userName').invalid}" id="username" required
           minlength="3" [(ngModel)]="userSignUp.username" name="username" />
@@ -12,7 +13,8 @@
         <div *ngIf="form.get('userName').errors.required">UserName is required</div>
         <div *ngIf="form.get('userName').errors.minlength">UserName must be at least 3 charector </div>
       </div>
-      <label for="passWord">Password
+      <!-- PASSWORD -->
+      <label for="passWord">Password*
         <input type="password" class="form-control" id="password" formControlName="passWord"
           [ngClass]="{'is-invalid':form.get('passWord').touched && form.get('passWord').invalid}"
           [(ngModel)]="userSignUp.password" name="password" />
@@ -22,8 +24,8 @@
         <div *ngIf="form.get('passWord').errors.required">Password is required</div>
         <div *ngIf="form.get('passWord').errors.minlength">Password must be at least 3 charector</div>
       </div>
-
-      <label for="email">Email
+      <!-- EMAIL -->
+      <label for="email">Email*
         <input type="email" class="form-control" id="email" formControlName="Email"
           [ngClass]="{'is-invalid':form.get('Email').touched && form.get('Email').invalid}"
           [(ngModel)]="userSignUp.email" name="email" />
@@ -33,8 +35,19 @@
         <div *ngIf="form.get('Email').errors.required">Email is required</div>
         <div *ngIf="form.get('Email').errors.email">Email must be a valid email Address</div>
       </div>
+      <!-- DATE OF BIRTH -->
+      <label>Date of Birth
+        <input type="date" class="form-control" id="birth" name="birth" [(ngModel)]="userSignUp.birth">
+      </label>
 
+      <!-- ADDRESS -->
+      <div class="md-form">
+        <label for="address">Address</label>
+        <textarea id="address" class="md-textarea form-control" rows="3" [(ngModel)]="userSignUp.address"></textarea>
+
+      </div>
       <button class="btn btn-primary" type="submit" [disabled]="!form.valid">SignUp</button>
     </div>
   </div>
 </form>
+</div>
