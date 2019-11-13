@@ -31,4 +31,18 @@ export class BorrowedService extends ApiService {
 					observe: 'response'
 				})
 	}
+
+	public getSearchBorrowed(token: string, username?: string, page?: number){
+		return this.http.get(this.REST_API_SERVER + '/SearchBorrowed', 
+				{
+					headers: new HttpHeaders({
+						'Authorization': token
+					}),
+					params: {
+						'username': username || '',
+						'page': page+'' || ''
+					},
+					observe: 'response'
+				})
+	}
 }

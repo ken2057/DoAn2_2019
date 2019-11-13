@@ -59,14 +59,13 @@ import { BorrowedComponent } from './admin/all-borrowed/borrowed/borrowed.compon
 
       {path: 'Admin', component: AdminComponent, canActivate: [AdminGuard]},
       {path: 'Admin/AllBorrowed', component: AllBorrowedComponent, canActivate: [AdminGuard]},
+      {path: 'Admin/AllBorrowed/:username', component: AllBorrowedComponent, canActivate: [AdminGuard]},
       {path: 'Admin/AccountManagement', component: AccountManagementComponent, canActivate: [AdminGuard]},
       {path: 'Admin/BookManagement', component: BookManagementComponent, canActivate: [AdminGuard]},
       {path: 'EditBook/:bookId', component: EditBookComponent, canActivate: [AdminGuard]},
       {path: 'EditAccount', component: EditAccountComponent, canActivate: [UserGuard]},
       {path: 'EditAccount/:username', component: EditAccountComponent, canActivate: [AdminGuard]},
       {path: 'AddBook', component: EditBookComponent, canActivate: [AdminGuard]},
-
-
 
       { path: '', redirectTo: '/Search', pathMatch: 'full'},
       { path: '**', redirectTo: '/', pathMatch: 'full'}

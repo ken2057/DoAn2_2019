@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Borrowed } from 'src/app/class/borrowed';
 import { ManangerService } from 'src/app/api/mananger.service';
 import { AuthService } from 'src/app/api/auth.service';
+import { BorrowedService } from 'src/app/api/borrowed.service';
 
 @Component({
   selector: 'app-all-borrowed',
@@ -11,23 +12,31 @@ import { AuthService } from 'src/app/api/auth.service';
   styleUrls: ['./all-borrowed.component.css']
 })
 export class AllBorrowedComponent implements OnInit {
+  txtSearch = ''
+  username: string
   allBorrowed = new Array<Borrowed>()
 
   constructor(
     private manService: ManangerService,
+    private borrowedService: BorrowedService,
     private cookieService: CookieService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.getAllBorrowed()
+    this.username = this.route.snapshot.paramMap.get('username')
+    if (this.username != null)
+      this.txtSearch = this.username
+
+    this.getAllBorrowed(this.username)
   }
 
-  getAllBorrowed(page?: number) {
+  getAllBorrowed(username?: string, page?: number) {
     // get all the borrowed history
-    this.manService.getAllBorrowed(this.cookieService.get('token'), page)
+    this.borrowedService.getSearchBorrowed(this.cookieService.get('token'), username, page)
         .subscribe(res => {
+          this.allBorrowed = new Array<Borrowed>()
           let allBorrowed = res.body['borrowed']
           allBorrowed.forEach(t => {
             this.allBorrowed.push(new Borrowed(
