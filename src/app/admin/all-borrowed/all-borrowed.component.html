@@ -10,6 +10,9 @@
         <th>Status</th>
         <th>Borrowed Date</th>
         <th>Expired Date</th>
+        <th>Returned Date</th>
+        <th>Fee</th>
+        <th>Paid</th>
         <th>Edit</th>
       </tr>
     </thead>
@@ -20,6 +23,9 @@
         <td>{{borrows.status}}</td>
         <td>{{borrows.date_borrow}}</td>
         <td>{{borrows.date_expire}}</td>
+        <td>{{borrows.date_return}}</td>
+        <td>{{borrows.fee}}</td>
+        <td>{{borrows.paid}}</td>
         <td><button type="button" class="btn btn-info" [routerLink]="['/Borrowed', borrows._id]" routerLinkActive="router-link-active" >V</button></td>
       </tr>
     </tbody>

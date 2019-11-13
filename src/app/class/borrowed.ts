@@ -29,6 +29,6 @@ export class Borrowed {
         public date_return?: Date,
         public history_status?: Array<string>,
         public fee?: number,
-        public paied?: number
+        public paid?: number
     ) {}
 }
