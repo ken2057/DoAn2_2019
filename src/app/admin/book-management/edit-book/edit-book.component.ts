@@ -30,6 +30,7 @@ export class EditBookComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.bookDetail = new Book()
     this.bookId = this.route.snapshot.paramMap.get('bookId')
     this.allSubject()
   }

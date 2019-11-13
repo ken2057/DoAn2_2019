@@ -72,3 +72,11 @@ hr{
 .spacer{
   flex: 1;
 }
+
+.group-subjects{
+  border: .5px solid #1D3C26;
+  padding: 15px 0;
+  border-radius: 5px;
+  margin: 0 15px 15px 15px;
+  width: -webkit-fill-available;
+}

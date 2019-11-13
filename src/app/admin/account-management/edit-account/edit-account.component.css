@@ -12,7 +12,7 @@
     margin-top: 5px;;
     padding: 20px 50px 40px 400px;
   }
-  #txt-username, #txtPass, #txtEmail ,#selectRole{
+  #txt-username, #txtPass, #txtEmail ,#selectRole, #txtDOB, #txtAddress{
     margin-top: 10px;
     width: 300px;
 
@@ -34,3 +34,4 @@
     background-color: brown;
     font-size: 20px;
   }
+

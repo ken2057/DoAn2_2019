@@ -14,8 +14,8 @@
           formControlName="userName"
           [(ngModel)]="edtUser.username"
         />
-        <h4 for="passWord">Password</h4>
 
+        <h4 for="passWord">Password</h4>
         <input type="password" class="form-control" id="txtPass" value="{{edtUser.password}}"
           placeholder="Enter new Password" formControlName="passWord" [(ngModel)]="edtUser.password"
           [ngClass]="{'is-invalid':form.get('passWord').touched && form.get('passWord').invalid}">
@@ -53,6 +53,14 @@
           </div>
         </div>
 
+        <h4 for="dateOfBirth">dateOfBirth</h4>
+        <input type="date" class="form-control" id="txtDOB" value="{{edtUser.birth}}"
+          placeholder="Enter new dateOfBirth" formControlName="dateOfBirth" [(ngModel)]="edtUser.birth">
+
+        <h4 for="address">Address</h4>
+        <input type="text" class="form-control" id="txtAddress" value="{{edtUser.address}}"
+          placeholder="Enter new Address" formControlName="address" [(ngModel)]="edtUser.address">
+
         <div *ngIf="isAdmin">
           <h4>Role</h4>
           <!-- <select class="form-control" id="selectRole">
@@ -66,7 +74,7 @@
             [(ngModel)]="newRole"
             class="form-control"
             [ngModelOptions]="{standalone: true}"
-            
+
           >
             <option *ngFor="let r of roles" [value]="r.id">
               {{ r.name }}
@@ -82,8 +90,8 @@
         </div>
       </div>
       <div class="btn-submit">
-        <button type="submit" class="btn btn-success" 
-        *ngIf="form.valid && 
+        <button type="submit" class="btn btn-success"
+        *ngIf="form.valid &&
         !((newRole == 3 && currentRole != 3) || (currentRole == 3 && newRole != 3))">Save</button>
       </div>
     </div>

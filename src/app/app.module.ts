@@ -48,8 +48,8 @@ import { BorrowedComponent } from './admin/all-borrowed/borrowed/borrowed.compon
       {path: 'Home', component: AppComponent},
       {path:'Login', component: LoginComponent, canActivate: [LoginGuard]},
       {path: 'SignUp', component: SignupComponent, canActivate: [LoginGuard]},
-      
-      {path:'Search', component: ListBookComponent}, 
+
+      {path:'Search', component: ListBookComponent},
       {path: 'Book/:bookId', component: BookDetailComponent},
 
       {path: 'Account', component: AccountComponent, canActivate: [UserGuard]},
@@ -64,7 +64,10 @@ import { BorrowedComponent } from './admin/all-borrowed/borrowed/borrowed.compon
       {path: 'EditBook/:bookId', component: EditBookComponent, canActivate: [AdminGuard]},
       {path: 'EditAccount', component: EditAccountComponent, canActivate: [UserGuard]},
       {path: 'EditAccount/:username', component: EditAccountComponent, canActivate: [AdminGuard]},
-      
+      {path: 'AddBook', component: EditBookComponent, canActivate: [AdminGuard]},
+
+
+
       { path: '', redirectTo: '/Search', pathMatch: 'full'},
       { path: '**', redirectTo: '/', pathMatch: 'full'}
     ]),
