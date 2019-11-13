@@ -111,24 +111,15 @@ export class BookDetailComponent implements OnInit {
         })
   }
 
-  public btnReturnClick() {
-    this.callPostReturn('return')
-  }
-
-  public btnLostClick() {
-    this.callPostReturn('lost')
-  }
-
   public btnCancelOrder() {
     this.callPostReturn('cancel')
   }
 
   callPostReturn(status: string) {
     // start post method set return/lost book
-    this.bookService.postReturnBook(
+    this.bookService.postCancelBookOrder(
       this.cookieService.get('token'),
-      this.bookId + '',
-      status
+      this.bookId + ''
     ).subscribe(response => {
       // success => start reload the book info
       this.getBookInfo()

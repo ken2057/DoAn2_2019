@@ -52,7 +52,8 @@ export class AccountManagementComponent implements OnInit {
               account['address'],
               account['date_created'],
               account['date_expire'],
-              account['active'] == undefined ? true : account['active']
+              account['active'] == undefined ? true : account['active'],
+              account['account_point']
             ))
           })
         })
@@ -64,6 +65,7 @@ export class AccountManagementComponent implements OnInit {
           .subscribe(Response => {
             // get the role position to disable some function in html
             this.role = Number(Response.body['role'])
+            console.log(this.role)
           }, error => {
             console.error(error)
           })

@@ -23,23 +23,27 @@
       <tr>
         <th>Username</th>
         <th>Email</th>
-        <th [hidden]="role != 0">Role</th>
-        <th>History Borrowed</th>
+        <th>Birth</th>
+        <th>Address</th>
+        <th [hidden]="role != 0 && role != 1">Role</th>
+        <th [hidden]="role != 0 && role != 1">AP</th>
         <th>Active</th>
         <th>Edit</th>
-        <th>Delete</th>
+        <th>Block</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let account of accounts">
         <td>
-          <a [routerLink]="['/Account', account.username]">{{
-            account.username
-          }}</a>
+          <a [routerLink]="['/Account', account.username]">
+            {{ account.username }}
+          </a>
         </td>
         <td>{{ account.email }}</td>
-        <td [hidden]="role != 0">{{ account.role }}</td>
-        <td>{{ account.history_borrowed }}</td>
+        <td>{{ account.birth }}</td>
+        <td>{{ account.address }}</td>
+        <td [hidden]="role != 0 && role != 1">{{ account.role }}</td>
+        <td [hidden]="role != 0 && role != 1">{{ account.account_point }}</td>
         
         <td>
           <button

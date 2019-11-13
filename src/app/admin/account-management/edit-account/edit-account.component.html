@@ -10,15 +10,23 @@
           type="text"
           class="form-control"
           id="txt-username"
-          value="{{ edtUser.username }} "
           formControlName="userName"
           [(ngModel)]="edtUser.username"
         />
 
         <h4 for="passWord">Password</h4>
-        <input type="password" class="form-control" id="txtPass" value="{{edtUser.password}}"
-          placeholder="Enter new Password" formControlName="passWord" [(ngModel)]="edtUser.password"
-          [ngClass]="{'is-invalid':form.get('passWord').touched && form.get('passWord').invalid}">
+        <input
+          type="password"
+          class="form-control"
+          id="txtPass"
+          placeholder="Enter new Password"
+          formControlName="passWord"
+          [(ngModel)]="edtUser.password"
+          [ngClass]="{
+            'is-invalid':
+              form.get('passWord').touched && form.get('passWord').invalid
+          }"
+        />
 
         <div
           style="color: red;"
@@ -35,7 +43,6 @@
           class="form-control"
           formControlName="Email"
           id="txtEmail"
-          value="{{ edtUser.email }}"
           [ngClass]="{
             'is-invalid': form.get('Email').touched && form.get('Email').invalid
           }"
@@ -54,12 +61,24 @@
         </div>
 
         <h4 for="dateOfBirth">dateOfBirth</h4>
-        <input type="date" class="form-control" id="txtDOB" value="{{edtUser.birth}}"
-          placeholder="Enter new dateOfBirth" formControlName="dateOfBirth" [(ngModel)]="edtUser.birth">
+        <input
+          type="date"
+          class="form-control"
+          id="txtDOB"
+          placeholder="Enter new dateOfBirth"
+          [(ngModel)]="edtUser.birth"
+          [ngModelOptions]="{ standalone: true }"
+        />
 
         <h4 for="address">Address</h4>
-        <input type="text" class="form-control" id="txtAddress" value="{{edtUser.address}}"
-          placeholder="Enter new Address" formControlName="address" [(ngModel)]="edtUser.address">
+        <input
+          type="text"
+          class="form-control"
+          id="txtAddress"
+          [ngModelOptions]="{standalone: true}"
+          placeholder="Enter new Address"
+          [(ngModel)]="edtUser.address"
+        />
 
         <div *ngIf="isAdmin">
           <h4>Role</h4>
@@ -73,8 +92,7 @@
             name="selectRole"
             [(ngModel)]="newRole"
             class="form-control"
-            [ngModelOptions]="{standalone: true}"
-
+            [ngModelOptions]="{ standalone: true }"
           >
             <option *ngFor="let r of roles" [value]="r.id">
               {{ r.name }}
@@ -82,17 +100,32 @@
           </select>
           <div
             style="color: red;"
-            *ngIf="(newRole == 3 && currentRole != 3) || (currentRole == 3 && newRole != 3)"
+            *ngIf="
+              (newRole == 3 && currentRole != 3) ||
+              (currentRole == 3 && newRole != 3)
+            "
             class="invalid-feedback"
           >
-              Can't change or set Admin role
+            Can't change or set Admin role
           </div>
         </div>
       </div>
       <div class="btn-submit">
-        <button type="submit" class="btn btn-success"
-        *ngIf="form.valid &&
-        !((newRole == 3 && currentRole != 3) || (currentRole == 3 && newRole != 3))">Save</button>
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="
+            !(
+              form.valid &&
+              !(
+                (newRole == 3 && currentRole != 3) ||
+                (currentRole == 3 && newRole != 3)
+              )
+            )
+          "
+        >
+          Save
+        </button>
       </div>
     </div>
   </form>

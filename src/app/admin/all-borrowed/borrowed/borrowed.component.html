@@ -1,137 +1,63 @@
-<div class="container">
+<div class="container" *ngIf="dataLoaded">
   <h1>BORROWED DETAIL</h1>
 
   <div class="row">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <label for="input-isbn">ISBN</label>
-      <input
-        type="text"
-        name="isbn"
-        id="input-isbn"
-        class="form-control"
-        value=""
-        required="required"
-        pattern=""
-        title=""
-        disabled
-        >
+      <label for="input-username">Username: </label>
+      <a
+        [routerLink]="['/Account', borrowedInfo.username]"
+        routerLinkActive="router-link-active"
+      >
+        <label for="input-username"> {{ borrowedInfo.username }}</label>
+      </a>
     </div>
 
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <label for="input-username">Username</label>
-      <input
-        type="text"
-        name="username"
-        id="input-username"
-        class="form-control"
-        value=""
-        required="required"
-        pattern=""
-        title=""
-        disabled
-        >
+      <label for="input-bookid">Book ID: </label>
+      <a
+        [routerLink]="['/Book', borrowedInfo.bookId]"
+        routerLinkActive="router-link-active"
+      >
+        <label for="input-bookid">
+          {{ borrowedInfo.bookId }}
+        </label>
+      </a>
     </div>
-
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <label for="input-bookid">BookID</label>
-      <input
-        type="text"
-        name="bookid"
-        id="input-bookid"
-        class="form-control"
-        value=""
-        required="required"
-        pattern=""
-        title=""
-        disabled
-        >
-    </div>
-
   </div>
 
   <div class="row">
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <label for="input-borrowed-date">Borrowed Date</label>
-      <input
-        type="date"
-        name="borrowed-date"
-        id="input-borrowed-date"
-        class="form-control"
-        value=""
-        required="required"
-        pattern=""
-        title=""
-        >
+      <label for="input-borrowed-date">
+        Borrowed Date: {{ borrowedInfo.date_borrow }}
+      </label>
     </div>
 
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <label for="input-expired-date">Expired Date</label>
-      <input
-        type="date"
-        name="expired-date"
-        id="input-expired-date"
-        class="form-control"
-        value=""
-        required="required"
-        pattern=""
-        title=""
-        >
+      <label for="input-expired-date">
+        Expired Date: {{ borrowedInfo.date_expire }}
+      </label>
     </div>
 
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <label for="input-returned-date">Returned Date</label>
-      <input
-        type="date"
-        name="returned-date"
-        id="input-returned-date"
-        class="form-control"
-        value=""
-        required="required"
-        pattern=""
-        title=""
-        >
+      <label for="input-returned-date">
+        Returned Date: {{ borrowedInfo.date_return }}
+      </label>
     </div>
-
   </div>
 
   <div class="row">
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <label for="input-status">Status</label>
-      <select name="status" id="input-status" class="form-control" required="required">
-        <option value="">...</option>
-      </select>
+      <label for="input-status">Status: {{ borrowedInfo.status }} </label>
     </div>
 
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <label for="input-fee">Fee</label>
-      <input
-        type="number"
-        name="fee"
-        id="input-fee"
-        class="form-control"
-        value="0"
-        required="required"
-        pattern=""
-        title=""
-        step="1000"
-        min="0"
-        >
+      <label for="input-fee">Fee: {{ borrowedInfo.fee }}</label>
     </div>
 
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <label for="input-paid">Paid</label>
-      <input
-        type="number"
-        name="paid"
-        id="input-paid"
-        class="form-control"
-        value="0"
-        required="required"
-        pattern=""
-        title=""
-        step="1000"
-        min="0"
-        >
+      <label for="input-paid">Paid: {{ borrowedInfo.paid }}</label>
     </div>
   </div>
 
@@ -143,35 +69,110 @@
           <tr>
             <th>Status</th>
             <th>Date</th>
+            <th>By</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>...</td>
-            <td>...</td>
+          <tr *ngFor="let h of borrowedInfo.history_status">
+            <td>{{ h.status }}</td>
+            <td>{{ h.date }}</td>
+            <td>{{ h.by }}</td>
           </tr>
+          <tr></tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <hr>
+  <hr />
 
-  <div class="row">
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-      <button type="button" class="btn btn-cancel" (click)="onCancel()">
-        Cancel
-      </button>
+  <div *ngIf="role != 0 || role != 1">
+    <div class="row">
+      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"></div>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <div class="row">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <div></div>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="btnAddPay()"
+              [disabled]="borrowedInfo.fee == borrowedInfo.paid"
+            >
+              Add
+            </button>
+          </div>
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+            <label>Fee paid</label>
+            <input
+              type="number"
+              class="form-control"
+              min="1000"
+              [(ngModel)]="moneyPay"
+            />
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"></div>
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-      <button
-        type="button"
-        class="btn btn-confirm"
-        (click)="btnSave()"      >
-        Save
-      </button>
+
+    <div class="row">
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <button type="button" class="btn btn-cancel" (click)="onBack()">
+          Back
+        </button>
+      </div>
+
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <div
+          class="row"
+          *ngIf="borrowedInfo.status == 'Get book from librarian'"
+        >
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <button
+              type="button"
+              class="btn btn-confirm"
+              (click)="btnSentBook()"
+            >
+              Sent
+            </button>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <button
+              type="button"
+              class="btn btn-confirm"
+              (click)="btnCancelOrder()"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="borrowedInfo.status == 'On borrowing'">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <button
+              type="button"
+              class="btn btn-confirm"
+              (click)="btnReturnBook()"
+            >
+              Returned
+            </button>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <button
+              type="button"
+              class="btn btn-confirm"
+              (click)="btnLostBook()"
+            >
+              Lost
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
     </div>
   </div>
-
 </div>

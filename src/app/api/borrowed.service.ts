@@ -45,4 +45,17 @@ export class BorrowedService extends ApiService {
 					observe: 'response'
 				})
 	}
+
+	
+	public postUpdateBorrowed(token: string, borrowedId: string, status: string) {
+		return this.http.post(this.REST_API_SERVER + '/UpdateBorrowed',
+					{
+					  json: {
+						'token': token,
+						'borrowedId': borrowedId,
+						'status': status
+					  },
+					  observe: 'response'
+					})
+	  }
 }

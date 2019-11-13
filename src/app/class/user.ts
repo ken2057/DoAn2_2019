@@ -11,6 +11,7 @@ export class User {
         public address?: string,
         public date_created?: Date,
         public date_expire?: Date,
-        public active?: boolean
+        public active?: boolean,
+        public account_point?: string
     ) {}
 }

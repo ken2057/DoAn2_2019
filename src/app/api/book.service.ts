@@ -63,15 +63,15 @@ export class BookService extends ApiService {
                 })
   }
 
-  public postReturnBook(token: string, bookId: string, status: string) {
-    return this.http.post(this.REST_API_SERVER + '/ReturnBook',
-                {
-                  json: {
-                    'token': token,
-                    'bookId': bookId,
-                    'status': status
-                  },
-                  observe: 'response'
-                })
-  }
+  public postCancelBookOrder(token: string, bookId: string) {
+		return this.http.post(this.REST_API_SERVER + '/CancelBookOrder',
+					{
+					  json: {
+              'token': token,
+              'bookId': bookId
+					  },
+					  observe: 'response'
+					})
+	  }
+  
 }
