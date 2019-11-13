@@ -1,1 +1,177 @@
-<p>borrowed works!</p>
+<div class="container">
+  <h1>BORROWED DETAIL</h1>
+
+  <div class="row">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <label for="input-isbn">ISBN</label>
+      <input
+        type="text"
+        name="isbn"
+        id="input-isbn"
+        class="form-control"
+        value=""
+        required="required"
+        pattern=""
+        title=""
+        disabled
+        >
+    </div>
+
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <label for="input-username">Username</label>
+      <input
+        type="text"
+        name="username"
+        id="input-username"
+        class="form-control"
+        value=""
+        required="required"
+        pattern=""
+        title=""
+        disabled
+        >
+    </div>
+
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <label for="input-bookid">BookID</label>
+      <input
+        type="text"
+        name="bookid"
+        id="input-bookid"
+        class="form-control"
+        value=""
+        required="required"
+        pattern=""
+        title=""
+        disabled
+        >
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <label for="input-borrowed-date">Borrowed Date</label>
+      <input
+        type="date"
+        name="borrowed-date"
+        id="input-borrowed-date"
+        class="form-control"
+        value=""
+        required="required"
+        pattern=""
+        title=""
+        >
+    </div>
+
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <label for="input-expired-date">Expired Date</label>
+      <input
+        type="date"
+        name="expired-date"
+        id="input-expired-date"
+        class="form-control"
+        value=""
+        required="required"
+        pattern=""
+        title=""
+        >
+    </div>
+
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <label for="input-returned-date">Returned Date</label>
+      <input
+        type="date"
+        name="returned-date"
+        id="input-returned-date"
+        class="form-control"
+        value=""
+        required="required"
+        pattern=""
+        title=""
+        >
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <label for="input-status">Status</label>
+      <select name="status" id="input-status" class="form-control" required="required">
+        <option value="">...</option>
+      </select>
+    </div>
+
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <label for="input-fee">Fee</label>
+      <input
+        type="number"
+        name="fee"
+        id="input-fee"
+        class="form-control"
+        value="0"
+        required="required"
+        pattern=""
+        title=""
+        step="1000"
+        min="0"
+        >
+    </div>
+
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <label for="input-paid">Paid</label>
+      <input
+        type="number"
+        name="paid"
+        id="input-paid"
+        class="form-control"
+        value="0"
+        required="required"
+        pattern=""
+        title=""
+        step="1000"
+        min="0"
+        >
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <label>History status</label>
+    <div class="history-table">
+      <table class="table table-striped table-class">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>...</td>
+            <td>...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <button type="button" class="btn btn-cancel" (click)="onCancel()">
+        Cancel
+      </button>
+    </div>
+    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"></div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <button
+        type="button"
+        class="btn btn-confirm"
+        (click)="btnSave()"      >
+        Save
+      </button>
+    </div>
+  </div>
+
+</div>

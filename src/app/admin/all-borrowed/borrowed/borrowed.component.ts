@@ -50,4 +50,11 @@ export class BorrowedComponent implements OnInit {
           console.error(error)
         })
   }
+
+  onCancel(){
+
+  }
+  btnSave(){
+
+  }
 }
