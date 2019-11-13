@@ -3,6 +3,7 @@
   min-width: 500px;
   min-height: 400px;
   max-height: 450px;
+  background: #fff;
 }
 .row{
   display: flex;
@@ -12,7 +13,7 @@
   margin-top: 20px;
   background-color: #e8e2d3;
   width: 100%;
-  height: 530px;
+  height: auto;
 }
 .row .btn-them {
   padding-top: 30px;
