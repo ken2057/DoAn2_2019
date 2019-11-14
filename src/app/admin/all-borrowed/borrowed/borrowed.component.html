@@ -69,14 +69,14 @@
           <tr>
             <th>Status</th>
             <th>Date</th>
-            <th [hidden]="role != 0 || role != 1">By</th>
+            <th *ngIf="role != 0 || role != 1">By</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let h of borrowedInfo.history_status">
             <td>{{ h.status }}</td>
             <td>{{ h.date }}</td>
-            <td [hidden]="role != 0 || role != 1">{{ h.by }}</td>
+            <td *ngIf="role != 0 || role != 1">{{ h.by }}</td>
           </tr>
           <tr></tr>
         </tbody>

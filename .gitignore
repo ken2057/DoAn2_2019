@@ -1,5 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# when i test local it wont push 
+/src/app/api/api.service.ts
+
 # compiled output
 /dist
 /tmp
