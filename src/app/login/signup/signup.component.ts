@@ -3,6 +3,7 @@ import { User } from 'src/app/class/user';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AccountService } from 'src/app/api/account.service';
+import { DialogServiceService } from 'src/app/services/dialog-ser-vice.service';
 
 @Component({
   selector: 'app-signup',
@@ -18,11 +19,12 @@ export class SignupComponent implements OnInit {
     passWord: new FormControl('',[Validators.required,Validators.minLength(3)]),
     Email: new FormControl('', [Validators.required,Validators.email])
   });
-  
+
   constructor(
     private accountService: AccountService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialogService: DialogServiceService
   ) {}
 
   ngOnInit() {
@@ -40,6 +42,7 @@ export class SignupComponent implements OnInit {
         }, error => {
           console.log('error signUp:' + error)
           this.isSignUp = false
+          this.dialogService.openModal('Error','SignUp failed')
         })
   }
 }

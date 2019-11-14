@@ -6,6 +6,7 @@ import { UtilsService } from '../utils.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AccountService } from '../api/account.service';
+import { DialogServiceService } from '../services/dialog-ser-vice.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,8 @@ export class LoginComponent implements OnInit {
     private cookieService: CookieService,
     private utilsService: UtilsService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialogService: DialogServiceService
   ) {}
 
   ngOnInit() {
@@ -50,6 +52,7 @@ export class LoginComponent implements OnInit {
           }, error => {
             //wrong usename/password
             console.error('login: ', error)
+            this.dialogService.openModal('Error','Wrong username or password')
           }
         )
   }

@@ -1,6 +1,7 @@
+import {MatButtonModule} from '@angular/material';
+import { MatDialogModule, MAT_DIALOG_DATA , MatDialogRef } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { CookieService } from 'ngx-cookie-service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +23,9 @@ import { AdminGuard } from './guard/admin.guard';
 import { ManagerGuard } from './guard/manager.guard';
 import { LoginGuard } from './guard/login.guard';
 import { BorrowedComponent } from './admin/all-borrowed/borrowed/borrowed.component';
+import { DialogtemplateComponent } from './dialogtemplate/dialogtemplate.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {DialogServiceService} from './services/dialog-ser-vice.service';
 
 @NgModule({
   declarations: [
@@ -37,10 +41,14 @@ import { BorrowedComponent } from './admin/all-borrowed/borrowed/borrowed.compon
     EditBookComponent,
     EditAccountComponent,
     AllBorrowedComponent,
-    BorrowedComponent
+    BorrowedComponent,
+    DialogtemplateComponent
   ],
   imports: [
     BrowserModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -72,8 +80,12 @@ import { BorrowedComponent } from './admin/all-borrowed/borrowed/borrowed.compon
     ]),
   ],
   providers: [
-    CookieService
+    CookieService,
+    DialogServiceService,
+    { provide: MatDialogRef, useValue: {} },
+	  { provide: MAT_DIALOG_DATA, useValue: [] },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ DialogtemplateComponent ]
 })
 export class AppModule { }
