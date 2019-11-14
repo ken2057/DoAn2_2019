@@ -11,6 +11,8 @@ import { AccountService } from 'src/app/api/account.service';
 })
 export class SignupComponent implements OnInit {
   userSignUp: User;
+  isSignUp = false
+
   form = new FormGroup({
     userName: new FormControl('',[Validators.required,Validators.minLength(3)]),
     passWord: new FormControl('',[Validators.required,Validators.minLength(3)]),
@@ -24,16 +26,20 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userSignUp = new User()
+    this.userSignUp = new User('', '', '', [], '', new Date('1990/1/1'), '')
   }
 
   onSubmit() {
+    console.log(this.userSignUp.address)
+    console.log(this.userSignUp.birth)
+    this.isSignUp = true
     this.accountService
         .postSignUp(this.userSignUp)
         .subscribe(response => {
           this.router.navigate(['/Login'], { queryParams: { username: this.userSignUp.username }} )
         }, error => {
           console.log('error signUp:' + error)
+          this.isSignUp = false
         })
   }
 }

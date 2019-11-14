@@ -27,8 +27,8 @@
         <th>Address</th>
         <th [hidden]="role != 0 && role != 1">Role</th>
         <th [hidden]="role != 0 && role != 1">AP</th>
-        <th>Active</th>
         <th>Edit</th>
+        <th>Active</th>
         <th>Block</th>
       </tr>
     </thead>
@@ -44,7 +44,16 @@
         <td>{{ account.address }}</td>
         <td [hidden]="role != 0 && role != 1">{{ account.role }}</td>
         <td [hidden]="role != 0 && role != 1">{{ account.account_point }}</td>
-        
+        <td>
+            <button
+              type="button"
+              class="btn btn-info"
+              [routerLink]="['/EditAccount', account.username]"
+              routerLinkActive="router-link-active"
+            >
+              V
+            </button>
+          </td>
         <td>
           <button
             type="button"
@@ -65,16 +74,25 @@
           </button>
         </td>
         <td>
-          <button
-            type="button"
-            class="btn btn-info"
-            [routerLink]="['/EditAccount', account.username]"
-            routerLinkActive="router-link-active"
-          >
-            V
-          </button>
-        </td>
-        <td><button type="button" class="btn btn-danger">X</button></td>
+            <button
+              type="button"
+              class="btn btn-success"
+              [disabled]="account.role == 'admin'"
+              *ngIf="!account.block"
+              (click)="btnBlockAccount(account.username)"
+            >
+              O
+            </button>
+            <button
+              type="button"
+              class="btn btn-error"
+              [disabled]="account.role == 'admin'"
+              *ngIf="account.block"
+              (click)="btnBlockAccount(account.username)"
+            >
+              X
+            </button>
+          </td>
       </tr>
     </tbody>
 

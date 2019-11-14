@@ -63,7 +63,7 @@ export class AppComponent implements OnInit {
 
   public btnLogoutClick() {
     this.accountService.postLogout(this.cookieService.get('token'))
-        .subscribe(response => { console.log(response) },
+        .subscribe(response => {  },
                   error => {console.error('logout: '+error)})
     this.resetAllValue()
     this.router.navigate(['/'], {relativeTo: this.route})

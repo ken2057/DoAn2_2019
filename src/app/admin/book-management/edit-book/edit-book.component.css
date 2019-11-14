@@ -80,3 +80,26 @@ hr{
   margin: 0 15px 15px 15px;
   width: -webkit-fill-available;
 }
+
+table{
+  max-height: 200px;
+  height: 200px;
+}
+
+table th , table td{
+  text-align: center;
+}
+
+.list-books{
+  height: 300px;
+  font:16px/26px Georgia, Garamond, Serif;
+  overflow:auto;
+  margin-bottom: 20px;
+  padding: 1px;
+  width: auto;
+  border: 1px solid #1D3C26;
+}
+
+.img-book {
+  max-height: 280px;
+}

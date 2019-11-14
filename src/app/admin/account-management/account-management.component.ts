@@ -53,7 +53,8 @@ export class AccountManagementComponent implements OnInit {
               account['date_created'],
               account['date_expire'],
               account['active'] == undefined ? true : account['active'],
-              account['account_point']
+              account['account_point'],
+              account['blocked'] == undefined ? false : account['blocked']
             ))
           })
         })
@@ -65,15 +66,26 @@ export class AccountManagementComponent implements OnInit {
           .subscribe(Response => {
             // get the role position to disable some function in html
             this.role = Number(Response.body['role'])
-            console.log(this.role)
           }, error => {
             console.error(error)
           })
   }
 
+
   public btnActiveAccount(username: string) {
     // active/deactive account so they can't borrow the book
-    this.manService.postActiveAccount(this.cookieService.get('token'), username)
+    this.manService.postActiveAccount(this.cookieService.get('token'), username, 'active')
+        .subscribe(response => {
+          // successful => reload the data
+          this.getAllAccount()
+        }, error => {
+          console.error(error)
+        })
+  }
+
+  public btnBlockAccount(username: string) {
+    // active/deactive account so they can't borrow the book
+    this.manService.postActiveAccount(this.cookieService.get('token'), username, 'block')
         .subscribe(response => {
           // successful => reload the data
           this.getAllAccount()

@@ -1,42 +1,41 @@
 .info-box {
-    border-radius: 7px ;
-    border: 1px solid black;
-    width: 100%;
-    background-color: #EADFCE;
-    opacity: 10;
-    margin-top: 10px;
-  }
-  .info-detail{
-    margin-left: 35px;
-    margin-right: 35px;
-  }
-  h4 {
-    font-weight: bold;
-    line-height: 30px;
-  }
-  .list-borrowed{
-    height:200px;
-    font:16px/26px Georgia, Garamond, Serif;
-    overflow:auto;
-    margin-bottom: 20px;
-    padding: 1px;
-    width: auto;
-    border: 1px solid #1D3C26;
-  }
-  th {
-    background: #1D3C26;
-    color: #EADFCE;
-    }
+  border-radius: 7px ;
+  border: 1px solid black;
+  width: 100%;
+  background-color: #EADFCE;
+  opacity: 10;
+  margin-top: 10px;
+}
+.info-detail{
+  margin-left: 35px;
+  margin-right: 35px;
+}
+h4 {
+  font-weight: bold;
+  line-height: 30px;
+}
+.list-borrowed{
+  height:200px;
+  font:16px/26px Georgia, Garamond, Serif;
+  overflow:auto;
+  margin-bottom: 20px;
+  padding: 1px;
+  width: auto;
+  border: 1px solid #1D3C26;
+}
+th {
+  background: #1D3C26;
+  color: #EADFCE;
+}
 table{
   margin-bottom: 0;
 }
 table th , table td{
-    text-align: center;
-
-    }
-    table tr:nth-child(even){
-      background-color: #ddd
-    }
+  text-align: center;
+}
+table tr:nth-child(even){
+  background-color: #ddd
+}
 .edtButton{
   margin:10px;
 }

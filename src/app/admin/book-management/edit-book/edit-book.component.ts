@@ -15,6 +15,8 @@ export class EditBookComponent implements OnInit {
   dataLoaded = false
   bookId: string
   bookDetail: Book
+  isEditBook = true
+  currentYear: number
 
   subjects = []
   selected = [-1, -1, -1]
@@ -30,9 +32,22 @@ export class EditBookComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.bookDetail = new Book()
-    this.bookId = this.route.snapshot.paramMap.get('bookId')
+    this.currentYear = (new Date()).getFullYear()
+    this.bookDetail = new Book('', '', '', [], [], '', false, this.currentYear)
+    this.bookDetail.books = []
     this.allSubject()
+    
+    // if user add new book
+    if(this.router.url == '/AddBook'){
+      this.isEditBook = false
+
+    }
+    // when is edit book
+    else {
+      this.bookId = this.route.snapshot.paramMap.get('bookId')
+      // call get book
+      this.getBookInfo()
+    }
   }
 
   getBookInfo() {
@@ -75,8 +90,7 @@ export class EditBookComponent implements OnInit {
           })
         this.subjects.push({ 'id': -1, 'name': 'None' })
         this.subjects.sort(t => t.id)
-        // call get book
-        this.getBookInfo()
+        
       }, error => {
         console.error(error)
       })
@@ -131,5 +145,27 @@ export class EditBookComponent implements OnInit {
       }, error => {
         console.error(error)
       })
+  }
+
+  //add book in list of book
+  public btnRemoveBook() {
+    let index = this.bookDetail.books.indexOf('')
+    if(index != -1)
+      this.bookDetail.books.splice(index, 1)
+  }
+
+  // remove book in list of book
+  public btnAddMoreBook() {
+    this.bookDetail.books.push('')
+  }
+
+  //create a new book in library
+  public btnAddNewBook() {
+    this.manService.postAddBook(this.cookieService.get('token'), this.bookDetail)
+        .subscribe(Response => {
+          this.router.navigate(['/Admin/BookManagement'])
+        }, error => {
+          console.error(error)
+        })
   }
 }

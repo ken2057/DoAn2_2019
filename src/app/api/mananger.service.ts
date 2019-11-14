@@ -60,12 +60,24 @@ export class ManangerService extends ApiService {
               })
   }
 
-  public postActiveAccount(token: string, username: string) {
+  public postActiveAccount(token: string, username: string, action: string) {
     return this.http.post(this.REST_API_SERVER + '/Manager/ActiveAccount',
               {
                 json: {
                   'token': token,
-                  'username': username
+                  'username': username,
+                  'action': action
+                },
+                observe: 'response'
+              })
+  }
+
+  public postAddBook(token: string, book: Book) {
+    return this.http.post(this.REST_API_SERVER + '/Manager/AddBook',
+              {
+                json: {
+                  'token': token,
+                  'book': book
                 },
                 observe: 'response'
               })

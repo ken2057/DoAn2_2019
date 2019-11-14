@@ -8,7 +8,7 @@ export class Book {
     public books?: Array<string>,
     public image?: string,
     public deleted?: boolean,
-    public year_released?: string,
+    public year_released?: number,
     public publisher?: string,
     public price?: number
   ) {}
