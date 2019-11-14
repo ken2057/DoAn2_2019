@@ -40,9 +40,9 @@ export class SignupComponent implements OnInit {
         .subscribe(response => {
           this.router.navigate(['/Login'], { queryParams: { username: this.userSignUp.username }} )
         }, error => {
-          console.log('error signUp:' + error)
+          console.error(error)
           this.isSignUp = false
-          this.dialogService.openModal('Error','SignUp failed')
+          this.dialogService.openModal('Error', error.error);
         })
   }
 }
