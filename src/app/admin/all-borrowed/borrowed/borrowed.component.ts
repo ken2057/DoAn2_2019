@@ -43,7 +43,8 @@ export class BorrowedComponent implements OnInit {
   getUserPermission() {
     this.authSerivce.getPermission(this.cookieService.get('token'))
       .subscribe(res => {
-        this.role = res.body['role']
+        this.role = Number(res.body['role'])
+        console.log(this.role)
       }, error => {
         console.error(error)
       })

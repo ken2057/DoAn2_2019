@@ -69,14 +69,14 @@
           <tr>
             <th>Status</th>
             <th>Date</th>
-            <th>By</th>
+            <th [hidden]="role != 0 || role != 1">By</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let h of borrowedInfo.history_status">
             <td>{{ h.status }}</td>
             <td>{{ h.date }}</td>
-            <td>{{ h.by }}</td>
+            <td [hidden]="role != 0 || role != 1">{{ h.by }}</td>
           </tr>
           <tr></tr>
         </tbody>
@@ -86,8 +86,8 @@
 
   <hr />
 
-  <div *ngIf="role != 0 || role != 1">
-    <div class="row">
+  <div>
+    <div class="row"  [hidden]="role != 0 || role != 1">
       <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"></div>
       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
         <div class="row">
@@ -128,7 +128,7 @@
       <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
       <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
 
-      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"  [hidden]="role != 0 || role != 1">
         <div
           class="row"
           *ngIf="borrowedInfo.status == 'Get book from librarian'"
