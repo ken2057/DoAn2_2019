@@ -1,7 +1,6 @@
 <div class="container">
   <div class="header_wrap">
     <div class="num_rows">
-
       <div class="form-group">
         <!--		Show Numbers Of Rows 		-->
         <select class="form-control" name="state" id="maxRows">
@@ -14,40 +13,84 @@
           <option value="5000">Show ALL Rows</option>
         </select>
       </div>
-
     </div>
     <div class="tb_search">
-      <input type="text" placeholder="Search.." class="form-control">
+      <input type="text" placeholder="Search.." class="form-control" />
     </div>
     <div>
-      <button class="btn btn-component" [routerLink]="['/AddBook']" routerLinkActive="router-link-active" >Add Book</button>
+      <button
+        class="btn btn-component"
+        [routerLink]="['/AddBook']"
+        routerLinkActive="router-link-active"
+      >
+        Add Book
+      </button>
     </div>
   </div>
   <table class="table table-striped table-class">
     <thead>
       <tr>
-          <th>ISBN</th>
-          <th>Image</th>
-          <th>Name</th>
-          <th>Author</th>
-          <th>Subject</th>
-          <th>Books</th>
-          <th>Edit</th>
-          <th>Delete</th>
+        <th>ISBN</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Subject</th>
+        <th>Books</th>
+        <th>Edit</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let book of books;" [hidden]="book.deleted">
-        <td><a [routerLink]="['/Book', book.isbn]">{{book.isbn}}</a></td>
-        <td><img src="{{book.image}}" class="img-responsive book-image" alt="BookImage"></td>
-        <td>{{book.name}}</td>
-        <td>{{book.author}}</td>
-        <td>{{book.subjects}}</td>
-        <td>{{book.books}}</td>
-        <td><button type="button" class="btn btn-info" [routerLink]="['/EditBook', book.isbn]" routerLinkActive="router-link-active" >V</button></td>
-        <td><button type="button" class="btn btn-danger" (click)="deleteBook(book.isbn)">X</button>
+      <tr *ngFor="let book of books" [hidden]="book.deleted">
+        <td>
+          <a [routerLink]="['/Book', book.isbn]">{{ book.isbn }}</a>
+        </td>
+        <td>
+          <img
+            src="{{ book.image }}"
+            class="img-responsive book-image"
+            alt="BookImage"
+          />
+        </td>
+        <td>{{ book.name }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.subjects }}</td>
+        <td><div *ngFor="let b of book.books">
+              <p *ngIf="b == ''">
+                Avaiable
+              </p>
+              <p *ngIf="b != ''">
+                  <a
+                  [routerLink]="['/Borrowed', b]"
+                  routerLinkActive="router-link-active"
+                >
+                  {{ b }}
+                </a>
+              </p>
+            </div>
+        </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-info"
+            [routerLink]="['/EditBook', book.isbn]"
+            routerLinkActive="router-link-active"
+          >
+            V
+          </button>
+        </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteBook(book.isbn)"
+          >
+            X
+          </button>
         </td>
       </tr>
-    <tbody>
+    </tbody>
+
+    <tbody></tbody>
   </table>
 </div>

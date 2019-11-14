@@ -48,7 +48,11 @@ export class EditBookComponent implements OnInit {
           json['author'],
           json['subjects'] || [],
           json['books'],
-          json['image']
+          json['image'],
+          false,
+          json['year_released'],
+          json['publisher'],
+          json['price']
         )
         // change subjects of books into html drop-box can use
         this.convertToSelectSubjects()

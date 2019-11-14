@@ -32,7 +32,9 @@
     </div>
   </div>
 
-  <div class="group-subjects form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div
+    class="group-subjects form-group col-xs-12 col-sm-12 col-md-12 col-lg-12"
+  >
     <label for="inputSubject" class="col-sm-12 control-label">Subjects:</label>
     <div class="row">
       <div class="col-sm-4">
@@ -98,7 +100,9 @@
     </div>
 
     <div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <label for="inputYearReleased" class="col-sm-12 control-label">Year released:</label>
+      <label for="inputYearReleased" class="col-sm-12 control-label"
+        >Year released:</label
+      >
       <div class="col-sm-12">
         <input
           type="text"
@@ -115,7 +119,9 @@
       <label for="inputPrice" class="col-sm-12 control-label">Price:</label>
       <div class="col-sm-12">
         <input
-          type="text"
+          type="number"
+          min="1000"
+          max="1000000000"
           name="Price"
           id="inputPrice"
           class="form-control"
@@ -124,21 +130,12 @@
         />
       </div>
     </div>
-
   </div>
 
   <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <label for="browse" class="col-sm-12 control-label">Book image:</label>
     <div class="row">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <img
-          src="{{ bookDetail.image }}"
-          class="img-responsive"
-          alt="BookImage"
-        />
-      </div>
-
-      <div class="input-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <input
           type="text"
           class="form-control"
@@ -146,29 +143,71 @@
           placeholder="Image link..."
           [(ngModel)]="bookDetail.image"
         />
-        <span class="input-group-btn">
-          <button type="button" class="btn btn-browse">Go!</button>
-        </span>
+        <img
+          src="{{ bookDetail.image }}"
+          class="img-responsive"
+          alt="BookImage"
+        />
+      </div>
+      <div class="input-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <table class="table table-striped table-class">
+          <thead>
+            <tr>
+              <th>Index</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let b of bookDetail.books; let i = index"
+              [attr.data-index]="i"
+            >
+              <td>{{ i+1 }}</td>
+              <td *ngIf="b != ''">
+                <a
+                  [routerLink]="['/Borrowed', b]"
+                  routerLinkActive="router-link-active"
+                >
+                  {{ b }}
+                </a>
+              </td>
+              <td *ngIf="b == ''">
+                Avaiable
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="input-group col-xs-1 col-sm-1 col-md-1 col-lg-1">
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <button type="button" class="btn btn-default">-</button>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <button type="button" class="btn btn-default">+</button>
+            </div>
+        </div>
       </div>
     </div>
-    <hr />
-    <div class="row">
-      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-        <button type="button" class="btn btn-cancel" (click)="onCancel()">
-          Cancel
-        </button>
-      </div>
-      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"></div>
-      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-        <button
-          type="button"
-          class="btn btn-confirm"
-          (click)="btnSave()"
-          *ngIf="selectedValid"
-        >
-          Save
-        </button>
-      </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <button type="button" class="btn btn-cancel" (click)="onCancel()">
+        Cancel
+      </button>
+    </div>
+    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"></div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <button
+        type="button"
+        class="btn btn-confirm"
+        (click)="btnSave()"
+        *ngIf="selectedValid"
+      >
+        Save
+      </button>
     </div>
   </div>
 </div>

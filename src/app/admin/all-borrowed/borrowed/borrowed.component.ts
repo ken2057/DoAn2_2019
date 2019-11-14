@@ -17,6 +17,7 @@ export class BorrowedComponent implements OnInit {
   borrowedInfo: Borrowed
   moneyPay: number
   dataLoaded = false
+  isValidPay = false
   role = 9
 
   constructor(
@@ -66,7 +67,6 @@ export class BorrowedComponent implements OnInit {
           result['fee'] || 0,
           result['paid'] || 0
         )
-        console.log(this.borrowedInfo)
         this.dataLoaded = true
       }, error => {
         console.error(error)
@@ -78,7 +78,24 @@ export class BorrowedComponent implements OnInit {
   }
 
   public btnAddPay() {
-
+    this.borrowedService.postAddPay(
+      this.cookieService.get('token'), 
+      this.borrowedInfo._id, 
+      this.moneyPay
+    ).subscribe(Response => {
+      this.getBorrowedInfo()
+      this.moneyPay = 0
+      this.isValidPay = false
+    }, error => {
+      console.error(error)
+    })
+  }
+  
+  public onChangePay() {
+    // disable btn add money when money not valid format
+    this.isValidPay = this.moneyPay >= 1000 
+             && this.moneyPay % 1000 == 0
+             && this.moneyPay <= this.borrowedInfo.fee - this.borrowedInfo.paid
   }
 
   public btnSentBook() {
@@ -100,7 +117,6 @@ export class BorrowedComponent implements OnInit {
   public btnAddPayFee() {
 
   }
-
 
   callPostReturn(status: string) {
     // start post method set return/lost/cancel book

@@ -97,7 +97,7 @@
               type="submit"
               class="btn btn-primary"
               (click)="btnAddPay()"
-              [disabled]="borrowedInfo.fee == borrowedInfo.paid"
+              [disabled]="!isValidPay"
             >
               Add
             </button>
@@ -108,6 +108,9 @@
               type="number"
               class="form-control"
               min="1000"
+              max="{{ borrowedInfo.fee - borrowedInfo.paid }}"
+              step="1000"
+              (change)="onChangePay()"
               [(ngModel)]="moneyPay"
             />
           </div>

@@ -46,7 +46,6 @@ export class BorrowedService extends ApiService {
 				})
 	}
 
-	
 	public postUpdateBorrowed(token: string, borrowedId: string, status: string) {
 		return this.http.post(this.REST_API_SERVER + '/UpdateBorrowed',
 					{
@@ -54,6 +53,18 @@ export class BorrowedService extends ApiService {
 						'token': token,
 						'borrowedId': borrowedId,
 						'status': status
+					  },
+					  observe: 'response'
+					})
+	  }
+
+	  public postAddPay(token: string, borrowedId: string, pay: number) {
+		return this.http.post(this.REST_API_SERVER + '/PayFee',
+					{
+					  json: {
+						'token': token,
+						'borrowedId': borrowedId,
+						'pay': pay+''
 					  },
 					  observe: 'response'
 					})

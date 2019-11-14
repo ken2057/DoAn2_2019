@@ -18,10 +18,12 @@
               <tr>
                 <th>Detail</th>
                 <th>Book</th>
+                <th>Status</th>
                 <th>Borrowed Date</th>
                 <th>Expired Date</th>
-                <th>Status</th>
                 <th>Returned Date</th>
+                <th>Fee</th>
+                <th>Paid</th>
               </tr>
             </thead>
             <tbody>
@@ -41,10 +43,12 @@
                     borrowed.bookId
                   }}</a>
                 </td>
+                <td>{{ borrowed.status }}</td>
                 <td>{{ borrowed.date_borrow }}</td>
                 <td>{{ borrowed.date_expire }}</td>
-                <td>{{ borrowed.status }}</td>
                 <td>{{ borrowed.date_return}}</td>
+                <td>{{ borrowed.fee}}</td>
+                <td>{{ borrowed.paid}}</td>
               </tr>
             </tbody>
           </table>
