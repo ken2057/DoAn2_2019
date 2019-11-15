@@ -3,12 +3,12 @@ table th , table td{
 }
 
 table tr:nth-child(even){
-  background-color: #EADFCE
+  background-color: #e4e3e3
 }
 
 th {
-  background: #1D3C26;
-  color: #EADFCE;
+background: #1D3C26;
+color: #EADFCE;
 }
 
 .pagination {
