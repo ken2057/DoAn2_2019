@@ -5,6 +5,7 @@ import { Borrowed } from 'src/app/class/borrowed';
 import { ManangerService } from 'src/app/api/mananger.service';
 import { AuthService } from 'src/app/api/auth.service';
 import { BorrowedService } from 'src/app/api/borrowed.service';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-all-borrowed',
@@ -21,7 +22,8 @@ export class AllBorrowedComponent implements OnInit {
     private borrowedService: BorrowedService,
     private cookieService: CookieService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -53,7 +55,8 @@ export class AllBorrowedComponent implements OnInit {
             ))
           })
         }, error => {
-          console.error('GetAllBorrwed: '+error)
+          console.error(error)
+          this.dialogService.openModal('Error', error.error)
         })
   }
 }

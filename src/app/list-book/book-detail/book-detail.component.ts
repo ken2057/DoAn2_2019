@@ -4,6 +4,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from 'src/app/api/book.service';
 import { AuthService } from 'src/app/api/auth.service';
+import { Location } from '@angular/common';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -21,7 +23,9 @@ export class BookDetailComponent implements OnInit {
     private bookService: BookService,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location,
+    private dialogService: DialogService
   ) { }
 
   @Input() bookId: number;
@@ -54,6 +58,7 @@ export class BookDetailComponent implements OnInit {
           this.checkUserBorrowed()
         }, error => {
           console.log(error)
+          this.location.back()
         })
     }
   }
@@ -105,9 +110,14 @@ export class BookDetailComponent implements OnInit {
       }
         , response => {
           // if token invalid, delete all the cookie and redirect to login
-          if (response.status == 400 || response.status == 401)
+          if (response.status == 400 || response.status == 401){
             this.cookieService.deleteAll()
-          this.router.navigate(['/Login'], { relativeTo: this.route })
+            this.router.navigate(['/Login'], { relativeTo: this.route })
+          }
+          else {
+            this.dialogService.openModal('Error', response.error)
+          }
+
         })
   }
 
@@ -125,6 +135,7 @@ export class BookDetailComponent implements OnInit {
       this.getBookInfo()
     }, error => {
       console.error(error)
+      this.dialogService.openModal('Error', error.error)
     })
   }
 

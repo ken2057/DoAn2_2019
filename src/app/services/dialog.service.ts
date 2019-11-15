@@ -2,11 +2,10 @@ import { DialogtemplateComponent } from './../dialogtemplate/dialogtemplate.comp
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 
-
 @Injectable({
   providedIn: 'root'
 })
-export class DialogServiceService {
+export class DialogService {
 
   constructor(
     public dialog: MatDialog) { }
@@ -23,10 +22,8 @@ export class DialogServiceService {
 
       const dialogRef = this.dialog.open(DialogtemplateComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
-          console.log('Dialog was closed')
-          console.log(result)
+          // console.log('Dialog was closed')
+          // console.log(result)
       });
     }
-
-
-  }
+}

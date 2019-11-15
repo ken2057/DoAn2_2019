@@ -6,7 +6,7 @@ import { UtilsService } from '../utils.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AccountService } from '../api/account.service';
-import { DialogServiceService } from '../services/dialog-ser-vice.service';
+import { DialogService } from '../services/dialog.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,8 @@ import { DialogServiceService } from '../services/dialog-ser-vice.service';
 
 export class LoginComponent implements OnInit {
   userLogin: User;
-  isLogin = true;
+  isLogin = false;
+
   form = new FormGroup({
     userName: new FormControl('', [Validators.required, Validators.minLength(3)]),
     passWord: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
     private utilsService: UtilsService,
     private router: Router,
     private route: ActivatedRoute,
-    public dialogService: DialogServiceService
+    private dialogService: DialogService
   ) {}
 
   ngOnInit() {
@@ -41,6 +42,7 @@ export class LoginComponent implements OnInit {
   @Output() userInfo = new EventEmitter<User>();
 
   onSubmit() {
+    this.isLogin = true
     this.accService.getLogin(this.userLogin)
         .subscribe(response => {
             // login succesfully
@@ -51,8 +53,9 @@ export class LoginComponent implements OnInit {
             this.router.navigate([''], {relativeTo: this.route})
           }, error => {
             //wrong usename/password
-            console.error('login: ', error)
-            this.dialogService.openModal('Error','Wrong username or password')
+            console.error(error)
+            this.dialogService.openModal('Error', error.error)
+            this.isLogin = false
           }
         )
   }

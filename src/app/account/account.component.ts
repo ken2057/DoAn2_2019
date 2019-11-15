@@ -5,6 +5,7 @@ import { User } from '../class/user';
 import { AuthService } from '../api/auth.service';
 import { AccountService } from '../api/account.service';
 import { ManangerService } from '../api/mananger.service';
+import { DialogService } from '../services/dialog.service';
 
 @Component({
   selector: 'app-account',
@@ -23,7 +24,8 @@ export class AccountComponent implements OnInit {
     private accService: AccountService,
     private manService: ManangerService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -53,14 +55,15 @@ export class AccountComponent implements OnInit {
             account['date_expire']
           )          
         }, error => {
-          console.error('getAccountInfo: '+error)
+            console.error(error)
+            this.dialogService.openModal('Error', error.error)
           })
   }
 
   updateAccountInfo() {
     this.accService.postAccountInfo(this.cookieService.get('token'), this.user)
         .subscribe(res => {console.log(res)},
-                  err => {console.log(err)})
+                  error => {console.log(error); this.dialogService.openModal('Error', error.error)})
   }
 
   getAccountInfoWithId(username: string) {
@@ -76,6 +79,7 @@ export class AccountComponent implements OnInit {
             this.isAdmin = true
           }, error => {
             console.error(error)
+            this.dialogService.openModal('Error', error.error)
           })
   }
 }

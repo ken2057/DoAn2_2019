@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/api/auth.service';
 import { ManangerService } from 'src/app/api/mananger.service';
 import { BookService } from 'src/app/api/book.service';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-book-management',
@@ -22,7 +23,8 @@ export class BookManagementComponent implements OnInit {
     private manService: ManangerService,
     private bookService: BookService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialogService: DialogService
   ) { }
 
 
@@ -54,7 +56,8 @@ export class BookManagementComponent implements OnInit {
           this.dataLoaded = true
         });
       }, error => {
-        console.error('error searchBook: ' + error);
+        console.error(error);
+        this.dialogService.openModal('Error', error.error)
       });
   }
 
@@ -71,7 +74,8 @@ export class BookManagementComponent implements OnInit {
           this.books.splice(this.books.indexOf(bookRemove), 1)
           
         }, error => {
-          console.error('error deleteBook: '+error)
+          console.error(error)
+          this.dialogService.openModal('Error', error.error)
         })
   }
 }

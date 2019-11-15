@@ -5,6 +5,7 @@ import { User } from 'src/app/class/user';
 import { AuthService } from 'src/app/api/auth.service';
 import { AdminService } from 'src/app/api/admin.service';
 import { ManangerService } from 'src/app/api/mananger.service';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-account-management',
@@ -21,7 +22,8 @@ export class AccountManagementComponent implements OnInit {
     private adminService: AdminService,
     private manService: ManangerService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -57,6 +59,8 @@ export class AccountManagementComponent implements OnInit {
               account['blocked'] == undefined ? false : account['blocked']
             ))
           })
+        }, error => {
+          this.dialogService.openModal('Error', error.error)
         })
   }
 
@@ -68,6 +72,7 @@ export class AccountManagementComponent implements OnInit {
             this.role = Number(Response.body['role'])
           }, error => {
             console.error(error)
+            this.dialogService.openModal('Error', error.error)
           })
   }
 

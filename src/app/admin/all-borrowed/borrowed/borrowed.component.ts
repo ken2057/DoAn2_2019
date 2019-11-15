@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Borrowed } from 'src/app/class/borrowed';
 import { Location } from '@angular/common';
 import { BookService } from 'src/app/api/book.service';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-borrowed',
@@ -27,7 +28,8 @@ export class BorrowedComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private cookieService: CookieService,
-    private location: Location
+    private location: Location,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit() {
@@ -46,6 +48,7 @@ export class BorrowedComponent implements OnInit {
         this.role = Number(res.body['role'])
       }, error => {
         console.error(error)
+        this.dialogService.openModal('Error', error.error)
       })
   }
 
@@ -70,6 +73,7 @@ export class BorrowedComponent implements OnInit {
         this.dataLoaded = true
       }, error => {
         console.error(error)
+        this.dialogService.openModal('Error', error.error)
       })
   }
 
@@ -129,6 +133,7 @@ export class BorrowedComponent implements OnInit {
       this.getBorrowedInfo()
     }, error => {
       console.error(error)
+      this.dialogService.openModal('Error', error.error)
     })
   }
 }

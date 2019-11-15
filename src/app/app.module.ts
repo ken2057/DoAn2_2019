@@ -25,7 +25,7 @@ import { LoginGuard } from './guard/login.guard';
 import { BorrowedComponent } from './admin/all-borrowed/borrowed/borrowed.component';
 import { DialogtemplateComponent } from './dialogtemplate/dialogtemplate.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {DialogServiceService} from './services/dialog-ser-vice.service';
+import { DialogService } from './services/dialog.service';
 
 @NgModule({
   declarations: [
@@ -81,7 +81,7 @@ import {DialogServiceService} from './services/dialog-ser-vice.service';
   ],
   providers: [
     CookieService,
-    DialogServiceService,
+    DialogService,
     { provide: MatDialogRef, useValue: {} },
 	  { provide: MAT_DIALOG_DATA, useValue: [] },
   ],

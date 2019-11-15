@@ -1,4 +1,4 @@
-<div *ngIf="isLogin" class="container">
+<div class="container">
   <form name="form" [formGroup]="form" (ngSubmit)="onSubmit() && form.valid" class="container">
     <div class="form-container">
       <div class="row-columns">
@@ -25,7 +25,7 @@
           <div *ngIf="form.get('passWord').errors.minlength" style="color: red;">Password must be at least 3 charector</div>
         </div>
 
-        <button type="submit" (click)="onSubmit()">Login</button>
+        <button type="submit" (click)="onSubmit()" [disabled]="isLogin">Login</button>
         <div id="signUpLink">
           <br>
           <a [routerLink]="['/SignUp']">Don't have an account ?</a>
@@ -33,9 +33,4 @@
       </div>
     </div>
   </form>
-</div>
-<div *ngIf="!isLogin">
-  <app-signup
-  (signUp)="finishSignUp($event)">
-  </app-signup>
 </div>

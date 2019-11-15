@@ -5,6 +5,7 @@ import { BookService } from 'src/app/api/book.service';
 import { Book } from 'src/app/class/book';
 import { ManangerService } from 'src/app/api/mananger.service';
 import { SubjectService } from 'src/app/api/subject.service';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-edit-book',
@@ -28,7 +29,8 @@ export class EditBookComponent implements OnInit {
     private manService: ManangerService,
     private subjectService: SubjectService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -75,6 +77,7 @@ export class EditBookComponent implements OnInit {
         this.dataLoaded = true
       }, error => {
         console.error(error)
+        this.dialogService.openModal('Error', error.error)
       })
   }
 
@@ -93,6 +96,7 @@ export class EditBookComponent implements OnInit {
         
       }, error => {
         console.error(error)
+        this.dialogService.openModal('Error',error.error)
       })
   }
 
@@ -144,6 +148,7 @@ export class EditBookComponent implements OnInit {
         this.router.navigate(['/Admin/BookManagement'])
       }, error => {
         console.error(error)
+        this.dialogService.openModal('Error', error.error)
       })
   }
 
@@ -166,6 +171,7 @@ export class EditBookComponent implements OnInit {
           this.router.navigate(['/Admin/BookManagement'])
         }, error => {
           console.error(error)
+          this.dialogService.openModal('Error', error.error)
         })
   }
 }
