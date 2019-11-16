@@ -67,7 +67,7 @@ hr{
   font-weight: 600;
 }
 .btn-confirm{
-  width: 100%;
+  width: 70px;
   background: #1D3C26;
   color: #EADFCE;
 }
@@ -75,4 +75,16 @@ hr{
   background: #578F53;
   color: #EADFCE;
   font-weight: 600;
+}
+.input-fee-paid{
+  width: 200px;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
