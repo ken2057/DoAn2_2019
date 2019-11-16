@@ -1,3 +1,5 @@
+import { NgxSpinnerService } from 'ngx-spinner';
+import { slideInAnimation } from './../../../route-animation';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -11,7 +13,7 @@ import { ManangerService } from 'src/app/api/mananger.service';
 @Component({
   selector: 'app-edit-account',
   templateUrl: './edit-account.component.html',
-  styleUrls: ['./edit-account.component.css']
+  styleUrls: ['./edit-account.component.css'],
 })
 export class EditAccountComponent implements OnInit {
   dataLoaded = false;
@@ -37,10 +39,15 @@ export class EditAccountComponent implements OnInit {
     private accService: AccountService,
     private manService: ManangerService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
     let username = this.route.snapshot.paramMap.get('username')
     if (username == null)
       this.getAccountInfo() //user
@@ -116,7 +123,7 @@ export class EditAccountComponent implements OnInit {
         if (this.newRole == role.id)
           this.edtUser.role = role.name.toLowerCase()
       })
-    
+
     // start post method to update user information
     this.accService.postAccountInfo(this.cookieService.get('token'), this.edtUser)
         .subscribe(res => {

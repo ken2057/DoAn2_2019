@@ -1,3 +1,5 @@
+import { slideInAnimation } from './route-animation';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from './class/user';
@@ -6,10 +8,12 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { AuthService } from './api/auth.service';
 import { AccountService } from './api/account.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [ slideInAnimation ]
 })
 export class AppComponent implements OnInit {
   title = 'Home';
@@ -24,7 +28,8 @@ export class AppComponent implements OnInit {
     private accountService: AccountService,
     private utilsService: UtilsService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private spinner: NgxSpinnerService
   ) {
     this.router.events.subscribe(val => {
       if(val instanceof NavigationEnd)
@@ -52,7 +57,7 @@ export class AppComponent implements OnInit {
               this.authService.getPermission(this.cookieService.get('token'))
                       .subscribe(res => this.role = Number(res.body['role']), err => this.role = 9)
 
-            }, error => { 
+            }, error => {
               console.error('checkToken: '+error)
               this.resetAllValue()
             })
@@ -62,6 +67,10 @@ export class AppComponent implements OnInit {
   }
 
   public btnLogoutClick() {
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 2000);
     this.accountService.postLogout(this.cookieService.get('token'))
         .subscribe(response => {  },
                   error => {console.error('logout: '+error)})

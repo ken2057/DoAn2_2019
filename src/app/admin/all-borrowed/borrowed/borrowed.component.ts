@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/api/auth.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
@@ -29,10 +30,16 @@ export class BorrowedComponent implements OnInit {
     private route: ActivatedRoute,
     private cookieService: CookieService,
     private location: Location,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
+
     this.moneyPay = 0
 
     this.borrowedId = this.route.snapshot.paramMap.get('borrowedId')
@@ -83,8 +90,8 @@ export class BorrowedComponent implements OnInit {
 
   public btnAddPay() {
     this.borrowedService.postAddPay(
-      this.cookieService.get('token'), 
-      this.borrowedInfo._id, 
+      this.cookieService.get('token'),
+      this.borrowedInfo._id,
       this.moneyPay
     ).subscribe(Response => {
       this.getBorrowedInfo()
@@ -94,10 +101,10 @@ export class BorrowedComponent implements OnInit {
       console.error(error)
     })
   }
-  
+
   public onChangePay() {
     // disable btn add money when money not valid format
-    this.isValidPay = this.moneyPay >= 1000 
+    this.isValidPay = this.moneyPay >= 1000
              && this.moneyPay % 1000 == 0
              && this.moneyPay <= this.borrowedInfo.fee - this.borrowedInfo.paid
   }

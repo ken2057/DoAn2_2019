@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AccountService } from '../api/account.service';
 import { DialogService } from '../services/dialog.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -31,10 +32,17 @@ export class LoginComponent implements OnInit {
     private utilsService: UtilsService,
     private router: Router,
     private route: ActivatedRoute,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
+    //////Set Loading screen//////
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 2000);
+    /////////////////////////////
     this.userLogin = new User()
     this.userLogin.username = this.route.snapshot.queryParams['username'] || ''
   }
@@ -42,6 +50,10 @@ export class LoginComponent implements OnInit {
   @Output() userInfo = new EventEmitter<User>();
 
   onSubmit() {
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 2000);
     this.isLogin = true
     this.accService.getLogin(this.userLogin)
         .subscribe(response => {
@@ -54,7 +66,9 @@ export class LoginComponent implements OnInit {
           }, error => {
             //wrong usename/password
             console.error(error)
-            this.dialogService.openModal('Error', error.error)
+            setTimeout(() => {
+              this.dialogService.openModal('Error', error.error)
+            },2100)
             this.isLogin = false
           }
         )

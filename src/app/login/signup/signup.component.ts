@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { User } from 'src/app/class/user';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -24,14 +25,23 @@ export class SignupComponent implements OnInit {
     private accountService: AccountService,
     private router: Router,
     private route: ActivatedRoute,
-    public dialogService: DialogService
+    public dialogService: DialogService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
     this.userSignUp = new User('', '', '', [], '', new Date('1990/01/01'), '')
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
   }
 
   onSubmit() {
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 2000);
     console.log(this.userSignUp.address)
     console.log(this.userSignUp.birth)
     this.isSignUp = true
@@ -42,7 +52,9 @@ export class SignupComponent implements OnInit {
         }, error => {
           console.error(error)
           this.isSignUp = false
-          this.dialogService.openModal('Error', error.error);
+          setTimeout(() => {
+            this.dialogService.openModal('Error', error.error);
+          }, 2100);
         })
   }
 }

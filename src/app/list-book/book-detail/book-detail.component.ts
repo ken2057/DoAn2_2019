@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Book } from './../../class/book';
 import { Component, OnInit, Input } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
@@ -25,7 +26,8 @@ export class BookDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private spinner: NgxSpinnerService
   ) { }
 
   @Input() bookId: number;
@@ -33,6 +35,10 @@ export class BookDetailComponent implements OnInit {
   ngOnInit() {
     this.bookId = Number(this.route.snapshot.paramMap.get('bookId'))
     this.getBookInfo()
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
   }
 
   getBookInfo() {
@@ -79,13 +85,13 @@ export class BookDetailComponent implements OnInit {
         })
     else
       this.btnBorrowText = this.isAvaiable ? 'Borrow' : 'Out of order'
-    
+
     // after get data from API then show it
     this.dataAvaialbe = true
   }
 
   public btnBorrowClick() {
-    // get token 
+    // get token
     let token = this.cookieService.get('token')
     // if token empty direct to login
     if (token == "") {
@@ -98,7 +104,7 @@ export class BookDetailComponent implements OnInit {
         // if token valid => call the post method to start borrow the book
         this.bookService.postBorrowBook(token, this.bookId.toString())
           .subscribe(response => {
-            // borrow successful 
+            // borrow successful
             // change the btnTxt to 'Wait to Get'
             // for user come to the librarian to get the book
             this.btnBorrowText = 'Wait To Get'

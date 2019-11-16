@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -23,12 +24,17 @@ export class AccountManagementComponent implements OnInit {
     private manService: ManangerService,
     private router: Router,
     private route: ActivatedRoute,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
     this.getRole()
     this.getAllAccount()
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide()
+    }, 1000);
   }
 
   searchAccount() {
@@ -78,6 +84,11 @@ export class AccountManagementComponent implements OnInit {
 
 
   public btnActiveAccount(username: string) {
+    //Loading screen
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
     // active/deactive account so they can't borrow the book
     this.manService.postActiveAccount(this.cookieService.get('token'), username, 'active')
         .subscribe(response => {
@@ -89,6 +100,11 @@ export class AccountManagementComponent implements OnInit {
   }
 
   public btnBlockAccount(username: string) {
+    //Loading screen
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
     // active/deactive account so they can't borrow the book
     this.manService.postActiveAccount(this.cookieService.get('token'), username, 'block')
         .subscribe(response => {

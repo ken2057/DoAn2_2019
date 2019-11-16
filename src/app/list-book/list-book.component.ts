@@ -1,7 +1,9 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../class/book';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BookService } from '../api/book.service';
+
 
 @Component({
   selector: 'app-list-book',
@@ -17,13 +19,18 @@ export class ListBookComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private bookService: BookService
+    private bookService: BookService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
     this.searchBook();
     this.txtSearch = ''
     this.dataLoaded = true;
+    this.spinner.show()
+    setTimeout(() => {
+      this.spinner.hide();
+    },500)
   }
 
   searchBook(name?: string, subject?: string, author?: string, page?: number) {
@@ -61,7 +68,7 @@ export class ListBookComponent implements OnInit {
   public btnFindAuthorName() {
     this.searchBook(null, null, this.txtSearch)
   }
-  
+
   public btnFindSubject() {
     this.searchBook(null, this.txtSearch)
   }

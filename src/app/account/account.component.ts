@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Component, OnInit, Injectable, Input } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -25,17 +26,22 @@ export class AccountComponent implements OnInit {
     private manService: ManangerService,
     private router: Router,
     private route: ActivatedRoute,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
     let username = this.route.snapshot.paramMap.get('username')
     if(username == null)
       this.getAccountInfo()
-    else 
+    else
       this.getAccountInfoWithId(username) // admin or manager
 
     this.dataLoaded = true
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
   }
 
   getAccountInfo() {
@@ -53,7 +59,7 @@ export class AccountComponent implements OnInit {
             account['address'],
             account['date_creted'],
             account['date_expire']
-          )          
+          )
         }, error => {
             console.error(error)
             this.dialogService.openModal('Error', error.error)

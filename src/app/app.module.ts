@@ -1,3 +1,4 @@
+
 import {MatButtonModule} from '@angular/material';
 import { MatDialogModule, MAT_DIALOG_DATA , MatDialogRef } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
@@ -26,6 +27,7 @@ import { BorrowedComponent } from './admin/all-borrowed/borrowed/borrowed.compon
 import { DialogtemplateComponent } from './dialogtemplate/dialogtemplate.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogService } from './services/dialog.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { DialogService } from './services/dialog.service';
   imports: [
     BrowserModule,
     MatButtonModule,
+    NgxSpinnerModule,
     BrowserAnimationsModule,
     MatDialogModule,
     HttpClientModule,
@@ -57,22 +60,22 @@ import { DialogService } from './services/dialog.service';
       {path:'Login', component: LoginComponent, canActivate: [LoginGuard]},
       {path: 'SignUp', component: SignupComponent, canActivate: [LoginGuard]},
 
-      {path:'Search', component: ListBookComponent},
+      {path:'Search', component: ListBookComponent, data: {animation: 'Home'}},
       {path: 'Book/:bookId', component: BookDetailComponent},
 
-      {path: 'Account', component: AccountComponent, canActivate: [UserGuard]},
-      {path: 'Account/:username', component: AccountComponent, canActivate: [AdminGuard]},
+      {path: 'Account', component: AccountComponent, canActivate: [UserGuard], data: {animation: 'Account'}},
+      {path: 'Account/:username', component: AccountComponent, canActivate: [AdminGuard], data: {animation: 'Account'}},
 
-      {path: 'Borrowed/:borrowedId', component: BorrowedComponent, canActivate: [UserGuard]},
+      {path: 'Borrowed/:borrowedId', component: BorrowedComponent, canActivate: [UserGuard], data: {animation: 'Borrowed'}},
 
       {path: 'Admin', component: AdminComponent, canActivate: [AdminGuard]},
       {path: 'Admin/AllBorrowed', component: AllBorrowedComponent, canActivate: [AdminGuard]},
-      {path: 'Admin/AllBorrowed/:username', component: AllBorrowedComponent, canActivate: [AdminGuard]},
-      {path: 'Admin/AccountManagement', component: AccountManagementComponent, canActivate: [AdminGuard]},
-      {path: 'Admin/BookManagement', component: BookManagementComponent, canActivate: [AdminGuard]},
+      {path: 'Admin/AllBorrowed/:username', component: AllBorrowedComponent, canActivate: [AdminGuard], data: {animation: 'AllBorrowed'}},
+      {path: 'Admin/AccountManagement', component: AccountManagementComponent, canActivate: [AdminGuard], data: {animation: 'AccountManagerment'}},
+      {path: 'Admin/BookManagement', component: BookManagementComponent, canActivate: [AdminGuard], data: {animation: 'BookManagerment'}},
       {path: 'EditBook/:bookId', component: EditBookComponent, canActivate: [AdminGuard]},
       {path: 'EditAccount', component: EditAccountComponent, canActivate: [UserGuard]},
-      {path: 'EditAccount/:username', component: EditAccountComponent, canActivate: [AdminGuard]},
+      {path: 'EditAccount/:username', component: EditAccountComponent, canActivate: [AdminGuard], data: {animation: 'EditAccount'}},
       {path: 'AddBook', component: EditBookComponent, canActivate: [AdminGuard]},
 
       { path: '', redirectTo: '/Search', pathMatch: 'full'},
