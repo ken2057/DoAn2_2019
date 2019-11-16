@@ -68,14 +68,12 @@ export class AppComponent implements OnInit {
 
   public btnLogoutClick() {
     this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 2000);
     this.accountService.postLogout(this.cookieService.get('token'))
         .subscribe(response => {  },
                   error => {console.error('logout: '+error)})
     this.resetAllValue()
     this.router.navigate(['/'], {relativeTo: this.route})
+    this.spinner.hide();
   }
 
   resetAllValue() {

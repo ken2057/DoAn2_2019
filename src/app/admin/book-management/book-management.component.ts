@@ -32,10 +32,6 @@ export class BookManagementComponent implements OnInit {
 
   ngOnInit() {
     this.searchBook();
-    this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 1000);
   }
 
   searchBook(name?: string, subject?: string, author?: string, page?: number) {
@@ -44,6 +40,9 @@ export class BookManagementComponent implements OnInit {
       return
     }
     this.books = new Array<Book>()
+    //Show loading screen
+    this.spinner.show();
+
     this.bookService.getSearchBooks(subject, author, name, page + '')
       .subscribe(response => {
         // set all book add to books
@@ -60,6 +59,8 @@ export class BookManagementComponent implements OnInit {
                     ));
           this.books.sort(t => Number(t.isbn))
           this.dataLoaded = true
+          //close loading screen
+          this.spinner.hide();
         });
       }, error => {
         console.error(error);
@@ -70,9 +71,6 @@ export class BookManagementComponent implements OnInit {
   public deleteBook(bookId: string) {
     //Show load screen
     this.spinner.show();
-    setTimeout(() => {
-    this.spinner.hide();
-    }, 800);
     // delete book
     this.manService.postDelteBook(this.cookieService.get('token'), bookId)
         .subscribe(response => {
@@ -83,10 +81,13 @@ export class BookManagementComponent implements OnInit {
           })
           // this.books = this.books.filter(t => t != bookRemove)
           this.books.splice(this.books.indexOf(bookRemove), 1)
+          //close loading screen
+          this.spinner.hide()
 
         }, error => {
           console.error(error)
           this.dialogService.openModal('Error', error.error)
+          this.spinner.hide();
         })
   }
 }

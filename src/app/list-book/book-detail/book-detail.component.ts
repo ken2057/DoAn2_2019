@@ -35,13 +35,11 @@ export class BookDetailComponent implements OnInit {
   ngOnInit() {
     this.bookId = Number(this.route.snapshot.paramMap.get('bookId'))
     this.getBookInfo()
-    this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 1000);
   }
 
   getBookInfo() {
+    //loading screen
+    this.spinner.show();
     this.bookDetail = new Book()
     if (this.bookId != null) {
       this.bookService.getBook(this.bookId.toString())
@@ -62,9 +60,12 @@ export class BookDetailComponent implements OnInit {
           // set if still have book for borrow
           this.isAvaiable = this.bookDetail.books.filter(t => t == '').length == 0 ? false : true
           this.checkUserBorrowed()
+          //close loading screen
+          this.spinner.hide();
         }, error => {
           console.log(error)
           this.location.back()
+          this.spinner.hide();
         })
     }
   }
@@ -91,11 +92,15 @@ export class BookDetailComponent implements OnInit {
   }
 
   public btnBorrowClick() {
+
+    //show loading screen
+    this.spinner.show();
     // get token
     let token = this.cookieService.get('token')
     // if token empty direct to login
     if (token == "") {
       this.router.navigate(['/Login'], { relativeTo: this.route })
+      this.spinner.hide();
       return
     }
     // check valid token
@@ -110,8 +115,11 @@ export class BookDetailComponent implements OnInit {
             this.btnBorrowText = 'Wait To Get'
             // make borrow button disable
             this.isAvaiable = false
+            //close loading screen
+            this.spinner.hide();
           }, error => {
             console.error(error)
+            this.spinner.hide();
           })
       }
         , response => {
@@ -119,9 +127,11 @@ export class BookDetailComponent implements OnInit {
           if (response.status == 400 || response.status == 401){
             this.cookieService.deleteAll()
             this.router.navigate(['/Login'], { relativeTo: this.route })
+            this.spinner.hide();
           }
           else {
             this.dialogService.openModal('Error', response.error)
+            this.spinner.hide();
           }
 
         })
@@ -132,6 +142,8 @@ export class BookDetailComponent implements OnInit {
   }
 
   callPostReturn(status: string) {
+    //show loading screen
+    this.spinner.show();
     // start post method set return/lost book
     this.bookService.postCancelBookOrder(
       this.cookieService.get('token'),
@@ -139,9 +151,12 @@ export class BookDetailComponent implements OnInit {
     ).subscribe(response => {
       // success => start reload the book info
       this.getBookInfo()
+      //close loading screen
+      this,this.spinner.hide();
     }, error => {
       console.error(error)
       this.dialogService.openModal('Error', error.error)
+      this,this.spinner.hide();
     })
   }
 

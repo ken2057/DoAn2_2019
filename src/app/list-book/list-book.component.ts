@@ -27,10 +27,6 @@ export class ListBookComponent implements OnInit {
     this.searchBook();
     this.txtSearch = ''
     this.dataLoaded = true;
-    this.spinner.show()
-    setTimeout(() => {
-      this.spinner.hide();
-    },500)
   }
 
   searchBook(name?: string, subject?: string, author?: string, page?: number) {
@@ -39,6 +35,7 @@ export class ListBookComponent implements OnInit {
       return
     }
     this.books = new Array<Book>()
+    this.spinner.show();
     this.bookService.getSearchBooks(subject, author, name, page + '')
       .subscribe(response => {
         // get lists book from return
@@ -55,9 +52,11 @@ export class ListBookComponent implements OnInit {
                       book['image'],
                       book['deleted']
                     ));
+          this.spinner.hide();
         });
       }, error => {
         console.error('error searchBook: ' + error);
+        this.spinner.hide();
       });
   }
 

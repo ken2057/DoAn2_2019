@@ -44,10 +44,6 @@ export class EditAccountComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 1000);
     let username = this.route.snapshot.paramMap.get('username')
     if (username == null)
       this.getAccountInfo() //user
@@ -58,6 +54,8 @@ export class EditAccountComponent implements OnInit {
   }
 
   getAccountInfo() {
+    //open loading screen
+    this.spinner.show();
     // this function execute when user go to change his/her infomation
     this.accService.getAccountInfo(this.cookieService.get('token'))
       .subscribe(response => {
@@ -74,6 +72,7 @@ export class EditAccountComponent implements OnInit {
           account['date_created'],
           account['date_expire']
         )
+        this.spinner.hide();
       }, error => {
         console.error('getAccountInfo: ' + error)
       })
@@ -123,14 +122,16 @@ export class EditAccountComponent implements OnInit {
         if (this.newRole == role.id)
           this.edtUser.role = role.name.toLowerCase()
       })
-
+    this.spinner.show();
     // start post method to update user information
     this.accService.postAccountInfo(this.cookieService.get('token'), this.edtUser)
         .subscribe(res => {
           // after finish update, move back to account-management
           this.router.navigate(['/Admin/AccountManagement'], {relativeTo: this.route})
+          this.spinner.hide();
         }, error => {
           console.error(error)
+          this.spinner.hide();
         })
   }
 }

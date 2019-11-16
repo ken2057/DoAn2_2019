@@ -39,9 +39,6 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 2000);
     console.log(this.userSignUp.address)
     console.log(this.userSignUp.birth)
     this.isSignUp = true
@@ -49,12 +46,12 @@ export class SignupComponent implements OnInit {
         .postSignUp(this.userSignUp)
         .subscribe(response => {
           this.router.navigate(['/Login'], { queryParams: { username: this.userSignUp.username }} )
+          this.spinner.hide();
         }, error => {
           console.error(error)
           this.isSignUp = false
-          setTimeout(() => {
             this.dialogService.openModal('Error', error.error);
-          }, 2100);
+            this.spinner.hide();
         })
   }
 }

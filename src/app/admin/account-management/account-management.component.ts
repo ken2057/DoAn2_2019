@@ -31,10 +31,6 @@ export class AccountManagementComponent implements OnInit {
   ngOnInit() {
     this.getRole()
     this.getAllAccount()
-    this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide()
-    }, 1000);
   }
 
   searchAccount() {
@@ -42,6 +38,8 @@ export class AccountManagementComponent implements OnInit {
   }
 
   getAllAccount() {
+    //loading screen
+    this.spinner.show();
     // get all the user info
     this.adminService.getUsersInfo(this.cookieService.get('token'))
         .subscribe(res => {
@@ -65,6 +63,8 @@ export class AccountManagementComponent implements OnInit {
               account['blocked'] == undefined ? false : account['blocked']
             ))
           })
+          //close loading screen
+          this.spinner.hide();
         }, error => {
           this.dialogService.openModal('Error', error.error)
         })
@@ -86,32 +86,35 @@ export class AccountManagementComponent implements OnInit {
   public btnActiveAccount(username: string) {
     //Loading screen
     this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 1000);
     // active/deactive account so they can't borrow the book
     this.manService.postActiveAccount(this.cookieService.get('token'), username, 'active')
         .subscribe(response => {
           // successful => reload the data
           this.getAllAccount()
+
+        //close loading screen
+        this.spinner.hide();
         }, error => {
           console.error(error)
+          this.spinner.hide();
         })
   }
 
   public btnBlockAccount(username: string) {
     //Loading screen
     this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 1000);
+
     // active/deactive account so they can't borrow the book
     this.manService.postActiveAccount(this.cookieService.get('token'), username, 'block')
         .subscribe(response => {
           // successful => reload the data
           this.getAllAccount()
+
+          //close loading screen
+          this.spinner.hide();
         }, error => {
           console.error(error)
+          this.spinner.hide();
         })
   }
 }

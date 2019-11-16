@@ -35,10 +35,6 @@ export class BorrowedComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 1000);
 
     this.moneyPay = 0
 
@@ -50,16 +46,24 @@ export class BorrowedComponent implements OnInit {
 
   // get user perrmission to enable/disable button
   getUserPermission() {
+    //show loading screen
+    this.spinner.show();
     this.authSerivce.getPermission(this.cookieService.get('token'))
       .subscribe(res => {
         this.role = Number(res.body['role'])
+        //close loading screen
+        this.spinner.hide();
       }, error => {
         console.error(error)
         this.dialogService.openModal('Error', error.error)
+        //close loading screen
+        this.spinner.hide();
       })
   }
 
   getBorrowedInfo() {
+    //loading screen
+    this.spinner.show();
     // get detail of the borrowed
     this.borrowedService.getBorrowed(this.cookieService.get('token'), this.borrowedId)
       .subscribe(Response => {
@@ -78,9 +82,12 @@ export class BorrowedComponent implements OnInit {
           result['paid'] || 0
         )
         this.dataLoaded = true
+        //close loading screen
+        this.spinner.hide()
       }, error => {
         console.error(error)
         this.dialogService.openModal('Error', error.error)
+        this.spinner.hide();
       })
   }
 
@@ -89,6 +96,7 @@ export class BorrowedComponent implements OnInit {
   }
 
   public btnAddPay() {
+    this.spinner.show();
     this.borrowedService.postAddPay(
       this.cookieService.get('token'),
       this.borrowedInfo._id,
@@ -97,8 +105,10 @@ export class BorrowedComponent implements OnInit {
       this.getBorrowedInfo()
       this.moneyPay = 0
       this.isValidPay = false
+      this.spinner.hide();
     }, error => {
       console.error(error)
+      this.spinner.hide();
     })
   }
 
@@ -130,6 +140,8 @@ export class BorrowedComponent implements OnInit {
   }
 
   callPostReturn(status: string) {
+    //show loading screen
+    this.spinner.show();
     // start post method set return/lost/cancel book
     this.borrowedService.postUpdateBorrowed(
       this.cookieService.get('token'),
@@ -138,9 +150,12 @@ export class BorrowedComponent implements OnInit {
     ).subscribe(response => {
       // success => start reload the book info
       this.getBorrowedInfo()
+      //close loading screen
+      this.spinner.hide();
     }, error => {
       console.error(error)
       this.dialogService.openModal('Error', error.error)
+      this.spinner.hide();
     })
   }
 }

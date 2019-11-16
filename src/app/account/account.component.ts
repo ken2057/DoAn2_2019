@@ -36,15 +36,11 @@ export class AccountComponent implements OnInit {
       this.getAccountInfo()
     else
       this.getAccountInfoWithId(username) // admin or manager
-
-    this.dataLoaded = true
-    this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 1000);
+      this.dataLoaded = true
   }
 
   getAccountInfo() {
+    this.spinner.show();
     this.accService.getAccountInfo(this.cookieService.get('token'))
         .subscribe(response => {
           let json = response.body
@@ -60,6 +56,7 @@ export class AccountComponent implements OnInit {
             account['date_creted'],
             account['date_expire']
           )
+          this.spinner.hide();
         }, error => {
             console.error(error)
             this.dialogService.openModal('Error', error.error)

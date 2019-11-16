@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     //////Set Loading screen//////
     this.spinner.show();
     setTimeout(() => {
-      this.spinner.hide();
+    this.spinner.hide();
     }, 2000);
     /////////////////////////////
     this.userLogin = new User()
@@ -51,9 +51,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 2000);
     this.isLogin = true
     this.accService.getLogin(this.userLogin)
         .subscribe(response => {
@@ -63,6 +60,8 @@ export class LoginComponent implements OnInit {
             this.cookieService.set('token', json['token'])
             this.cookieService.set('username', this.userLogin.username)
             this.router.navigate([''], {relativeTo: this.route})
+
+            this.spinner.hide();
           }, error => {
             //wrong usename/password
             console.error(error)
@@ -70,6 +69,7 @@ export class LoginComponent implements OnInit {
               this.dialogService.openModal('Error', error.error)
             },2100)
             this.isLogin = false
+            this.spinner.hide();
           }
         )
   }

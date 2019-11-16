@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -30,7 +31,8 @@ export class EditBookComponent implements OnInit {
     private subjectService: SubjectService,
     private router: Router,
     private route: ActivatedRoute,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -38,7 +40,7 @@ export class EditBookComponent implements OnInit {
     this.bookDetail = new Book('', '', '', [], [], '', false, this.currentYear)
     this.bookDetail.books = []
     this.allSubject()
-    
+
     // if user add new book
     if(this.router.url == '/AddBook'){
       this.isEditBook = false
@@ -93,7 +95,7 @@ export class EditBookComponent implements OnInit {
           })
         this.subjects.push({ 'id': -1, 'name': 'None' })
         this.subjects.sort(t => t.id)
-        
+
       }, error => {
         console.error(error)
         this.dialogService.openModal('Error',error.error)
@@ -134,21 +136,27 @@ export class EditBookComponent implements OnInit {
   }
 
   public btnSave() {
+    //loading screen
+    this.spinner.show();
     // convert selected subject into the book
     let fil = this.selected.filter(t => t != -1).map(t => Number(t))
     this.bookDetail.subjects = fil.map(t => {
       let name = ''
       this.subjects.forEach(s => { if (s.id == t) name = s.name })
       return name
+      this.spinner.hide();
     })
 
     // update
     this.manService.postEditBook(this.cookieService.get('token'), this.bookDetail)
       .subscribe(response => {
         this.router.navigate(['/Admin/BookManagement'])
+        //close loading screen
+        this.spinner.hide();
       }, error => {
         console.error(error)
         this.dialogService.openModal('Error', error.error)
+        this.spinner.hide();
       })
   }
 
@@ -166,12 +174,17 @@ export class EditBookComponent implements OnInit {
 
   //create a new book in library
   public btnAddNewBook() {
+    //open loading screen
+    this.spinner.show();
     this.manService.postAddBook(this.cookieService.get('token'), this.bookDetail)
         .subscribe(Response => {
           this.router.navigate(['/Admin/BookManagement'])
+          //close loading screen
+          this.spinner.hide();
         }, error => {
           console.error(error)
           this.dialogService.openModal('Error', error.error)
+          this.spinner.hide();
         })
   }
 }

@@ -29,10 +29,6 @@ export class AllBorrowedComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 1000);
     this.username = this.route.snapshot.paramMap.get('username')
     if (this.username != null)
       this.txtSearch = this.username
@@ -41,6 +37,8 @@ export class AllBorrowedComponent implements OnInit {
   }
 
   getAllBorrowed(username?: string, page?: number) {
+    //Show loadign screen
+    this.spinner.show();
     // get all the borrowed history
     this.borrowedService.getSearchBorrowed(this.cookieService.get('token'), username, page)
         .subscribe(res => {
@@ -59,6 +57,8 @@ export class AllBorrowedComponent implements OnInit {
               t['fee'],
               t['paid'],
             ))
+            //close loading screen
+            this.spinner.hide();
           })
         }, error => {
           console.error(error)
