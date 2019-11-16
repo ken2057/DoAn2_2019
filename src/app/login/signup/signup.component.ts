@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userSignUp = new User('', '', '', [], '', new Date('1990/1/1'), '')
+    this.userSignUp = new User('', '', '', [], '', new Date('1990/01/01'), '')
   }
 
   onSubmit() {

@@ -99,9 +99,9 @@
             class="form-control"
             id="birth"
             name="birth"
-            value="1990-01-01"
             [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="userSignUp.birth"
+            [ngModel]="userSignUp.birth | date: 'yyyy-MM-dd'"
+            (ngModelChange) = "userSignUp.birth= $event"
           />
         </label>
 

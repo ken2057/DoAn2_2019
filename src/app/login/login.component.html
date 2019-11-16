@@ -1,36 +1,58 @@
 <div class="container">
-  <form name="form" [formGroup]="form" (ngSubmit)="onSubmit() && form.valid" class="container">
-    <div class="form-container">
-      <div class="row-columns">
-        <h1 style="color: brown;">Login</h1>
+  <div class="row">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
 
-        <label for="username">Username
-          <input type="text" class="form-control" id="username" required formControlName="userName"
-            [(ngModel)]="userLogin.username"
-            [ngClass]="{'is-invalid':form.get('userName').touched && form.get('userName').invalid}" name="username" />
-        </label>
-        <div *ngIf="form.get('userName').touched && form.get('userName').invalid" class="invalid-feedback">
-          <div *ngIf= "form.get('userName').errors.required" style="color: red;">UserName invalid</div>
-          <div *ngIf= "form.get('userName').errors.minlength" style="color: red;">UserName must be at least 3 charector </div>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <form name="form" [formGroup]="form" (ngSubmit)="onSubmit() && form.valid" class="container">
+
+        <div class="row">
+          <h1>Login</h1>
         </div>
 
-        <label for="passWord">Password
-          <input type="password" class="form-control" id="password" required formControlName="passWord"
-            [ngClass]="{'is-invalid':form.get('passWord').touched && form.get('passWord').invalid}"
-            [(ngModel)]="userLogin.password" name="password" />
-        </label>
-
-        <div *ngIf="form.get('passWord').touched && form.get('passWord').invalid" class="invalid-feedback">
-          <div *ngIf="form.get('passWord').errors.required" style="color: red;">Password is required</div>
-          <div *ngIf="form.get('passWord').errors.minlength" style="color: red;">Password must be at least 3 charector</div>
+        <div class="row">
+          <label for="username">Username
+            <input type="text" class="form-control" id="username" required formControlName="userName"
+              [(ngModel)]="userLogin.username"
+              [ngClass]="{'is-invalid':form.get('userName').touched && form.get('userName').invalid}" name="username" />
+          </label>
+          <div *ngIf="form.get('userName').touched && form.get('userName').invalid" class="invalid-feedback">
+            <div *ngIf="form.get('userName').errors.required" style="color: red;">UserName invalid</div>
+            <div *ngIf="form.get('userName').errors.minlength" style="color: red;">UserName must be at least 3 charector
+            </div>
+          </div>
         </div>
 
-        <button type="submit" (click)="onSubmit()" [disabled]="isLogin">Login</button>
-        <div id="signUpLink">
-          <br>
-          <a [routerLink]="['/SignUp']">Don't have an account ?</a>
+        <div class="row">
+          <label for="passWord">Password
+            <input type="password" class="form-control" id="password" required formControlName="passWord"
+              [ngClass]="{'is-invalid':form.get('passWord').touched && form.get('passWord').invalid}"
+              [(ngModel)]="userLogin.password" name="password" />
+          </label>
+
+          <div *ngIf="form.get('passWord').touched && form.get('passWord').invalid" class="invalid-feedback">
+            <div *ngIf="form.get('passWord').errors.required" style="color: red;">Password is required</div>
+            <div *ngIf="form.get('passWord').errors.minlength" style="color: red;">Password must be at least 3 charector
+            </div>
+          </div>
         </div>
-      </div>
+
+        <div class="row">
+          <button type="submit" [disabled]="isLogin">Login</button>
+        </div>
+
+        <div class="row">
+          <div id="signUpLink">
+            <br>
+            <a [routerLink]="['/SignUp']">Don't have an account ?</a>
+          </div>
+        </div>
+
+      </form>
     </div>
-  </form>
+
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+
+  </div>
+
+
 </div>

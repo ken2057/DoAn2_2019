@@ -7,8 +7,8 @@ table tr:nth-child(even){
 }
 
 th {
-background: brown;
-color: #fff;
+  background: #1D3C26;
+  color: #EADFCE;
 }
 
 .pagination {

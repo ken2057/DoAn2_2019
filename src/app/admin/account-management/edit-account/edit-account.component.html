@@ -60,13 +60,13 @@
           </div>
         </div>
 
-        <h4 for="dateOfBirth">dateOfBirth</h4>
+        <h4 for="dateOfBirth">Date of birth </h4>
         <input
           type="date"
           class="form-control"
           id="txtDOB"
-          placeholder="Enter new dateOfBirth"
-          [(ngModel)]="edtUser.birth"
+          [ngModel]="edtUser.birth | date: 'yyyy-MM-dd'"
+          (ngModelChange) = "edtUser.birth= $event"
           [ngModelOptions]="{ standalone: true }"
         />
 

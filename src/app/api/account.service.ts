@@ -8,7 +8,7 @@ import { HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AccountService extends ApiService {
-  
+
   // ---------------------------------------------------------------------------
   //  API Account
   // ---------------------------------------------------------------------------
@@ -61,7 +61,7 @@ export class AccountService extends ApiService {
                 'user': new User(
                   user.username,
                   user.password == '' ? '' : sha1(user.password),
-                  user.email, 
+                  user.email,
                   null,
                   user.role
                 )
