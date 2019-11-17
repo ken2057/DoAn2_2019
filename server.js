@@ -7,17 +7,19 @@ const app = express();
 
 // Serve only the static files form the dist directory
 // app.use(express.static(__dirname + '/dist/<name-of-app>'));
-app.disable('etag');
-app.use(bodyParser.json(), { maxAge: 2592000000 });
+app.use(bodyParser.json());
 app.use(express.static(__dirname + '/dist/Angular'));
 
-
-app.get('/*', function(req,res) {
+app.use(function (req, res, next) {
     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
     res.header('Expires', '-1');
     res.header('Pragma', 'no-cache');
-    res.sendFile(path.join(__dirname + '/dist/Angular/index.html'));
     next()
+});
+
+app.disable('etag');
+app.get('/*', function(req,res) {
+    res.sendFile(path.join(__dirname + '/dist/Angular/index.html'));
 });
 
 // Start the app by listening on the default Heroku port
