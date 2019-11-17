@@ -1,9 +1,15 @@
 .row img{
-  padding: 24px 24px 20px 20px;
-  min-width: 500px;
-  min-height: 400px;
-  max-height: 450px;
+  padding: 1.5rem;
+  min-width: 10rem;
+  min-height: 30rem;
+  max-width: 30rem;
+  max-height: 45rem;
   background: #fff;
+  align-items: center;
+  margin: 0 auto;
+}
+.row figure{
+  margin: 1.5rem auto;
 }
 .row{
   display: flex;

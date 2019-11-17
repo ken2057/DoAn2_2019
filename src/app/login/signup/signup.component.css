@@ -1,29 +1,46 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 10px;
+  color: #1D3C26;
+  font-weight: 900;
+}
+hr{
+  border-top: .1rem solid #1D3C26;
+}
 form{
   position: relative;
-  padding: 20px 50px 50px 50px;
+  padding: 2rem;
   text-align: center;
-  width: 410px;
   height: auto;
   box-sizing: border-box;
-  border-radius: 20px;
-  background-color: rgb(245, 233, 233);
+  border-radius: 2rem;
+  background-color: #EADFCE;
   opacity: 10;
-  margin-top: 30px;
+  margin-top: 3rem;
 }
 button[type="submit"]
 {
   border: none;
   outline: none;
-  height: 50px;
+  height: auto;
   width: 150px;
-  color: rgb(255, 255, 255);
+  color: #EADFCE;
   font-size: 20px;
-  background: brown;
+  background: #1D3C26;
   cursor: pointer;
   border-radius: 20px;
-  margin-top: 20px;
+
 }
-.row-columns input[type="text"],
+button[type="submit"]:hover{
+  font-weight: 700;
+  background: #578F53;
+}
+/* .row-columns input[type="text"],
 .row-columns input[type="password"],
 .row-columns input[type="email"],
 .row-columns input[type="date"]
@@ -33,12 +50,23 @@ button[type="submit"]
   height: 35px;
   color: rgb(5, 5, 5);
   font-size: 16px;
-}
+} */
 label{
   font-size: 16px;
+  max-width: 70%;
+  min-width: 50%;
 }
-#address{
+/* #address{
   height: 100px;
   padding-top: 0;
+} */
+
+.container{
+  width:unset;
+}
+.row{
+  margin: 0;
+  padding: 0;
+  margin-bottom: 2rem;
 }
 

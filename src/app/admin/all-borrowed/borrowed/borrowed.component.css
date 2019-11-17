@@ -28,7 +28,7 @@ input{
 }
 
 .history-table{
-  height:200px;
+  height:30rem;
   font:16px/26px Georgia, Garamond, Serif;
   overflow:auto;
   margin-bottom: 20px;
