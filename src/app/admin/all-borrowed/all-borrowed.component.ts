@@ -62,6 +62,7 @@ export class AllBorrowedComponent implements OnInit {
           })
         }, error => {
           console.error(error)
+          this.spinner.hide();
           this.dialogService.openModal('Error', error.error)
         })
   }

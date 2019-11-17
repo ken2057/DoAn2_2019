@@ -30,12 +30,12 @@ export class ListBookComponent implements OnInit {
   }
 
   searchBook(name?: string, subject?: string, author?: string, page?: number) {
-    if (page < 1) {
-      // show error
-      return
-    }
-    this.books = new Array<Book>()
+    // show some error
+    if (page < 1) { return }
+    
     this.spinner.show();
+    
+    this.books = new Array<Book>()
     this.bookService.getSearchBooks(subject, author, name, page + '')
       .subscribe(response => {
         // get lists book from return

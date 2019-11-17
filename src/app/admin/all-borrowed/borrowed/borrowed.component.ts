@@ -55,9 +55,10 @@ export class BorrowedComponent implements OnInit {
         this.spinner.hide();
       }, error => {
         console.error(error)
-        this.dialogService.openModal('Error', error.error)
         //close loading screen
         this.spinner.hide();
+
+        this.dialogService.openModal('Error', error.error)
       })
   }
 
@@ -86,8 +87,8 @@ export class BorrowedComponent implements OnInit {
         this.spinner.hide()
       }, error => {
         console.error(error)
-        this.dialogService.openModal('Error', error.error)
         this.spinner.hide();
+        this.dialogService.openModal('Error', error.error)
       })
   }
 
@@ -109,6 +110,7 @@ export class BorrowedComponent implements OnInit {
     }, error => {
       console.error(error)
       this.spinner.hide();
+      this.dialogService.openModal('Error', error.error)
     })
   }
 
@@ -135,10 +137,6 @@ export class BorrowedComponent implements OnInit {
     this.callPostReturn('cancel')
   }
 
-  public btnAddPayFee() {
-
-  }
-
   callPostReturn(status: string) {
     //show loading screen
     this.spinner.show();
@@ -154,8 +152,8 @@ export class BorrowedComponent implements OnInit {
       this.spinner.hide();
     }, error => {
       console.error(error)
-      this.dialogService.openModal('Error', error.error)
       this.spinner.hide();
+      this.dialogService.openModal('Error', error.error)
     })
   }
 }

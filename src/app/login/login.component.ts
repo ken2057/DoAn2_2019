@@ -37,12 +37,6 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //////Set Loading screen//////
-    this.spinner.show();
-    setTimeout(() => {
-    this.spinner.hide();
-    }, 2000);
-    /////////////////////////////
     this.userLogin = new User()
     this.userLogin.username = this.route.snapshot.queryParams['username'] || ''
   }
@@ -65,9 +59,7 @@ export class LoginComponent implements OnInit {
           }, error => {
             //wrong usename/password
             console.error(error)
-            setTimeout(() => {
-              this.dialogService.openModal('Error', error.error)
-            },2100)
+            this.dialogService.openModal('Error', error.error)
             this.isLogin = false
             this.spinner.hide();
           }

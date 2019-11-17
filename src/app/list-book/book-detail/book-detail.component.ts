@@ -92,7 +92,6 @@ export class BookDetailComponent implements OnInit {
   }
 
   public btnBorrowClick() {
-
     //show loading screen
     this.spinner.show();
     // get token
