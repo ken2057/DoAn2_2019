@@ -92,6 +92,10 @@ export class BookDetailComponent implements OnInit {
   }
 
   public btnBorrowClick() {
+    if (!this.isAvaiable && this.btnBorrowText != 'Borrow') {
+      this.dialogService.openModal('Error', 'Nice try')
+      return
+    }
     //show loading screen
     this.spinner.show();
     // get token
@@ -111,7 +115,7 @@ export class BookDetailComponent implements OnInit {
             // borrow successful
             // change the btnTxt to 'Wait to Get'
             // for user come to the librarian to get the book
-            this.btnBorrowText = 'Wait To Get'
+            this.btnBorrowText = 'Get book from librarian'
             // make borrow button disable
             this.isAvaiable = false
             //close loading screen
