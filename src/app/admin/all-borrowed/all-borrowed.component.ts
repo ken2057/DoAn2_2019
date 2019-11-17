@@ -57,9 +57,9 @@ export class AllBorrowedComponent implements OnInit {
               t['fee'],
               t['paid'],
             ))
-            //close loading screen
-            this.spinner.hide();
           })
+          //close loading screen
+          this.spinner.hide();
         }, error => {
           console.error(error)
           this.spinner.hide();
