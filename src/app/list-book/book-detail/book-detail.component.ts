@@ -14,9 +14,9 @@ import { DialogService } from 'src/app/services/dialog.service';
   styleUrls: ['./book-detail.component.css']
 })
 export class BookDetailComponent implements OnInit {
-  bookDetail: Book;
-  isAvaiable = false;
-  dataAvaialbe = false;
+  bookDetail: Book
+  isAvaiable = false
+  dataAvaialbe = false
   btnBorrowText = ''
 
   constructor(
@@ -118,6 +118,7 @@ export class BookDetailComponent implements OnInit {
             this.spinner.hide();
           }, error => {
             console.error(error)
+            this.dialogService.openModal('Error', error.error)
             this.spinner.hide();
           })
       }
