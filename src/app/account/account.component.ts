@@ -53,12 +53,13 @@ export class AccountComponent implements OnInit {
             '',
             account['birth'],
             account['address'],
-            account['date_creted'],
+            account['date_created'],
             account['date_expire']
           )
           this.spinner.hide();
         }, error => {
             console.error(error)
+            this.spinner.hide()
             this.dialogService.openModal('Error', error.error)
           })
   }
@@ -70,6 +71,7 @@ export class AccountComponent implements OnInit {
   }
 
   getAccountInfoWithId(username: string) {
+    this.spinner.show()
     this.manService.getUserWithId(this.cookieService.get('token'), username)
           .subscribe( res => {
             let user = res.body['user']
@@ -79,9 +81,11 @@ export class AccountComponent implements OnInit {
               user['email'],
               user['borrowed']
             )
+            this.spinner.hide()
             this.isAdmin = true
           }, error => {
             console.error(error)
+            this.spinner.hide()
             this.dialogService.openModal('Error', error.error)
           })
   }
