@@ -31,16 +31,11 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.userSignUp = new User('', '', '', [], '', new Date('1990/01/01'), '')
-    this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 1000);
   }
 
   onSubmit() {
     this.spinner.show();
-    console.log(this.userSignUp.address)
-    console.log(this.userSignUp.birth)
+    
     this.isSignUp = true
     this.accountService
         .postSignUp(this.userSignUp)
@@ -50,8 +45,8 @@ export class SignupComponent implements OnInit {
         }, error => {
           console.error(error)
           this.isSignUp = false
-            this.dialogService.openModal('Error', error.error);
-            this.spinner.hide();
+          this.dialogService.openModal('Error', error.error);
+          this.spinner.hide();
         })
   }
 }
