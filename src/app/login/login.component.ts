@@ -22,8 +22,7 @@ export class LoginComponent implements OnInit {
 
   form = new FormGroup({
     userName: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    passWord: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    Email: new FormControl('', [Validators.required, Validators.email])
+    passWord: new FormControl('', [Validators.required, Validators.minLength(3)])
   });
 
   constructor(
@@ -44,6 +43,12 @@ export class LoginComponent implements OnInit {
   @Output() userInfo = new EventEmitter<User>();
 
   onSubmit() {
+    if(this.userLogin.username == '' || this.userLogin.password == ''){
+      this.dialogService.openModal('Error', 'Nice try')
+      return
+    }
+
+
     this.spinner.show();
     this.isLogin = true
     this.accService.getLogin(this.userLogin)

@@ -34,6 +34,11 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
+    if(this.userSignUp.username == '' || this.userSignUp.password == '' || this.userSignUp.email == ''){
+      this.dialogService.openModal('Error', 'Nice try')
+      return
+    }
+
     this.spinner.show();
     
     this.isSignUp = true

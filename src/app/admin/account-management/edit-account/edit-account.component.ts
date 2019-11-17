@@ -8,6 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from 'src/app/api/auth.service';
 import { AccountService } from 'src/app/api/account.service';
 import { ManangerService } from 'src/app/api/mananger.service';
+import { DialogService } from 'src/app/services/dialog.service';
 
 
 @Component({
@@ -40,7 +41,8 @@ export class EditAccountComponent implements OnInit {
     private manService: ManangerService,
     private router: Router,
     private route: ActivatedRoute,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -78,14 +80,9 @@ export class EditAccountComponent implements OnInit {
       })
   }
 
-  updateAccountInfo() {
-    // update the information
-    this.accService.postAccountInfo(this.cookieService.get('token'), this.edtUser)
-      .subscribe(res => { console.log(res) },
-        err => { console.log(err) })
-  }
-
   getAccountInfoWithId(username: string) {
+    //
+    this.spinner.show()
     // this function excecute when admin/manager access to change user infomation
     this.manService.getUserWithId(this.cookieService.get('token'), username)
       .subscribe(res => {
@@ -109,19 +106,27 @@ export class EditAccountComponent implements OnInit {
               this.newRole = role.id
             }
           })
+          this.spinner.hide()
           this.isAdmin = true
       }, error => {
         console.error(error)
+        this.spinner.hide()
       })
   }
 
   onSubmit() {
+    if(this.edtUser.username == '' || this.edtUser.password == '' || this.edtUser.email == ''){
+      this.dialogService.openModal('Error', 'Nice try')
+      return
+    }
+
     // only admin can change the role of user
     if(this.isAdmin)
       this.roles.forEach(role => {
         if (this.newRole == role.id)
           this.edtUser.role = role.name.toLowerCase()
       })
+    //
     this.spinner.show();
     // start post method to update user information
     this.accService.postAccountInfo(this.cookieService.get('token'), this.edtUser)
