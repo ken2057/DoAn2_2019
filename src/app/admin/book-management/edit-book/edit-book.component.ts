@@ -144,9 +144,8 @@ export class EditBookComponent implements OnInit {
       let name = ''
       this.subjects.forEach(s => { if (s.id == t) name = s.name })
       return name
-      this.spinner.hide();
     })
-
+    
     // update
     this.manService.postEditBook(this.cookieService.get('token'), this.bookDetail)
       .subscribe(response => {
@@ -176,6 +175,14 @@ export class EditBookComponent implements OnInit {
   public btnAddNewBook() {
     //open loading screen
     this.spinner.show();
+    // convert selected subject into the book
+    let fil = this.selected.filter(t => t != -1).map(t => Number(t))
+    this.bookDetail.subjects = fil.map(t => {
+      let name = ''
+      this.subjects.forEach(s => { if (s.id == t) name = s.name })
+      return name
+    })
+
     this.manService.postAddBook(this.cookieService.get('token'), this.bookDetail)
         .subscribe(Response => {
           this.router.navigate(['/Admin/BookManagement'])
