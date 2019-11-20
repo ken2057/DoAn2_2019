@@ -67,7 +67,6 @@ export class AccountManagementComponent implements OnInit {
           })
           //close loading screen
           this.spinner.hide();
-          console.log(this.total)
         }, error => {
           this.dialogService.openModal('Error', error.error)
         })

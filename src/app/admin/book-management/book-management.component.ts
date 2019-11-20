@@ -63,7 +63,6 @@ export class BookManagementComponent implements OnInit {
           this.dataLoaded = true
           //close loading screen
         })
-        console.log(this.total)
         this.spinner.hide();
       }, error => {
         console.error(error);

@@ -60,7 +60,6 @@ export class AllBorrowedComponent implements OnInit {
               t['paid'],
             ))
           })
-          console.log(this.total)
           //close loading screen
           this.spinner.hide();
         }, error => {
