@@ -14,6 +14,7 @@ import { DialogService } from 'src/app/services/dialog.service';
   styleUrls: ['./all-borrowed.component.css']
 })
 export class AllBorrowedComponent implements OnInit {
+  total = 0
   txtSearch = ''
   username: string
   allBorrowed = new Array<Borrowed>()
@@ -44,6 +45,7 @@ export class AllBorrowedComponent implements OnInit {
         .subscribe(res => {
           this.allBorrowed = new Array<Borrowed>()
           let allBorrowed = res.body['borrowed']
+          this.total = Number(res.body['total'])
           allBorrowed.forEach(t => {
             this.allBorrowed.push(new Borrowed(
               t['_id'],
@@ -58,6 +60,7 @@ export class AllBorrowedComponent implements OnInit {
               t['paid'],
             ))
           })
+          console.log(this.total)
           //close loading screen
           this.spinner.hide();
         }, error => {

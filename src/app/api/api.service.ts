@@ -10,8 +10,8 @@ export class ApiService {
   
 
   constructor(public http: HttpClient) { 
-    this.REST_API_SERVER = "https://library-project-2-api.herokuapp.com"
-    // this.REST_API_SERVER = "http://127.0.0.1:5000"
+    // this.REST_API_SERVER = "https://library-project-2-api.herokuapp.com"
+    this.REST_API_SERVER = "http://127.0.0.1:5000"
   }
 
 }

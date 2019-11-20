@@ -15,6 +15,7 @@ import { DialogService } from 'src/app/services/dialog.service';
 })
 export class AccountManagementComponent implements OnInit {
   public accounts = new Array<User>();
+  total = 0
   role = 9;
 
   constructor(
@@ -37,14 +38,15 @@ export class AccountManagementComponent implements OnInit {
     // find account info
   }
 
-  getAllAccount() {
+  getAllAccount(username: string = '') {
     //loading screen
     this.spinner.show();
     // get all the user info
-    this.adminService.getUsersInfo(this.cookieService.get('token'))
+    this.adminService.getUsersInfo(this.cookieService.get('token'), username)
         .subscribe(res => {
           // get list user from respone
           let accounts = res.body['users']
+          this.total = Number(res.body['total'])
           this.accounts = new Array<User>()
           // add to accounts
           accounts.forEach(account => {
@@ -65,6 +67,7 @@ export class AccountManagementComponent implements OnInit {
           })
           //close loading screen
           this.spinner.hide();
+          console.log(this.total)
         }, error => {
           this.dialogService.openModal('Error', error.error)
         })

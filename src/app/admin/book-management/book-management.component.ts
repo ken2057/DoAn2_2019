@@ -14,6 +14,7 @@ import { DialogService } from 'src/app/services/dialog.service';
   styleUrls: ['./book-management.component.css']
 })
 export class BookManagementComponent implements OnInit {
+  total = 0
   public bookClicked = -1;
   public books = new Array<Book>();
   dataLoaded = false;
@@ -46,8 +47,9 @@ export class BookManagementComponent implements OnInit {
     this.bookService.getSearchBooks(subject, author, name, page + '')
       .subscribe(response => {
         // set all book add to books
-        let json = response.body
-        json['books'].forEach(book => {
+        let books = response.body['books']
+        this.total = Number(response.body['total'])
+        books.forEach(book => {
           this.books.push(new Book(
                       book['_id'],
                       book['name'],
@@ -60,8 +62,9 @@ export class BookManagementComponent implements OnInit {
           this.books.sort(t => Number(t.isbn))
           this.dataLoaded = true
           //close loading screen
-          this.spinner.hide();
-        });
+        })
+        console.log(this.total)
+        this.spinner.hide();
       }, error => {
         console.error(error);
         this.dialogService.openModal('Error', error.error)

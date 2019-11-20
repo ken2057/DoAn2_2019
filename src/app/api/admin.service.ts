@@ -7,12 +7,13 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class AdminService extends ApiService {
 
-  public getUsersInfo(token: string) {
+  public getUsersInfo(token: string, username: string) {
     return this.http.get(this.REST_API_SERVER + '/Admin/GetUsers',
             {
               headers: new HttpHeaders({
                 'Authorization': token
               }),
+              params: { 'username': username },
               observe: 'response'
             })
   }
