@@ -17,7 +17,7 @@ export class AccountManagementComponent implements OnInit {
   public accounts = new Array<User>();
   total = 0
   role = 9;
-
+  itemsPerPage: number;
   constructor(
     private cookieService: CookieService,
     private authService: AuthService,
