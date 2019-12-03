@@ -63,7 +63,9 @@ export class AccountService extends ApiService {
                   user.password == '' ? '' : sha1(user.password),
                   user.email,
                   null,
-                  user.role
+		  user.role,
+		  user.birth,
+		  user.address
                 )
               }, observe: 'response'
             })
