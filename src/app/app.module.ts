@@ -28,6 +28,7 @@ import { DialogtemplateComponent } from './dialogtemplate/dialogtemplate.compone
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogService } from './services/dialog.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
     RouterModule.forRoot([
       {path: 'Home', component: AppComponent},
       {path:'Login', component: LoginComponent, canActivate: [LoginGuard]},

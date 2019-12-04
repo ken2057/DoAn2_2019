@@ -14,7 +14,8 @@ import { DialogService } from 'src/app/services/dialog.service';
   styleUrls: ['./book-management.component.css']
 })
 export class BookManagementComponent implements OnInit {
-  total = 0
+  total = 0;
+  itemsPerPage: number;
   public bookClicked = -1;
   public books = new Array<Book>();
   dataLoaded = false;

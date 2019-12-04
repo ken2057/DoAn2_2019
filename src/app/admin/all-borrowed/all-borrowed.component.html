@@ -22,7 +22,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let borrowed of allBorrowed">
+      <tr *ngFor="let borrowed of allBorrowed  | paginate: { itemsPerPage: 5, currentPage: p}">
         <td>
           <a [routerLink]="['/Account', borrowed.username]">{{ borrowed.username }}</a>
         </td>
@@ -47,5 +47,7 @@
         </td>
       </tr>
     </tbody>
+
   </table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
