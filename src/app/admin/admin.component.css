@@ -22,6 +22,56 @@ label{
   background: #EADFCE;
   max-width: 900px;
 }
-.btn-box{
+.input-subject{
+  width: 70%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn-subject{
+ width: 15%;
+}
+.btn-confirm{
+  width: 100%;
   background: #1D3C26;
+  color: #EADFCE;
+}
+.btn-confirm:hover{
+  background: #578F53;
+  color: #EADFCE;
+  font-weight: 600;
+}
+
+table{
+  height: 30rem;
+}
+table th , table td{
+  text-align: center;
+}
+
+table tr:nth-child(even){
+  background-color: #e4e3e3
+}
+
+th {
+background: #1D3C26;
+color: #EADFCE;
+}
+
+.set-bottom{
+  width: 30%;
+  position: absolute;
+  bottom: 15px;
+  left: 35%;
+  right: 35%;
+}
+.set-height{
+  height: 350px;
 }
