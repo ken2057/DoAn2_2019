@@ -82,4 +82,14 @@ export class ManangerService extends ApiService {
                 observe: 'response'
               })
   }
+
+  public getConfigs(token: string) {
+    return this.http.get(this.REST_API_SERVER + '/Manager/Config',
+              {
+                headers: new HttpHeaders({
+                  'Authorization': token
+                }),
+                observe: 'response'
+              })
+  }
 }

@@ -5,37 +5,13 @@
 
   <div class="row">
 
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <label>Min age</label>
-      <input type="number" class="form-control" min="1" max="20" step="1" value="10" />
-    </div>
-
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <label>Max age</label>
-      <input type="number" class="form-control" min="20" max="100" step="1" value="40" />
-    </div>
-
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <label>Validity for</label>
-      <select id="sltValidity" name="Validity time" class="form-control">
-        <option>
-          1 month
-        </option>
-      </select>
-    </div>
-
-  </div>
-
-  <hr>
-
-  <div class="row">
-
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
       <div class="row">
-        <input type="text" class="input-subject">
-        <button class="btn btn-subject btn-success">Add</button>
-        <button class="btn btn-subject btn-primary">Edit</button>
+        <input type="text" class="input-subject" [(ngModel)]="txtSubject" (keydown)="keydown_txtSubject($event)">
+        <button class="btn btn-subject btn-success" (click)="addSubject()">Add</button>
+        <button class="btn btn-subject btn-primary" (click)="editSubject()" [disabled]="clickedSubject == ''" >Edit</button>
+        
       </div>
 
       <div class="row">
@@ -45,12 +21,18 @@
               <th>
                 Subject Name
               </th>
+              <th>
+                Delete
+              </th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngFor="let s of subjects">
+              <td (click)="clickSubject(s)">
+                {{ s }}
+              </td>
               <td>
-                ad
+                <button class="btn btn-warning" (click)="delSubject(s)">X</button>
               </td>
             </tr>
           </tbody>
@@ -60,35 +42,42 @@
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 set-height">
-
+      
+      <div class="row">
+        <label>Min age</label>
+        <input type="number" class="form-control" min="10" step="1" [(ngModel)]="configs.min_age" />
+      </div>
+  
+      <div class="row">
+        <label>Max age</label>
+        <input type="number" class="form-control" 
+        min="{{ configs.min_age + 1 }}" 
+        max="100" 
+        step="1" value="40" [(ngModel)]="configs.max_age" />
+      </div>
+  
+      <div class="row">
+        <label>Validity for</label>
+        <input type="number" class="form-control" min="1" max="20" step="1" value="10"
+          [(ngModel)]="configs.max_month_account_expire" />
+      </div>
+      
       <div class="row">
         <label>The gap of published year</label>
-        <select id="slt-GOPY" name="GOPY" class="form-control">
-          <option>
-            1 year
-          </option>
-        </select>
+        <input type="number" class="form-control" min="1" max="20" step="1" [(ngModel)]="configs.max_year_publised" />
       </div>
 
       <div class="row">
         <label>Maximun borrowed books</label>
-        <select id="slt-MBB" name="MBB" class="form-control">
-          <option>
-            1
-          </option>
-        </select>
+        <input type="number" class="form-control" min="1" max="10" step="1" [(ngModel)]="configs.max_book_borrow" />
       </div>
 
       <div class="row">
         <label>Maximun borrowed days</label>
-        <select id="slt-MBD" name="MBD" class="form-control">
-          <option>
-            1 day
-          </option>
-        </select>
+        <input type="number" class="form-control" min="1" max="30" step="1" [(ngModel)]="configs.max_date_borrowed" />
       </div>
 
-      <div class="row set-bottom">
+      <div class="row set-bottom" style="margin-top: 10px;">
         <button class="btn btn-confirm">Save</button>
       </div>
 

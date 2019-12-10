@@ -68,10 +68,11 @@ color: #EADFCE;
 .set-bottom{
   width: 30%;
   position: absolute;
-  bottom: 15px;
+  /* bottom: 15px; */
   left: 35%;
   right: 35%;
+  margin-bottom: 10px;
 }
 .set-height{
-  height: 350px;
+  height: 400px;
 }
