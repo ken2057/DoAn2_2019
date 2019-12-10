@@ -115,7 +115,7 @@ export class EditAccountComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.edtUser.username == '' || this.edtUser.password == '' || this.edtUser.email == ''){
+    if(this.edtUser.username == '' || this.edtUser.email == ''){
       this.dialogService.openModal('Error', 'Nice try')
       return
     }

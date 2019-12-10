@@ -97,6 +97,12 @@ export class BorrowedComponent implements OnInit {
   }
 
   public btnAddPay() {
+
+    if(!this.isValidPay) {
+      this.dialogService.openModal('Error', 'Nice try')
+      return
+    }
+
     this.spinner.show();
     this.borrowedService.postAddPay(
       this.cookieService.get('token'),

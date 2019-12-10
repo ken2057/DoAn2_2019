@@ -3,14 +3,10 @@
     <div class="num_rows">
       <div class="form-group">
         <!--		Show Numbers Of Rows 		-->
-        <select class="form-control" name="state" id="maxRows">
+        <select class="form-control" name="state" id="maxRows" [(ngModel)]="itemsPerPage">
+          <option value="5" selected >5</option>
           <option value="10">10</option>
-          <option value="15">15</option>
-          <option value="20">20</option>
           <option value="50">50</option>
-          <option value="70">70</option>
-          <option value="100">100</option>
-          <option value="5000">Show ALL Rows</option>
         </select>
       </div>
     </div>
@@ -33,7 +29,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let account of accounts">
+      <tr *ngFor=" let account of accounts | paginate: { itemsPerPage: itemsPerPage, currentPage: p}">
         <td>
           <a [routerLink]="['/Account', account.username]">
             {{ account.username }}
@@ -95,7 +91,7 @@
           </td>
       </tr>
     </tbody>
-
     <tbody></tbody>
   </table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>

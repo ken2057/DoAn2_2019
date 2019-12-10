@@ -79,7 +79,12 @@ export class AccountComponent implements OnInit {
               user['_id'],
               '',
               user['email'],
-              user['borrowed']
+              user['borrowed'],
+              '',
+              user['birth'],
+              user['address'],
+              user['date_created'],
+              user['date_expire']
             )
             this.spinner.hide()
             this.isAdmin = true

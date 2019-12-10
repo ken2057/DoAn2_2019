@@ -13,6 +13,7 @@ import { BookService } from '../api/book.service';
 export class ListBookComponent implements OnInit {
   public bookClicked = -1
   public books = new Array<Book>()
+  total = 0
   dataLoaded = false
   txtSearch: string
 
@@ -21,7 +22,7 @@ export class ListBookComponent implements OnInit {
     private route: ActivatedRoute,
     private bookService: BookService,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.searchBook();
@@ -32,9 +33,9 @@ export class ListBookComponent implements OnInit {
   searchBook(name?: string, subject?: string, author?: string, page?: number) {
     // show some error
     if (page < 1) { return }
-    
+
     this.spinner.show();
-    
+
     this.books = new Array<Book>()
     this.bookService.getSearchBooks(subject, author, name, page + '')
       .subscribe(response => {
@@ -44,16 +45,17 @@ export class ListBookComponent implements OnInit {
         // add all the book into books varible
         json['books'].forEach(book => {
           this.books.push(new Book(
-                      book['_id'],
-                      book['name'],
-                      book['author'],
-                      book['subjects'],
-                      book['books'],
-                      book['image'],
-                      book['deleted']
-                    ));
-          this.spinner.hide();
+            book['_id'],
+            book['name'],
+            book['author'],
+            book['subjects'],
+            book['books'],
+            book['image'],
+            book['deleted']
+          ));
         });
+        this.total = json['total']
+        this.spinner.hide();
       }, error => {
         console.error('error searchBook: ' + error);
         this.spinner.hide();
