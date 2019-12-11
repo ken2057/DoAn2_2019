@@ -84,6 +84,18 @@ export class AdminComponent implements OnInit {
         })
   }
 
+  postConfigs() {
+    this.spinner.show()
+    this.manService.postConfigs(this.cookieService.get('token'), this.configs)
+        .subscribe(Response => {
+          this.spinner.hide()
+          this.resetValue()
+        }, error => {
+          this.dialogService.openModal('Error', error.error)
+          this.spinner.hide()
+        })
+  }
+
   // Public function
   public clickSubject(subject: string) {
     this.txtSubject = subject
@@ -116,5 +128,9 @@ export class AdminComponent implements OnInit {
     }
     
     this.postSubject("edit")
+  }
+
+  public saveConfigs() {
+    this.postConfigs()
   }
 }

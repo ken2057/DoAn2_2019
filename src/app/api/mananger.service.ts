@@ -92,4 +92,15 @@ export class ManangerService extends ApiService {
                 observe: 'response'
               })
   }
+
+  public postConfigs(token: string, configs) {
+      return this.http.post(this.REST_API_SERVER + '/Manager/Config',
+                {
+                  json: {
+                    'token': token,
+                    'configs': configs
+                  },
+                  observe: 'response'
+                })
+    }
 }

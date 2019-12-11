@@ -21,6 +21,7 @@
         <th>Email</th>
         <th>Birth</th>
         <th>Address</th>
+        <th>User Type</th>
         <th [hidden]="role != 0 && role != 1">Role</th>
         <th [hidden]="role != 0 && role != 1">AP</th>
         <th>Edit</th>
@@ -38,6 +39,7 @@
         <td>{{ account.email }}</td>
         <td>{{ account.birth }}</td>
         <td>{{ account.address }}</td>
+        <td>{{ account.user_type }}</td>
         <td [hidden]="role != 0 && role != 1">{{ account.role }}</td>
         <td [hidden]="role != 0 && role != 1">{{ account.account_point }}</td>
         <td>

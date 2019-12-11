@@ -13,6 +13,7 @@ export class User {
         public date_expire?: Date,
         public active?: boolean,
         public account_point?: string,
-        public block?: boolean
+        public block?: boolean,
+        public user_type?: string
     ) {}
 }

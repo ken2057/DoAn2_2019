@@ -62,7 +62,8 @@ export class AccountManagementComponent implements OnInit {
               account['date_expire'],
               account['active'] == undefined ? true : account['active'],
               account['account_point'],
-              account['blocked'] == undefined ? false : account['blocked']
+              account['blocked'] == undefined ? false : account['blocked'],
+              account['user_type']
             ))
           })
           //close loading screen
