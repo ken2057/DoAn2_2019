@@ -70,15 +70,15 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
       {path: 'Borrowed/:borrowedId', component: BorrowedComponent, canActivate: [UserGuard], data: {animation: 'Borrowed'}},
 
-      {path: 'Admin', component: AdminComponent, canActivate: [AdminGuard]},
-      {path: 'Admin/AllBorrowed', component: AllBorrowedComponent, canActivate: [AdminGuard]},
-      {path: 'Admin/AllBorrowed/:username', component: AllBorrowedComponent, canActivate: [AdminGuard], data: {animation: 'AllBorrowed'}},
-      {path: 'Admin/AccountManagement', component: AccountManagementComponent, canActivate: [AdminGuard], data: {animation: 'AccountManagerment'}},
-      {path: 'Admin/BookManagement', component: BookManagementComponent, canActivate: [AdminGuard], data: {animation: 'BookManagerment'}},
-      {path: 'EditBook/:bookId', component: EditBookComponent, canActivate: [AdminGuard]},
+      {path: 'Admin', component: AdminComponent, canActivate: [ManagerGuard]},
+      {path: 'Admin/AllBorrowed', component: AllBorrowedComponent, canActivate: [ManagerGuard]},
+      {path: 'Admin/AllBorrowed/:username', component: AllBorrowedComponent, canActivate: [ManagerGuard], data: {animation: 'AllBorrowed'}},
+      {path: 'Admin/AccountManagement', component: AccountManagementComponent, canActivate: [ManagerGuard], data: {animation: 'AccountManagerment'}},
+      {path: 'Admin/BookManagement', component: BookManagementComponent, canActivate: [ManagerGuard], data: {animation: 'BookManagerment'}},
+      {path: 'EditBook/:bookId', component: EditBookComponent, canActivate: [ManagerGuard]},
       {path: 'EditAccount', component: EditAccountComponent, canActivate: [UserGuard]},
-      {path: 'EditAccount/:username', component: EditAccountComponent, canActivate: [AdminGuard], data: {animation: 'EditAccount'}},
-      {path: 'AddBook', component: EditBookComponent, canActivate: [AdminGuard]},
+      {path: 'EditAccount/:username', component: EditAccountComponent, canActivate: [ManagerGuard], data: {animation: 'EditAccount'}},
+      {path: 'AddBook', component: EditBookComponent, canActivate: [ManagerGuard]},
 
       { path: '', redirectTo: '/Search', pathMatch: 'full'},
       { path: '**', redirectTo: '/', pathMatch: 'full'}

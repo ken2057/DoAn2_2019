@@ -30,7 +30,7 @@ export class ManagerGuard implements CanActivate {
     await this.authService
       .getPermission(this.cookieService.get('token'))
       .toPromise().then(t => {
-        this.res = (Number(t.body['role']) == 1)
+        this.res = (Number(t.body['role']) == 1) || (Number(t.body['role']) == 0)
         if (!this.res)
           this.router.navigate(['/'], {relativeTo: this.route})
     })

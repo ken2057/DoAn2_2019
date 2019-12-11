@@ -20,18 +20,33 @@
         <h3>Year released: {{ bookDetail.year_released }}</h3>
       </div>
 
-      <div class="btn-them">
-        <button type="button" class="btn btn-success" [disabled]="!isAvaiable" *ngIf="btnBorrowText != ''"
-          (click)="btnBorrowClick()">
-          {{ btnBorrowText }}
-        </button>
-        <div class="btn-option" *ngIf="btnBorrowText == 'Get book from librarian'">
-          <button type="button" class="btn btn-danger" (click)="btnCancelOrder()">
-            Cancel
-          </button>
+      
+      <div class="row">
+        
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="btn-them">
+              <button type="button" class="btn btn-success" [disabled]="!isAvaiable" *ngIf="btnBorrowText != ''"
+                (click)="btnBorrowClick()">
+                {{ btnBorrowText }}
+              </button>
+              <div class="btn-option" *ngIf="btnBorrowText == 'Get book from librarian'">
+                <button type="button" class="btn btn-danger" (click)="btnCancelOrder()">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div *ngIf="role == 1 || role == 0">
+                <label>Add Borrow to user: </label>
+                <input [(ngModel)]="txtUserName"/>
+                <button type="button" class="btn btn-info" (click)="addBorrowUser()">Add</button>
+              </div>        
         </div>
       </div>
-
+      
+      
     </div>
 
     <div class="card-footer">

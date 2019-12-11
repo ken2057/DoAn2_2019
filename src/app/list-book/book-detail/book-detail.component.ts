@@ -18,6 +18,8 @@ export class BookDetailComponent implements OnInit {
   isAvaiable = false
   dataAvaialbe = false
   btnBorrowText = ''
+  txtUserName = ''
+  role = 9
 
   constructor(
     private cookieService: CookieService,
@@ -35,6 +37,12 @@ export class BookDetailComponent implements OnInit {
   ngOnInit() {
     this.bookId = Number(this.route.snapshot.paramMap.get('bookId'))
     this.getBookInfo()
+    this.getUserPermission()
+  }
+
+  getUserPermission() {
+    this.authService.getPermission(this.cookieService.get('token'))
+        .subscribe(res => this.role = Number(res.body['role']), err => this.role = 9)
   }
 
   getBookInfo() {
@@ -168,4 +176,21 @@ export class BookDetailComponent implements OnInit {
     this.router.navigate(['/Search']);
   }
 
+  public addBorrowUser() {
+    if(this.txtUserName == '') {
+      return
+    }
+    
+    this.spinner.show()
+    this.bookService.postBorrowBook(this.cookieService.get('token'), this.bookId.toString(), this.txtUserName, true)
+      .subscribe(response => {
+        this.txtUserName = ''
+        this.spinner.hide()
+        this.router.navigateByUrl('Borrowed/'+response['borrowId'])
+      }, error => {
+        console.error(error)
+        this.dialogService.openModal('Error', error.error)
+        this.spinner.hide();
+      })
+  }
 }

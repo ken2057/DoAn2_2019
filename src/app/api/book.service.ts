@@ -39,13 +39,26 @@ export class BookService extends ApiService {
                 })
   }
 
-  public postBorrowBook(token: string, bookId: string) {
+  public postBorrowBook(token: string, bookId: string, username = '', adminAdd = false) {
+    let _json = {}
+    if (!adminAdd) {
+      _json = {
+        'token': token,
+        'bookId': bookId
+      }
+    }
+    else {
+      _json = {
+        'token': token,
+        'bookId': bookId,
+        'add': 'true',
+        'username': username
+      }
+    }
+
     return this.http.post(this.REST_API_SERVER + '/BorrowBook',
                 {
-                  json: {
-                    'token': token,
-                    'bookId': bookId
-                  },
+                  json: _json,
                   observe: 'response'
                 })
   }

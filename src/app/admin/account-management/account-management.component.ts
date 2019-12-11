@@ -67,8 +67,10 @@ export class AccountManagementComponent implements OnInit {
             ))
           })
           //close loading screen
-          this.spinner.hide();
+          this.spinner.hide()
         }, error => {
+          console.error(error)
+          this.spinner.hide()
           this.dialogService.openModal('Error', error.error)
         })
   }
@@ -81,6 +83,7 @@ export class AccountManagementComponent implements OnInit {
             this.role = Number(Response.body['role'])
           }, error => {
             console.error(error)
+            this.spinner.hide()
             this.dialogService.openModal('Error', error.error)
           })
   }
