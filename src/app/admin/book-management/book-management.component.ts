@@ -56,7 +56,7 @@ export class BookManagementComponent implements OnInit {
                       book['name'],
                       book['author'],
                       book['subjects'],
-                      book['books'],
+		      [book['books'].filter(t => t == '').length + ' Avaiable'].concat(book['books'].filter(t => t != '')),
                       book['image'],
                       book['deleted']
                     ));
