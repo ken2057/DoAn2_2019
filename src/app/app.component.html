@@ -118,6 +118,13 @@
             >
             All Borrowed
           </a>
+          <a
+            class="btn btn-component"
+            *ngIf="role == 0 || role == 1"
+            [routerLink]="['/Admin/Report']"
+            >
+            Report
+          </a>
         </div>
       </div>
     </nav>

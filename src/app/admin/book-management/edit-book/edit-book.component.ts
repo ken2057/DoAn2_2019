@@ -7,6 +7,7 @@ import { Book } from 'src/app/class/book';
 import { ManangerService } from 'src/app/api/mananger.service';
 import { SubjectService } from 'src/app/api/subject.service';
 import { DialogService } from 'src/app/services/dialog.service';
+import { AuthorService } from 'src/app/api/author.service';
 
 @Component({
   selector: 'app-edit-book',
@@ -15,6 +16,9 @@ import { DialogService } from 'src/app/services/dialog.service';
 })
 export class EditBookComponent implements OnInit {
   dataLoaded = false
+  keyword = 'name'
+  listAuthor;
+  author = ''
   bookId: string
   bookDetail: Book
   isEditBook = true
@@ -32,7 +36,8 @@ export class EditBookComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private dialogService: DialogService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private authorService: AuthorService
   ) { }
 
   ngOnInit() {
@@ -41,6 +46,7 @@ export class EditBookComponent implements OnInit {
     this.bookDetail.books = []
     this.allSubject()
 
+    this.getAuthor()
     // if user add new book
     if(this.router.url == '/AddBook'){
       this.isEditBook = false
@@ -130,6 +136,14 @@ export class EditBookComponent implements OnInit {
     this.selectedValid = valid
   }
 
+  getAuthor() {
+    this.authorService.getAuthors()
+        .subscribe(
+          Response => this.listAuthor = Response.body['authors'],
+          error => console.error(error.error)
+        )
+  }
+
   // Public function
   public onCancel() {
     this.router.navigate(['/Admin/BookManagement']);
@@ -173,6 +187,7 @@ export class EditBookComponent implements OnInit {
 
   //create a new book in library
   public btnAddNewBook() {
+    console.log(this.bookDetail.author);
     //open loading screen
     this.spinner.show();
     // convert selected subject into the book
@@ -193,5 +208,19 @@ export class EditBookComponent implements OnInit {
           this.dialogService.openModal('Error', error.error)
           this.spinner.hide();
         })
+  }
+
+  selectEvent(item) {
+    this.bookDetail.author = item.name
+  }
+ 
+  onChangeSearch(val: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+    this.bookDetail.author = val
+  }
+  
+  onFocused(e){
+    // do something when input is focused
   }
 }

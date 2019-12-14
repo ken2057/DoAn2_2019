@@ -7,74 +7,55 @@
         Book Name:
       </label>
       <div class="col-sm-12">
-        <input
-          type="text"
-          name="BookName"
-          id="inputBookName"
-          class="form-control"
-          required="required"
-          [(ngModel)]="bookDetail.name"
-        />
+        <input type="text" name="BookName" id="inputBookName" class="form-control" required="required"
+          [(ngModel)]="bookDetail.name" />
       </div>
     </div>
 
     <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
       <label for="inputAuthor" class="col-sm-12 control-label">Author:</label>
-      <div class="col-sm-12">
-        <input
-          type="text"
-          name="Author"
-          id="input"
-          class="form-control"
-          required="required"
-          [(ngModel)]="bookDetail.author"
-        />
+      <div>
+        <div class="col-sm-12">
+          <ng-autocomplete [data]="listAuthor" [searchKeyword]="keyword" placeHolder="Enter Author Name"
+            (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
+            historyIdentifier="listAuthor" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+          </ng-autocomplete>
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.name"></a>
+          </ng-template>
+
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>
+        </div>
+        <!-- <input type="text" name="Author" id="input" class="form-control" required="required"
+          [(ngModel)]="bookDetail.author" /> -->
       </div>
     </div>
   </div>
 
-  <div
-    class="group-subjects form-group col-xs-12 col-sm-12 col-md-12 col-lg-12"
-  >
+  <div class="group-subjects form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <label for="inputSubject" class="col-sm-12 control-label">Subjects:</label>
     <div class="row">
       <div class="col-sm-4">
-        <select
-          id="inputSubject"
-          name="Subject1"
-          [(ngModel)]="selected[0]"
-          class="form-control"
-          [ngModelOptions]="{ standalone: true }"
-          (change)="checkChangeSelected()"
-        >
+        <select id="inputSubject" name="Subject1" [(ngModel)]="selected[0]" class="form-control"
+          [ngModelOptions]="{ standalone: true }" (change)="checkChangeSelected()">
           <option *ngFor="let s of subjects" [value]="s.id">
             {{ s.name }}
           </option>
         </select>
       </div>
       <div class="col-sm-4">
-        <select
-          id="inputSubject"
-          name="Subject1"
-          [(ngModel)]="selected[1]"
-          class="form-control"
-          [ngModelOptions]="{ standalone: true }"
-          (change)="checkChangeSelected()"
-        >
+        <select id="inputSubject" name="Subject1" [(ngModel)]="selected[1]" class="form-control"
+          [ngModelOptions]="{ standalone: true }" (change)="checkChangeSelected()">
           <option *ngFor="let s of subjects" [value]="s.id">
             {{ s.name }}
           </option>
         </select>
       </div>
       <div class="col-sm-4">
-        <select
-          id="inputSubject"
-          name="Subject1"
-          [(ngModel)]="selected[2]"
-          class="form-control"
-          [ngModelOptions]="{ standalone: true }"
-          (change)="checkChangeSelected()"
-        >
+        <select id="inputSubject" name="Subject1" [(ngModel)]="selected[2]" class="form-control"
+          [ngModelOptions]="{ standalone: true }" (change)="checkChangeSelected()">
           <option *ngFor="let s of subjects" [value]="s.id">
             {{ s.name }}
           </option>
@@ -89,49 +70,24 @@
         Publisher:
       </label>
       <div class="col-sm-12">
-        <input
-          type="text"
-          name="Publisher"
-          id="inputPublisher"
-          class="form-control"
-          required="required"
-          [(ngModel)]="bookDetail.publisher"
-        />
+        <input type="text" name="Publisher" id="inputPublisher" class="form-control" required="required"
+          [(ngModel)]="bookDetail.publisher" />
       </div>
     </div>
 
     <div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <label for="inputYearReleased" class="col-sm-12 control-label"
-        >Year released:</label
-      >
+      <label for="inputYearReleased" class="col-sm-12 control-label">Year released:</label>
       <div class="col-sm-12">
-        <input
-          type="number"
-          name="YearReleased"
-          id="inputYearReleased"
-          min="1900"
-          max="{{currentYear + 2}}"
-          class="form-control"
-          required="required"
-          [(ngModel)]="bookDetail.year_released"
-        />
+        <input type="number" name="YearReleased" id="inputYearReleased" min="1900" max="{{currentYear + 2}}"
+          class="form-control" required="required" [(ngModel)]="bookDetail.year_released" />
       </div>
     </div>
 
     <div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-3">
       <label for="inputPrice" class="col-sm-12 control-label">Price:</label>
       <div class="col-sm-12">
-        <input
-          type="number"
-          min="1000"
-          max="1000000000"
-          name="Price"
-          step="1000"
-          id="inputPrice"
-          class="form-control"
-          required="required"
-          [(ngModel)]="bookDetail.price"
-        />
+        <input type="number" min="1000" max="1000000000" name="Price" step="1000" id="inputPrice" class="form-control"
+          required="required" [(ngModel)]="bookDetail.price" />
       </div>
     </div>
   </div>
@@ -145,21 +101,13 @@
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <div class="row">
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <button
-              type="button"
-              class="btn btn-default"
-              (click)="btnRemoveBook()"
-            >
+            <button type="button" class="btn btn-default" (click)="btnRemoveBook()">
               -
             </button>
           </div>
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <button
-              type="button"
-              class="btn btn-default"
-              (click)="btnAddMoreBook()"
-            >
+            <button type="button" class="btn btn-default" (click)="btnAddMoreBook()">
               +
             </button>
           </div>
@@ -169,49 +117,34 @@
 
     <div class="row">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <input
-          type="text"
-          class="form-control"
-          id="inputImgLink"
-          placeholder="Image link..."
-          [(ngModel)]="bookDetail.image"
-        />
-        <img
-          src="{{ bookDetail.image }}"
-          class="img-responsive img-book"
-          alt="BookImage"
-        />
+        <input type="text" class="form-control" id="inputImgLink" placeholder="Image link..."
+          [(ngModel)]="bookDetail.image" />
+        <img src="{{ bookDetail.image }}" class="img-responsive img-book" alt="BookImage" />
       </div>
       <div class="input-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <div class="list-books">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Index</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              *ngFor="let b of bookDetail.books; let i = index"
-              [attr.data-index]="i"
-            >
-              <td>{{ i + 1 }}</td>
-              <td *ngIf="b != ''">
-                <a
-                  [routerLink]="['/Borrowed', b]"
-                  routerLinkActive="router-link-active"
-                >
-                  {{ b }}
-                </a>
-              </td>
-              <td *ngIf="b == ''">
-                Avaiable
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Index</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let b of bookDetail.books; let i = index" [attr.data-index]="i">
+                <td>{{ i + 1 }}</td>
+                <td *ngIf="b != ''">
+                  <a [routerLink]="['/Borrowed', b]" routerLinkActive="router-link-active">
+                    {{ b }}
+                  </a>
+                </td>
+                <td *ngIf="b == ''">
+                  Avaiable
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -224,22 +157,11 @@
     </div>
     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"></div>
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-      <button
-        type="button"
-        class="btn btn-confirm"
-        (click)="btnSave()"
-        [disabled]="!selectedValid"
-        *ngIf="isEditBook"
-      >
+      <button type="button" class="btn btn-confirm" (click)="btnSave()" [disabled]="!selectedValid" *ngIf="isEditBook">
         Save
       </button>
-      <button
-        type="button"
-        class="btn btn-confirm"
-        (click)="btnAddNewBook()"
-        [disabled]="!selectedValid"
-        *ngIf="!isEditBook"
-      >
+      <button type="button" class="btn btn-confirm" (click)="btnAddNewBook()" [disabled]="!selectedValid"
+        *ngIf="!isEditBook">
         Add
       </button>
     </div>

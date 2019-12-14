@@ -4,7 +4,7 @@
       <div class="form-group">
         <!--		Show Numbers Of Rows 		-->
         <select class="form-control" name="state" id="maxRows" [(ngModel)]="itemsPerPage">
-          <option value="5" selected >5</option>
+          <option value="5" selected>5</option>
           <option value="10">10</option>
           <option value="50">50</option>
           <option value="5000">Show ALL Rows</option>
@@ -15,11 +15,7 @@
       <input type="text" placeholder="Search.." class="form-control" />
     </div>
     <div>
-      <button
-        class="btn btn-component"
-        [routerLink]="['/AddBook']"
-        routerLinkActive="router-link-active"
-      >
+      <button class="btn btn-component" [routerLink]="['/AddBook']" routerLinkActive="router-link-active">
         Add Book
       </button>
     </div>
@@ -38,50 +34,52 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let book of books  | paginate: { itemsPerPage: itemsPerPage, currentPage: p}" [hidden]="book.deleted ">
+      <tr *ngFor="let book of books  | paginate: { itemsPerPage: itemsPerPage, currentPage: p}"
+        [hidden]="book.deleted ">
         <td>
           <a [routerLink]="['/Book', book.isbn]">{{ book.isbn }}</a>
         </td>
         <td>
-          <img
-            src="{{ book.image }}"
-            class="img-responsive book-image"
-            alt="BookImage"
-          />
+          <a [routerLink]="['/Book', book.isbn]">
+            <img src="{{ book.image }}" class="img-responsive book-image" alt="Image" />
+          </a>
         </td>
         <td>{{ book.name }}</td>
         <td>{{ book.author }}</td>
         <td>{{ book.subjects }}</td>
-        <td><div *ngFor="let b of book.books">
-              <p *ngIf="b == ''">
-                Avaiable
-              </p>
-              <p *ngIf="b != ''">
-                  <a
-                  [routerLink]="['/Borrowed', b]"
-                  routerLinkActive="router-link-active"
-                >
+        <td>
+          <!-- <div *ngFor="let b of book.books; let i = index" [attr.data-index]="i">
+            <p *ngIf="i == 0">
+              {{ b }}
+            </p>
+            <p *ngIf="i > 0">
+              <a [routerLink]="['/Borrowed', b]" routerLinkActive="router-link-active">
+                {{ b }}
+              </a>
+            </p>
+          </div> -->
+          <div>
+            {{ book.books[0] }}
+          </div>
+          <div *ngIf="book.books[1].length > 0">
+            <button (click)="click_btnPopup(book.isbn)">Borrowed Info</button>
+            <div *ngIf="listHidden[book.isbn]">
+              <div *ngFor="let b of book.books[1]">
+                <a [routerLink]="['/Borrowed', b]" routerLinkActive="router-link-active">
                   {{ b }}
                 </a>
-              </p>
+              </div>
             </div>
+          </div>
         </td>
         <td>
-          <button
-            type="button"
-            class="btn btn-info"
-            [routerLink]="['/EditBook', book.isbn]"
-            routerLinkActive="router-link-active"
-          >
+          <button type="button" class="btn btn-info" [routerLink]="['/EditBook', book.isbn]"
+            routerLinkActive="router-link-active">
             V
           </button>
         </td>
         <td>
-          <button
-            type="button"
-            class="btn btn-danger"
-            (click)="deleteBook(book.isbn)"
-          >
+          <button type="button" class="btn btn-danger" (click)="deleteBook(book.isbn)">
             X
           </button>
         </td>

@@ -7,6 +7,7 @@ import { BookService } from 'src/app/api/book.service';
 import { AuthService } from 'src/app/api/auth.service';
 import { Location } from '@angular/common';
 import { DialogService } from 'src/app/services/dialog.service';
+import { AuthorService } from 'src/app/api/author.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -29,7 +30,8 @@ export class BookDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private dialogService: DialogService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private authorService: AuthorService
   ) { }
 
   @Input() bookId: number;

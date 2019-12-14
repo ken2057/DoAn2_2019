@@ -15,10 +15,16 @@ import { DialogService } from 'src/app/services/dialog.service';
 })
 export class BookManagementComponent implements OnInit {
   total = 0;
-  itemsPerPage: number;
+  itemsPerPage: number
+  dataLoaded = false
+  hidden = true
+  listHidden = {}
+
   public bookClicked = -1;
   public books = new Array<Book>();
-  dataLoaded = false;
+
+  
+
 
   constructor(
     private cookieService: CookieService,
@@ -51,19 +57,23 @@ export class BookManagementComponent implements OnInit {
         let books = response.body['books']
         this.total = Number(response.body['total'])
         books.forEach(book => {
-          this.books.push(new Book(
-                      book['_id'],
-                      book['name'],
-                      book['author'],
-                      book['subjects'],
-		      [book['books'].filter(t => t == '').length + ' Avaiable'].concat(book['books'].filter(t => t != '')),
-                      book['image'],
-                      book['deleted']
-                    ));
-          this.books.sort(t => Number(t.isbn))
-          this.dataLoaded = true
-          //close loading screen
+          let b = new Book(
+            book['_id'],
+            book['name'],
+            book['author'],
+            book['subjects'],
+            [book['books'].filter(t => t == '').length + ' Avaiable']
+              .concat([book['books'].filter(t => t != '')]),
+            book['image'],
+            book['deleted']
+          );
+          this.books.push(b);
+          if (b.books[1].length > 0)
+            this.listHidden[b.isbn] = false;
         })
+        this.books.sort(t => Number(t.isbn))
+        this.dataLoaded = true
+        //close loading screen
         this.spinner.hide();
       }, error => {
         console.error(error);
@@ -92,5 +102,9 @@ export class BookManagementComponent implements OnInit {
           this.dialogService.openModal('Error', error.error)
           this.spinner.hide();
         })
+  }
+
+  click_btnPopup(isbn: string) {
+    this.listHidden[isbn] = !this.listHidden[isbn]
   }
 }
